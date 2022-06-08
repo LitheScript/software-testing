@@ -5,8 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Calendar {
-    private int test;
+    private int id;
+    private int year;
+    private int month;
+    private int day;
+    private int oyear;
+    private int omonth;
+    private int oday;
 }

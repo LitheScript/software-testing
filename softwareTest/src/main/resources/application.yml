@@ -17,10 +17,10 @@ server:
     name: softwareTesting.log
 
 
-#mybatis:
-#  # 配置XML映射文件中指定的实体类别名路径
-#  type-aliases-package: com.example.softwaretest.Entity
-#  # 配置MyBatis的xml配置文件路径
-#  mapper-locations: classpath:mapper/*.xml
+mybatis:
+  # 配置XML映射文件中指定的实体类别名路径
+  type-aliases-package: com.example.softwaretest.Entity
+  # 配置MyBatis的xml配置文件路径
+  mapper-locations: classpath:mapper/*.xml
 #  # 开启驼峰uName自动映射到u_name
 #  map-underscore-to-camel-case: true
