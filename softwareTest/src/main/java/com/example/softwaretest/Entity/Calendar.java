@@ -10,7 +10,7 @@ public class Calendar {
     private int year;
     private int month;
     private int day;
-    private int oyear;
-    private int omonth;
-    private int oday;
+    private int oYear;
+    private int oMonth;
+    private int oDay;
 }

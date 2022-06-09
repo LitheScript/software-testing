@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.softwaretest.Mapper.CalendarMapper">
 
-
+    <select id="getTestCases" resultType="Calendar">
+        select id,year,month,day,oYear,oMonth,oDay,pass
+        from softwareTesting.Calendar
+    </select>
 </mapper>

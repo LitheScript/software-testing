@@ -3,9 +3,8 @@
 <mapper namespace="com.example.softwaretest.Mapper.TriangleMapper">
 
 
-
     <select id="getTestCases" resultType="Triangle">
-        select *
+        select id, a, b, c, expectResult, pass
         from softwareTesting.Triangle;
     </select>
 </mapper>

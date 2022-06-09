@@ -10,6 +10,14 @@ import java.util.List;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
+    @Autowired
+    private CalendarMapper calendarMapper;
+
+
+    @Override
+    public List<Calendar> getTestCases(){
+        return  calendarMapper.getTestCases();
+    }
 
 
 

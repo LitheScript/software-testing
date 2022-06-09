@@ -1,7 +1,11 @@
 package com.example.softwaretest.Controller;
 
 
+import com.example.softwaretest.Entity.Calendar;
+import com.example.softwaretest.Entity.Commission;
 import com.example.softwaretest.Entity.Triangle;
+import com.example.softwaretest.Mapper.CalendarMapper;
+import com.example.softwaretest.Mapper.CommissionMapper;
 import com.example.softwaretest.Mapper.TriangleMapper;
 import com.example.softwaretest.Service.TriangleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +23,25 @@ public class TestController {
     @Autowired
     private TriangleMapper triangleMapper;
 
+    @Autowired
+    private CommissionMapper commissionMapper;
+
+    @Autowired
+    private CalendarMapper calendarMapper;
+
     @GetMapping("/queryTriangle")
     public List<Triangle> queryTriangle(){
         return triangleMapper.getTestCases();
+    }
+
+    @GetMapping("/queryCommission")
+    public List<Commission> queryCommission(){
+        return commissionMapper.getTestCases();
+    }
+
+    @GetMapping("/queryCalendar")
+    public List<Calendar> queryCalendar(){
+        return calendarMapper.getTestCases();
     }
 
 
