@@ -1,17 +1,17 @@
 <template>
   <!--商品信息卡片 -->
   <div class="commodity-card" @click="goDetail">
-    <img class="picture" :src="cardInfo.picture_url"/>
+    <img class="picture" :src="cardInfo.pictureUrl"/>
     <div class="section-featured-card-main">
       <div class="card-grid">
         <div class="card-title">{{ cardInfo.name }}</div>
         <div class="card-tag">{{ cardInfo.tag }}</div>
-        <div class="card-tag">{{ cardInfo.new_level }}</div>
+        <div class="card-tag">{{ cardInfo.newLevel }}</div>
       </div>
       <div class="card-description">{{ cardInfo.description }}</div>
       <div class="price">
         <div class="price-title">租金</div>
-        <div class="price-content">￥{{ cardInfo.rent_daliy }}/天</div>
+        <div class="price-content">￥{{ cardInfo.rentDaliy }}/天</div>
         <div style="width: 100px;height: 50px"></div>
         <div class="price-title">押金</div>
         <div class="price-content">￥{{ cardInfo.deposit }}/天</div>
@@ -20,7 +20,7 @@
       <div class="bottom-part">
         <div class="owner">
           <img class="owner-icon" :src="cardInfo.avatar"/>
-          <div class="owner-name">{{ cardInfo.nick_name }}</div>
+          <div class="owner-name">{{ cardInfo.nickName }}</div>
           <div class="check">
             <div><a class="uk-button uk-button-normal" @click="checkProved()">通过审核</a></div>
             <div><a class="uk-button uk-button-danger" @click="checkFailed()">下架物品</a></div>
@@ -53,13 +53,13 @@ export default {
     console.log("I'm just kidding!")
     },
     checkProved(){
-      axios.checkPass(this.cardInfo.object_id)
+      axios.checkPass(this.cardInfo.objectId)
           .then(res=>{
             console.log(res);
           })
     },
     checkFailed(){
-      axios.removeObj(this.cardInfo.object_id)
+      axios.removeObj(this.cardInfo.objectId)
           .then(res=>{
             console.log(res);
           })

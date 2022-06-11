@@ -1,19 +1,19 @@
 <template>
 <!--商品信息卡片 -->
   <div class="commodity-card" @click="goDetail">
-                  <img class="picture" :src="cardInfo.picture_url"/>
+                  <img class="picture" :src="cardInfo.pictureUrl"/>
               <div class="section-featured-card-main">
                 <div class="card-title">{{cardInfo.name}}</div>
                 <div class="card-description">{{cardInfo.description}}</div>
                 <div class="price">
                   <div class="price-title">租金</div>
-                  <div class="price-content">￥{{cardInfo.rent_daliy}}/天</div>
+                  <div class="price-content">￥{{cardInfo.rentDaliy}}/天</div>
                 </div>
                 <div class="line"></div>
                 <div class="bottom-part">
                   <div class="owner">
                     <img class="owner-icon" :src="cardInfo.avatar"/>
-                    <div class="owner-name">{{cardInfo.nick_name}}</div>
+                    <div class="owner-name">{{cardInfo.nickName}}</div>
                   </div>
                   <div @click.stop="collect()" :class="{'collect':!this.collected,'collect-active':this.collected}" @mouseover="changeToWhite()" @mouseleave="changeBack()">
                     <svg class="heart" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" :stroke="this.heartColor" stroke-width="1.03" d="M10,4 C10,4 8.1,2 5.74,2 C3.38,2 1,3.55 1,6.73 C1,8.84 2.67,10.44 2.67,10.44 L10,18 L17.33,10.44 C17.33,10.44 19,8.84 19,6.73 C19,3.55 16.62,2 14.26,2 C11.9,2 10,4 10,4 L10,4 Z"></path></svg>
@@ -39,7 +39,7 @@ export default {
   methods: {
     goDetail(){
       this.$router.push({
-        path:'/homepage/ItemDetail/'+this.cardInfo.object_id,
+        path:'/homepage/ItemDetail/'+this.cardInfo.objectId,
       })
       
     },
@@ -52,7 +52,7 @@ export default {
     },
     collect(){
       if(!this.collected){
-        axios.collect(this.cardInfo.object_id)
+        axios.collect(this.cardInfo.objectId)
         .then(res=>{
           console.log(res);
           alert('收藏成功');

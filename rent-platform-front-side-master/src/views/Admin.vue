@@ -25,7 +25,7 @@
           <div class="section-featured-main">
             <commodityReviewCard
               v-for="item in this.myCollects"
-              :key="item.object_id"
+              :key="item.objectId"
               :cardInfo="item"
             />
           </div>
