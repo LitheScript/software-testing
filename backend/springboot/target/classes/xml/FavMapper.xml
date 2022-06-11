@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.FavMapper">
+
+    <select id="queryObjectInFav" resultType="Integer">
+        select fav.fav_id
+        from favourite_cart
+            join `user` on favourite_cart.user_id=`user`.user_id
+            join fav on favourite_cart.fav_id=fav.fav_id
+        where  `user`.user_id=#{user_id} and fav.object_id=#{object_id}
+    </select>
+
+
+
+</mapper>
