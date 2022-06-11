@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'round'; /* 重命名字体名 */
+    src: url('round.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
