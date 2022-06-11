@@ -10,5 +10,12 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CommissionMapper {
+    /**
+     *
+     *@author cj
+     *@date 2022/6/9 13:36
+     获取佣金所有测试用例
+     * @return List<Commission> 
+     */
     List<Commission> getTestCases();
 }

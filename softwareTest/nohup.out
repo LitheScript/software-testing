@@ -1,0 +1,70 @@
+no main manifest attribute, in softwareTest-0.0.1-SNAPSHOT.jar
+
+
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                    *                                         
+                                   .. . :*o:                                  
+                                    .o::::ooo                                 
+                                 ***::*::::oo*                                
+                                 :o*:*::o:&oo&o                               
+                                  .o&o*:@@ ooo&.                              
+                              .. *.. 8.   .8:&&&                              
+                            *.:*: .8*o    ::&&o**.                            
+                           o*****: o:***:..o**:&:::      .                    
+                          o:::::ooo  :o:    .&:::o:::o&8..                    
+                          oo:::&o:o&#*. ...::o**::*                           
+                           o*&88*..o . *.** o*:o:*::o*   . :                  
+                              .8*.*...o*.*.:oo::.:o**o::::                    
+                             &&8*:**..o:*::::o*::o  .                         
+                           .&:&....*.**ooo:&& .:::                            
+                         :.o:o......*.*&:o8*o   .  *.                         
+                      *.:::oo .......**.*:o. *:&&&&o&&&                       
+                     *o::::o. .........*.*...*:.:8**#8&                       
+                      :o:oo  ...*..**.:...*.*888888&&&o                       
+                        :& .....*..*::.. *oo.o88&&&&&&.                       
+                          . ......***:*.****:&&&&&&&&8                        
+                         .  **..:*** :o:   *88#@8&&oo                         
+                        .  *:...  .*:      :**.@@8                            
+                          .:&..*:****    .***::o#                             
+                                 .**.   .***:#@@#.                            
+                                   **. ..**  .8#                              
+                                   .:..**:                                    
+                                     .....                                    
+                                      ......                                  
+                                       .....                                  
+                                        .....                                 
+                                         ....                                 
+                                          ....                                
+                                         *:. .                                
+                                           . *                                
+                                           ..*                                
+                                           *. .                               
+                                         8#&8@#@                              
+                                        #8o#@@@:                              
+                                         .*                                   
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+
+2022-06-09 09:43:46.680  INFO 21708 --- [           main] c.e.s.SoftwareTestApplication            : Starting SoftwareTestApplication v0.0.1-SNAPSHOT using Java 11.0.14.1 on VM-16-4-centos with PID 21708 (/softwareTesting/softwareTest-0.0.1-SNAPSHOT.jar started by root in /softwareTesting)
+2022-06-09 09:43:46.683  INFO 21708 --- [           main] c.e.s.SoftwareTestApplication            : No active profile set, falling back to 1 default profile: "default"
+2022-06-09 09:43:49.294  INFO 21708 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 81 (http)
+2022-06-09 09:43:49.315  INFO 21708 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-06-09 09:43:49.316  INFO 21708 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2022-06-09 09:43:49.795  INFO 21708 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-06-09 09:43:49.795  INFO 21708 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2965 ms
+2022-06-09 09:43:52.412  INFO 21708 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 81 (http) with context path ''
+2022-06-09 09:43:52.439  INFO 21708 --- [           main] c.e.s.SoftwareTestApplication            : Started SoftwareTestApplication in 8.484 seconds (JVM running for 9.895)
+2022-06-09 09:44:08.502  INFO 21708 --- [p-nio-81-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-06-09 09:44:08.502  INFO 21708 --- [p-nio-81-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-06-09 09:44:08.503  INFO 21708 --- [p-nio-81-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-06-09 09:44:08.602  INFO 21708 --- [p-nio-81-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-06-09 09:44:09.196  INFO 21708 --- [p-nio-81-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

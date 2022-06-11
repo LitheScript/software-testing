@@ -14,4 +14,14 @@ public interface TriangleService {
      * @return List<Triangle> 
      */
     List<Triangle> getTestCases ();
+
+
+    /**
+     *
+     *@author cj
+     * 测试测试用例
+     *@date 2022/6/9 8:21
+     * @return List<Integer>
+     */
+    List<Integer> testTriangle(List<Triangle> testCases);
 }

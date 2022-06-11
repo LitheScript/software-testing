@@ -16,4 +16,11 @@ public class TriangleServiceImpl implements TriangleService {
 
     @Override
     public List<Triangle> getTestCases(){return triangleMapper.getTestCases();}
+
+    @Override
+    public List<Integer> testTriangle(List<Triangle> testCases) {
+        return null;
+    }
+
+
 }

@@ -11,6 +11,12 @@ import java.util.Map;
 @Repository
 public interface CalendarMapper {
 
-
+    /**
+     *
+     *@author cj
+     *@date 2022/6/9 13:36
+     获取日历的所有测试用例
+     * @return List<Calendar> 
+     */
     List<Calendar> getTestCases();
 }
