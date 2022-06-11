@@ -135,7 +135,7 @@
         <div class="section-featured-main">
           <commodityCard
             v-for="item in this.recommendList"
-            :key="item.objectId"
+            :key="item.object_id"
             :cardInfo="item"
           ></commodityCard>
         </div>

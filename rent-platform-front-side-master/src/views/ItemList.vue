@@ -51,7 +51,7 @@
         <div class="section-featured-main">
           <commodityCard
             v-for="item in this.objectList"
-            :key="item.objectId"
+            :key="item.object_id"
             :cardInfo="item"
           ></commodityCard>
         </div>
