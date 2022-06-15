@@ -425,7 +425,7 @@ export default {
       background-color: white;
       .check-out-head{
         width:100%;
-        display: felx;
+        display: flex;
         flex-direction: row;
         align-items: center;
         padding:5px 20px;

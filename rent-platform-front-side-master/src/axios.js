@@ -20,6 +20,7 @@ instance.interceptors.request.use(
 );
 var url = 'http://101.35.194.132:9090/';  //服务器连接
 // var url = 'http://localhost:9090/';  //服务器连接
+
 export default {
   //这里export的是axios
   //所以引用的方法是: import axios from '../axios.js';
@@ -32,9 +33,9 @@ export default {
     return instance.post(url+'user/login', data);
   },
   //获取用户
-  getUserByToken(data){
-    return instance.post(url+'users/userByToken',data);
-  },
+  // getUserByToken(data){
+  //   return instance.post(url+'users/userByToken',data);
+  // },
   //删除用户
   delUser(data){
     return instance.post('api/delUser', data);
