@@ -18,8 +18,8 @@ instance.interceptors.request.use(
         return config;
     }
 );
-// var url = 'http://101.35.194.132:9090/';  //服务器连接
- var url = 'http://localhost:9090/';  //服务器连接
+var url = 'http://101.35.194.132:9090/';  //服务器连接
+// var url = 'http://localhost:9090/';  //服务器连接
 export default {
   //这里export的是axios
   //所以引用的方法是: import axios from '../axios.js';
@@ -62,7 +62,7 @@ export default {
     return instance.post(url+'user/getUserByToken',data);
   },
   uploadObject(data){
-    return instance.post(url+'object/uploadObject?'+'userId='+data.userId+'&name='+data.name+'&description='+data.description+'&deposit='+data.deposit+'&tag='+data.tag+'&rentDaily'+data.rentDaily+'&newLevel='+data.newLevel+'&url='+data.url);
+    return instance.post(url+'object/uploadObject?'+'userId='+data.user_id+'&name='+data.name+'&description='+data.description+'&deposit='+data.deposit+'&tag='+data.tag+'&rentDaily'+data.rent_daily+'&newLevel='+data.new_level+'&url='+data.url);
   },
   uploadPicture(data){
     return instance.post(url+'picture/upload',data);
@@ -83,7 +83,7 @@ export default {
     return instance.get(url+'post/viewMyPosts?userId='+id);
   },
   publishPost(data){
-    return instance.post(url+'post/publishPost?userId='+data.userId+'&title='+data.title+'&content='+data.content+'&time='+data.time);
+    return instance.post(url+'post/publishPost?userId='+data.user_id+'&title='+data.title+'&content='+data.content+'&time='+data.time);
   },
   deletePost(id){
     return instance.post(url+'post/deleteMypost?postId='+id);
@@ -95,7 +95,7 @@ export default {
     return instance.get(url+'remarks/getRemarkList?objectId='+id);
   },
   createOrder(data){
-    return instance.post(url+'order/generateOrder?objectId='+data.objectId+'&borrowerId='+data.userId+'&lentoutTime='+data.time1+'&return_time='+data.time2+'&campus='+data.zone);
+    return instance.post(url+'order/generateOrder?objectId='+data.objectId+'&borrowerId='+data.userId+'&lentoutTime='+data.time1+'&returnTime='+data.time2+'&campus='+data.zone);
   },
   cancleOrder(id){
     return instance.get(url+'order/cancelOrder?orderId='+id);
@@ -113,7 +113,7 @@ export default {
     return instance.get(url+'fav/viewFavouriteCart?favId=1');
   },
   updateUser(data){
-    return instance.post(url+'user/modifyUserInfo?'+'userId='+data.userId+'&nickName='+data.nickName+'&password='+data.password+'&avatar='+data.avatar+'&gender='+data.gender+'&telephone='+data.telephone+'&email='+data.email+'&zone='+data.zone);
+    return instance.post(url+'user/modifyUserInfo?'+'userId='+data.user_id+'&nickName='+data.nick_name+'&password='+data.password+'&avatar='+data.avatar+'&gender='+data.gender+'&telephone='+data.telephone+'&email='+data.email+'&zone='+data.zone);
   },
   getPendingObj() {
       return instance.get(url + 'object/viewPendingObject?page=1');

@@ -25,6 +25,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Resource
     ObjectServiceImpl objectService;
     @Resource
+    UserServiceImpl userService;
+    @Resource
     OrderMapper orderMapper;
 
     public int generateOrder(int objectId, int borrowerId, LocalDateTime lentoutTime, LocalDateTime returnTime, String campus) {
@@ -43,6 +45,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             order.setCampus(campus);
             Integer deposit = objectService.getBaseMapper().selectById(objectId).getDeposit();
             Integer rentDaily = objectService.getBaseMapper().selectById(objectId).getRentDaliy();
+            Integer credit = Integer.valueOf(userService.getBaseMapper().selectById(borrowerId).getReputation());
+            if (credit > 100) {
+                deposit = deposit * (2 - credit / 100);
+            } else if (credit < 100) {
+                deposit = deposit * 100 / credit;
+            }
             order.setRentTotal(rentDaily * lentDays + deposit);
             int count = orderMapper.insert(order);
             if (count <= 0) {
