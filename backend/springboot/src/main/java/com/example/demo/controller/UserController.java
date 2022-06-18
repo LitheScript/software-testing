@@ -67,10 +67,12 @@ public class UserController {
     public Result<?> login(User user) {
         JSONObject jsonObject = new JSONObject();
         User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, user.getNickName()));
-        if (res == null || !res.getPassword().equals(user.getPassword())) {
+
+        if (res == null
+                || !res.getPassword().equals(user.getPassword())
+                || !res.getRole().equals(user.getRole())) {
             return Result.error("-1", "用户名或密码输入错误");
         } else {
-
             String token = JwtUtil.getToken(user.getNickName(), user.getPassword());
             jsonObject.put("token", token);
             return Result.success(jsonObject);

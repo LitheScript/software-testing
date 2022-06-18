@@ -30,17 +30,21 @@ public class FavServiceImpl extends ServiceImpl<FavMapper, Fav> implements IServ
 
 
     public Integer collect(Integer favId, Integer objectId) {
+        int fav_id = favId;
+        int object_id = objectId;
         Fav fav = new Fav();
-        fav.setFavId(favId);
-        fav.setObjectId(objectId);
+        fav.setFavId(fav_id);
+        fav.setObjectId(object_id);
         fav.setTime(LocalDateTime.now());
         return favMapper.insert(fav);
     }
 
     public Integer deleteCollection(Integer favId, Integer objectId) {
+        int fav_id = favId;
+        int object_id = objectId;
         QueryWrapper<Fav> wrapper = new QueryWrapper<>();
-        wrapper.eq("favId", favId);
-        wrapper.eq("objectId", objectId);
+        wrapper.eq("fav_id", fav_id);
+        wrapper.eq("object_id", object_id);
         return favMapper.delete(wrapper);
     }
 
@@ -49,8 +53,9 @@ public class FavServiceImpl extends ServiceImpl<FavMapper, Fav> implements IServ
     }
 
     public List<JSONObject> viewFavouriteCart(Integer favId) {
+        int fav_id = favId;
         QueryWrapper<Fav> wrapper = new QueryWrapper<>();
-        wrapper.eq("favId", favId);
+        wrapper.eq("fav_id", fav_id);
         List<Fav> favs = favMapper.selectList(wrapper);
         if (favs.isEmpty()) {
             return null;

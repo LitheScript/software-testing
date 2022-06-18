@@ -18,4 +18,8 @@ public interface CommissionMapper {
      * @return List<Commission> 
      */
     List<Commission> getTestCases();
+
+    void cleanTestCases();
+
+    void saveTestCases(Commission commission);
 }

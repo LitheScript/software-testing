@@ -19,4 +19,8 @@ public interface CalendarMapper {
      * @return List<Calendar> 
      */
     List<Calendar> getTestCases();
+
+    void saveTestCases(Calendar calendar);
+
+    void cleanTestCases();
 }

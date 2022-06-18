@@ -14,4 +14,8 @@ public interface CommissionService {
      * @return List<Commission> 
      */
     List<Commission> getTestCases ();
+
+    void cleanTestCases();
+
+    void saveTestCases(Commission commission);
 }

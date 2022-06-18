@@ -16,4 +16,8 @@ public interface TriangleMapper {
      * @return Triangle
      */
     List<Triangle> getTestCases();
+
+    void cleanTestCases();
+
+    void saveTestCases(Triangle triangle);
 }

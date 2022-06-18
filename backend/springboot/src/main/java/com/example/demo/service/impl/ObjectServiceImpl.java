@@ -116,14 +116,15 @@ public class ObjectServiceImpl extends ServiceImpl<ObjectMapper, Object> impleme
     public List<JSONObject> viewOwnObjectList(Integer userId) {
         List<JSONObject> jsonObjects = new ArrayList<>();
         QueryWrapper<Object> wrapper = new QueryWrapper<>();
-        wrapper.eq("userId", userId);
+        wrapper.eq("user_id", userId);
         List<Object> objects = objectMapper.selectList(wrapper);
-        if (objects.isEmpty())
+        if (objects.isEmpty()) {
             return null;
+        }
         for (Object object : objects) {
             QueryWrapper<Picture> pictureQueryWrapper = new QueryWrapper<>();
             String url;
-            pictureQueryWrapper.eq("objectId", object.getObjectId());
+            pictureQueryWrapper.eq("object_id", object.getObjectId());
             Picture picture = pictureMapper.selectOne(pictureQueryWrapper);
             if (picture != null) {
                 url = picture.getPictureUrl();

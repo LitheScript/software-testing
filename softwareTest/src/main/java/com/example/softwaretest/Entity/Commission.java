@@ -9,6 +9,6 @@ public class Commission {
     private int display;
     private int peripheral;
     private int sales;
-    private int commission;
+    private double commission;
     private int pass;
 }

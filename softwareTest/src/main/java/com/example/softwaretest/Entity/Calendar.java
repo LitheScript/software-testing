@@ -13,4 +13,5 @@ public class Calendar {
     private int oYear;
     private int oMonth;
     private int oDay;
+    private int pass;
 }

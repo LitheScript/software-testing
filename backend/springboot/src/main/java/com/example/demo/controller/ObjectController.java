@@ -64,7 +64,6 @@ public class ObjectController {
 
 
     @GetMapping("getObjectDetail")
-
     public Result<?> getObjectDetail(int objectId) {
         JSONObject jsonObject;
         jsonObject = objectService.getObjectDetail(objectId);

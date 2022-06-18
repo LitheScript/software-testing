@@ -19,6 +19,15 @@ public class CalendarServiceImpl implements CalendarService {
         return  calendarMapper.getTestCases();
     }
 
+    @Override
+    public void saveTestCases(Calendar calendar) {
+            calendarMapper.saveTestCases(calendar);
+    }
+
+    @Override
+    public void cleanTestCases() {
+        calendarMapper.cleanTestCases();
+    }
 
 
 }

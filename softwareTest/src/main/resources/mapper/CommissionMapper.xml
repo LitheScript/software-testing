@@ -5,4 +5,14 @@
         select id,host,display,peripheral,sales,commission,pass
         from softwareTesting.Commission
     </select>
+
+    <delete id="cleanTestCases">
+        delete from softwareTesting.Commission;
+    </delete>
+
+    <insert id="saveTestCases" parameterType="Commission">
+        insert into softwareTesting.Commission(host,display,peripheral,sales,commission)
+        values(#{host},#{display},#{peripheral},#{sales},#{commission})
+    </insert>
+
 </mapper>

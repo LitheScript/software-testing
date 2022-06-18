@@ -18,8 +18,8 @@ instance.interceptors.request.use(
         return config;
     }
 );
-var url = 'http://101.35.194.132:9090/';  //服务器连接
-// var url = 'http://localhost:9090/';  //服务器连接
+// var url = 'http://101.35.194.132:9090/';  //服务器连接
+var url = 'http://localhost:9090/';  //服务器连接
 
 export default {
   //这里export的是axios

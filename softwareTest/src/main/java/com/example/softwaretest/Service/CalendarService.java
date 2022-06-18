@@ -15,5 +15,7 @@ public interface CalendarService {
     List<Calendar> getTestCases ();
 
 
+    void saveTestCases(Calendar calendar);
 
+    void cleanTestCases();
 }
