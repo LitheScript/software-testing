@@ -63,12 +63,12 @@
   </div>
 </template>
 
-
 <script>
-import { WOW } from "wowjs";
-import axios from "../axios";
-import qs from "axios";
-import commodityCard from "../components/CommodityCard.vue";
+import { WOW } from 'wowjs';
+// import qs from 'axios';
+import axios from '../axios';
+import commodityCard from '../components/CommodityCard.vue';
+
 export default {
   components: {
     commodityCard,
@@ -82,15 +82,15 @@ export default {
       wow.init();
     });
     this.mode = this.$route.query.mode;
-    this.type = this.$route.query.type || "";
-    this.searchInput = this.$route.query.q || "";
+    this.type = this.$route.query.type || '';
+    this.searchInput = this.$route.query.q || '';
 
     if (this.mode == 0) {
       this.objectList = [];
       this.currentPage = 1;
       this.totalPages = 1;
-      let data = {
-        name: "",
+      const data = {
+        name: '',
         page: 1,
       };
       axios.searchListByName(data).then((res) => {
@@ -104,7 +104,7 @@ export default {
       this.objectList = [];
       this.currentPage = 1;
       this.totalPages = 1;
-      let data = {
+      const data = {
         type: this.type,
         page: 1,
       };
@@ -118,7 +118,7 @@ export default {
       this.objectList = [];
       this.currentPage = 1;
       this.totalPages = 1;
-      let data = {
+      const data = {
         name: this.searchInput,
         page: 1,
       };
@@ -130,21 +130,21 @@ export default {
       });
     }
 
-    this.goList(); //直接去列表
-    //console.log(this.mode,this.type,this.searchInput);
+    this.goList(); // 直接去列表
+    // console.log(this.mode,this.type,this.searchInput);
   },
   data() {
     return {
-      mode: 0, //0->list mode 1->type mode 2->search mode
-      type: "",
-      searchInput: "",
+      mode: 0, // 0->list mode 1->type mode 2->search mode
+      type: '',
+      searchInput: '',
       objectList: [],
       totalPages: 1,
       currentPage: 1,
     };
   },
   computed: {
-    loadState: function () {
+    loadState() {
       return this.currentPage < this.totalPages;
     },
   },
@@ -154,7 +154,7 @@ export default {
       this.objectList = [];
       this.currentPage = 1;
       this.totalPages = 1;
-      let data = {
+      const data = {
         name: this.searchInput,
         page: 1,
       };
@@ -165,7 +165,6 @@ export default {
         this.totalPages = res.data.data.pages;
       });
       this.$refs.test.scrollIntoView();
-      return;
     },
     goList() {
       this.$refs.test.scrollIntoView();
@@ -175,37 +174,37 @@ export default {
     },
     loadMore() {
       if (this.mode == 0) {
-        if (this.currentPage == this.totalPages) return; //健壮性保护
-        let data = {
-          name: "",
+        if (this.currentPage == this.totalPages) return; // 健壮性保护
+        const data = {
+          name: '',
           page: this.currentPage + 1,
         };
         axios.searchListByName(data).then((res) => {
-          let list = res.data.data.records;
+          const list = res.data.data.records;
           this.objectList.push(...list);
           this.currentPage++;
         });
       }
       if (this.mode == 1) {
-        if (this.currentPage == this.totalPages) return; //健壮性保护
-        let data = {
+        if (this.currentPage == this.totalPages) return; // 健壮性保护
+        const data = {
           type: this.type,
           page: this.currentPage + 1,
         };
         axios.getListByType(data).then((res) => {
-          let list = res.data.data.records;
+          const list = res.data.data.records;
           this.objectList.push(...list);
           this.currentPage++;
         });
       } else if (this.mode == 2) {
-        if (this.currentPage == this.totalPages) return; //健壮性保护
-        let data = {
+        if (this.currentPage == this.totalPages) return; // 健壮性保护
+        const data = {
           name: this.searchInput,
           page: this.currentPage + 1,
         };
         console.log(data);
         axios.searchListByName(data).then((res) => {
-          let list = res.data.data.records;
+          const list = res.data.data.records;
           this.objectList.push(...list);
           this.currentPage++;
         });

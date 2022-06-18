@@ -38,65 +38,66 @@
     </div>
 </template>
 <script>
-import axios from '../../axios'
+import axios from '../../axios';
+
 export default {
-    data(){
-        return{
-            postForm:{
-              user_id:this.$store.state.user.userId,
-                title:'',
-                content:'',
-                expected_price:''
-            },
-            
+  data() {
+    return {
+      postForm: {
+        user_id: this.$store.state.user.userId,
+        title: '',
+        content: '',
+        expected_price: '',
+      },
+
       rules: {
         title: [
-          { required: true, message: "请输入所需物品名称", trigger: "blur" },
+          { required: true, message: '请输入所需物品名称', trigger: 'blur' },
           {
             min: 1,
             max: 20,
-            message: "输入长度在1至20字符内",
-            trigger: "blur",
+            message: '输入长度在1至20字符内',
+            trigger: 'blur',
           },
         ],
-       expected_price: [
+        expected_price: [
           {
             required: true,
-            message: "请输入预期价格",
-            trigger: "change",
+            message: '请输入预期价格',
+            trigger: 'change',
           },
         ],
         content: [
           {
             required: true,
-            message: "请输入所需物品描述",
-            trigger: "blur",
+            message: '请输入所需物品描述',
+            trigger: 'blur',
           },
         ],
       },
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          axios.publishPost(this.postForm)
+            .then(() => {
+              this.$message({
+                message: '发布成功',
+                type: 'success',
+                offset: 100,
+              });
+              this.$router.push('/homepage/posts/mypost');
+            });
+          return true;
         }
+        return false;
+      });
     },
-    methods:{ 
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            axios.publishPost(this.postForm)
-            .then(()=>{
-            this.$message({
-          message: "发布成功",
-          type: "success",
-          offset:100
-        });
-            this.$router.push('/homepage/posts/mypost');
-            })
-          } else {
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
+    resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    }
-}
+  },
+};
 </script>

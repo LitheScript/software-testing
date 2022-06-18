@@ -16,53 +16,52 @@
     </div>
 </template>
 
-
 <script>
-import { WOW } from 'wowjs'
-import commodityCard from '../../components/CommodityCard.vue'
-import axios from '../../axios'
+import { WOW } from 'wowjs';
+import commodityCard from '../../components/CommodityCard.vue';
+import axios from '../../axios';
+
 export default {
-  components:{
-    commodityCard
+  components: {
+    commodityCard,
   },
   mounted() {
     this.$nextTick(() => {
       // 在dom渲染完后,再执行动画
       const wow = new WOW({
-        live: false
-      })
-      wow.init()
-    })
+        live: false,
+      });
+      wow.init();
+    });
 
     axios.getCollect()
-    .then(res=>{
-      console.log(res.data.data);
-      let raw=res.data.data;
-      let total=[];
-      raw.forEach(item=>{
-        let data={
-          picture_url:item.urls[0],
-          name:item.name,
-          description:item.description,
-          rent_daily:item.rent_daily,
-          avatar:item.avatar,
-          nick_name:item.nick_name,
-          object_id:item.object_id
-        }
-        total.push(data);
-      })
-      console.log(total);
-      this.myCollects=total;
-    })
-
+      .then((res) => {
+        console.log(res.data.data);
+        const raw = res.data.data;
+        const total = [];
+        raw.forEach((item) => {
+          const data = {
+            picture_url: item.urls[0],
+            name: item.name,
+            description: item.description,
+            rent_daily: item.rent_daily,
+            avatar: item.avatar,
+            nick_name: item.nick_name,
+            object_id: item.object_id,
+          };
+          total.push(data);
+        });
+        console.log(total);
+        this.myCollects = total;
+      });
   },
 
-  data () {
+  data() {
     return {
-      myCollects:[]
-    }
-  }
-}
+      myCollects: [],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -154,7 +153,7 @@ export default {
           transition: all .3s ease;
           &:hover{
             box-shadow:  25px 25px 50px #b8b8b8,
-             
+
           }
         }
       }

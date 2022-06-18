@@ -14,25 +14,25 @@
 
 <script>
 export default {
-  props:{
-    cardInfo:new Object,
-    required:true,
+  props: {
+    cardInfo: Object(),
+    required: true,
   },
-  data () {
+  data() {
     return {
-    }
+    };
   },
   methods: {
-    goDetail(){
+    goDetail() {
       this.$router.push({
-        path:'/homepage/ItemDetail/'+this.cardInfo.object_id,
-      })
+        path: `/homepage/ItemDetail/${this.cardInfo.object_id}`,
+      });
     },
-    formatTime(time){
-        return time.replace('T',' ');
-    }
-  }
-}
+    formatTime(time) {
+      return time.replace('T', ' ');
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +50,7 @@ export default {
         .picture{
             filter: brightness(100%);
         }
-        
+
         }
 
         .picture{
@@ -84,7 +84,7 @@ export default {
             border-bottom: #e0e0e0 1px solid;
             margin-top: 10px;
             margin-bottom: 20px;
-        } 
+        }
     }
 }
 </style>
