@@ -1,9 +1,9 @@
 <template>
   <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 100%;">
-    <div style="width: 68%;">
+    <div style="width: 28%;">
       <div style="display: flex;justify-content: space-between">
         <h1>Question4: 万年历问题</h1>
-        <el-button size="small" type="primary" @click="viewAll">查看所有</el-button>
+        <el-button size="small" type="primary" @click="viewAll" style="margin: 10px 0px">查看所有</el-button>
       </div>
 
       <el-upload
