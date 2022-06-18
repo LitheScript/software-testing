@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.RemarksMapper">
+
+    <select id="getRemarkList" resultType="cn.hutool.json.JSONObject">
+        select nick_name,avatar,time,grade,content
+        from object
+            join remarks on object.object_id=remarks.object_id
+            join user on remarks.user_id=user.user_id
+        where object.object_id=#{object_id}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ObjectMapper">
+    <resultMap id="s_r" type="com.example.demo.entity.Object">
+        <id property="productId" column="product_id"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+        <result property="deposit" column="deposit"/>
+        <result property="tag" column="tag"/>
+        <result property="rentDaily" column="rent_daily"/>
+        <result property="newLevel" column="new_level"/>
+    </resultMap>
+
+
+
+    <select id="getObjectDetail" resultType="cn.hutool.json.JSONObject">
+        select object.object_id,name,rent_daliy,description,new_level,nick_name,avatar,reputation,commentNum.count,commentNum.star
+        from object
+            join user on object.user_id=user.user_id
+            left outer join (select count(*) count,object.object_id,avg(remarks.grade) star
+                             from object
+                                      join remarks on object.object_id=remarks.object_id
+                             GROUP BY object.object_id
+        ) commentNum on commentNum.object_id=object.object_id
+        where object.object_id=#{object_id} and object.status='审核通过'
+    </select>
+    <select id="getPictureUrl" resultType="String">
+        select picture_url
+        from object join picture on object.object_id=picture.object_id
+        where object.object_id=#{object_id}
+    </select>
+    <select id="getRentCount" resultType="Integer">
+        select count(*)
+        from object
+        join `order` on object.object_id=`order`.object_id
+        where object.object_id=#{object_id}
+    </select>
+
+    <select id="getObjectListByType" resultType="cn.hutool.json.JSONObject">
+        select object.object_id,name,rent_daliy,description,new_level,nick_name,avatar,reputation,url.picture_url,commentNum.count,commentNum.star
+        from object
+                 join user on object.user_id=user.user_id
+                 left outer join (select picture_url,object.object_id  from picture join object where picture.object_id=object.object_id)  url on  url.object_id=object.object_id
+                 left outer join (select count(*) count,object.object_id,avg(remarks.grade) star
+                                  from object
+                                      join remarks on object.object_id=remarks.object_id
+                                  GROUP BY object.object_id
+        ) commentNum on commentNum.object_id=object.object_id
+        where object.tag=#{type} and object.status='审核通过'
+    </select>
+
+
+    <select id="viewPendingObject" resultType="cn.hutool.json.JSONObject">
+        select object.object_id,name,rent_daliy,tag,deposit,description,new_level,nick_name,avatar,reputation,url.picture_url
+        from object
+                 join user on object.user_id=user.user_id
+                 left outer join (select picture_url,object.object_id  from picture join object where picture.object_id=object.object_id)  url on  url.object_id=object.object_id
+                 left outer join (select count(*) count,object.object_id,avg(remarks.grade) star
+                                  from object
+                                      join remarks on object.object_id=remarks.object_id
+                                  GROUP BY object.object_id
+        ) commentNum on commentNum.object_id=object.object_id
+        where  object.status='待审核'
+    </select>
+
+    <select id="recommend" resultType="cn.hutool.json.JSONObject">
+        select object.object_id,name,rent_daliy,description,new_level,nick_name,avatar,reputation,url.picture_url,commentNum.count,commentNum.star
+        from object
+                 join user on object.user_id=user.user_id
+                 left outer join (select picture_url,object.object_id  from picture join object where picture.object_id=object.object_id)  url on  url.object_id=object.object_id
+                 left outer join (select count(*) count,object.object_id,avg(remarks.grade) star
+                                  from object
+                                      join remarks on object.object_id=remarks.object_id
+                                  GROUP BY object.object_id
+        ) commentNum on commentNum.object_id=object.object_id
+        where object.status='审核通过'
+        order by commentNum.star desc
+        limit 6
+    </select>
+
+    <select id="searchObject" resultType="cn.hutool.json.JSONObject">
+        select object.object_id,name,rent_daliy,description,new_level,nick_name,avatar,reputation,url.picture_url,commentNum.count,commentNum.star
+        from object
+                 join user on object.user_id=user.user_id
+                 left outer join (select picture_url,object.object_id  from picture join object where picture.object_id=object.object_id)  url on  url.object_id=object.object_id
+                 left outer join (select count(*) count,object.object_id,avg(remarks.grade) star
+                                  from object
+                                      join remarks on object.object_id=remarks.object_id
+                                  GROUP BY object.object_id
+        ) commentNum on commentNum.object_id=object.object_id
+        where name like CONCAT('%%',#{name},'%%') and object.status='审核通过'
+    </select>
+
+
+
+</mapper>

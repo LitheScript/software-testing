@@ -27,7 +27,7 @@
                       class="section-banner-grid">
                     <div>
                       <div class="price-item">
-                        <div class="price-item-value">￥{{this.detail.rentDaliy}}/天</div>
+                        <div class="price-item-value">￥{{this.detail.rent_daliy}}/天</div>
                       </div>
                     </div>
                   </div>
@@ -109,7 +109,7 @@
                       <div>
                         <div class="uk-grid">
                           <div>
-                            <h4 class="uk-comment-title uk-margin-small-bottom">{{this.detail.nickName}}</h4>
+                            <h4 class="uk-comment-title uk-margin-small-bottom">{{this.detail.nick_name}}</h4>
                           </div>
                           <div style="padding-left: 5px"><img src="../assets/img/ico-rating.svg" alt="ico-rating"></div>
                         </div>
@@ -142,7 +142,7 @@
                   <div class="uk-width-expand">
                     <div data-uk-grid>
                       <div>
-                        <h4 class="uk-comment-title uk-margin-small-bottom">{{item.nickName}}</h4>
+                        <h4 class="uk-comment-title uk-margin-small-bottom">{{item.nick_name}}</h4>
                         <div class="uk-comment-meta">{{formatTime(item.time)}}</div>
                       </div>
                       <div>
@@ -310,8 +310,8 @@ export default {
             this.myOrders=res.data.data;
             console.log(this.myOrders);
             this.myOrders.forEach(item=>{
-            if(item.objectId==this.detail.objectId&&item.status=='待支付'){
-              this.orderId=item.orderId;
+            if(item.object_id==this.detail.object_id&&item.status=='待支付'){
+              this.orderId=item.order_id;
               this.checkOut=true;
             }
             resolve();
@@ -320,9 +320,9 @@ export default {
       })
     },
     getComments(){
-      axios.getCommentByItemId(this.detail.objectId)
+      axios.getCommentByItemId(this.detail.object_id)
       .then(response=>{
-        this.comments=response.data.data.remarkList;
+        this.comments=response.data.data.remark_list;
         console.log(this.comments);
         this.detail.count=response.data.data.commentNum;
       })
@@ -341,7 +341,7 @@ export default {
       console.log(this.endTime);
       console.log(this.zone);
       let data={
-        objectId:this.detail.objectId,
+        objectId:this.detail.object_id,
         userId:myId,
         time1:this.startTime,
         time2:this.endTime,
@@ -376,13 +376,13 @@ export default {
       if(text=='')return;
       else{
         console.log('orders',this.myOrders);
-        console.log('item',this.detail.objectId);
-        if(this.myOrders.find(item=>{return item.objectId==this.detail.objectId})==undefined){
+        console.log('item',this.detail.object_id);
+        if(this.myOrders.find(item=>{return item.object_id==this.detail.object_id})==undefined){
           alert('请在使用后再评价！')
         }
         else{
           let data={
-            objectId:this.detail.objectId,
+            objectId:this.detail.object_id,
             userId:this.$store.state.user.userId,
             content:this.myComment,
             star:this.myRate
@@ -425,7 +425,7 @@ export default {
       background-color: white;
       .check-out-head{
         width:100%;
-        display: felx;
+        display: flex;
         flex-direction: row;
         align-items: center;
         padding:5px 20px;

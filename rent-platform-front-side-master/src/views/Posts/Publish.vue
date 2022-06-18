@@ -17,9 +17,9 @@
         :rows="8"
           placeholder="请描述所需物品的种类、名称、可交易的时间、地点等等"></el-input>
         </el-form-item>
-        <el-form-item label="预期租金价格" prop="expectedPrice">
+        <el-form-item label="预期租金价格" prop="expected_price">
           <el-input-number
-            v-model="postForm.expectedPrice"
+            v-model="postForm.expected_price"
             controls-position="right"
             :min="0"
             :step="1"
@@ -43,10 +43,10 @@ export default {
     data(){
         return{
             postForm:{
-              userId:this.$store.state.user.userId,
+              user_id:this.$store.state.user.userId,
                 title:'',
                 content:'',
-                expectedPrice:''
+                expected_price:''
             },
             
       rules: {
@@ -59,7 +59,7 @@ export default {
             trigger: "blur",
           },
         ],
-       expectedPrice: [
+       expected_price: [
           {
             required: true,
             message: "请输入预期价格",

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderMapper">
+
+    <select id="getOrderList" resultType="cn.hutool.json.JSONObject">
+        select order_id,`order`.object_id,borrower_id,status,rent_total,lentout_time,return_time,created_time,finished_time,campus,picture_url
+            from `order` left outer join picture on `order`.object_id=picture.object_id
+            where `order`.borrower_id=#{user_id}
+    </select>
+
+
+    <select id="getObjectName" resultType="cn.hutool.json.JSONObject">
+        select object.name
+        from `order` left outer join object on `order`.object_id=object.object_id
+        where `order`.order_id=#{order_id}
+    </select>
+
+</mapper>

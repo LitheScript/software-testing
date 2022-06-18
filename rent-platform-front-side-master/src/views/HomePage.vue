@@ -215,7 +215,7 @@ export default {
           .red-point-box {
             width: 0;
             height: 100%;
-            display: felx;
+            display: flex;
             flex-direction: column;
             justify-content: flex-start;
             .red-point {

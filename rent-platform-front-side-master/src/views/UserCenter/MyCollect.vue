@@ -5,7 +5,7 @@
           <div class="section-featured-main">
             <commodityCard
             v-for="item in this.myCollects"
-            :key=item.objectId
+            :key=item.object_id
             :cardInfo="item"
             />
           </div>
@@ -41,13 +41,13 @@ export default {
       let total=[];
       raw.forEach(item=>{
         let data={
-          pictureUrl:item.urls[0],
+          picture_url:item.urls[0],
           name:item.name,
           description:item.description,
-          rentDaily:item.rentDaily,
+          rent_daily:item.rent_daily,
           avatar:item.avatar,
-          nickName:item.nickName,
-          objectId:item.objectId
+          nick_name:item.nick_name,
+          object_id:item.object_id
         }
         total.push(data);
       })

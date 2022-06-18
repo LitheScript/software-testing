@@ -51,7 +51,7 @@
         <div class="section-featured-main">
           <commodityCard
             v-for="item in this.objectList"
-            :key="item.objectId"
+            :key="item.object_id"
             :cardInfo="item"
           ></commodityCard>
         </div>
@@ -138,8 +138,6 @@ export default {
       mode: 0, //0->list mode 1->type mode 2->search mode
       type: "",
       searchInput: "",
-      searchInput: "",
-      type: "",
       objectList: [],
       totalPages: 1,
       currentPage: 1,
