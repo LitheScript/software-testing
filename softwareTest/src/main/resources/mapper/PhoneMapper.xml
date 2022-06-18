@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.softwaretest.Mapper.PhoneMapper">
+
+    <select id="getTestCases" resultType="Phone">
+        select id, callLength,times,expectResult,actualResult,pass
+        from softwareTesting.Phone;
+    </select>
+
+    <delete id="cleanTestCases">
+        delete from softwareTesting.Phone;
+    </delete>
+
+    <insert id="saveTestCases" parameterType="Phone">
+        insert into softwareTesting.Triangle(callLength,times,expectResult,actualResult,pass)
+        values(#{callLength},#{times},#{expectResult},#{actualResult},#{pass})
+    </insert>
+</mapper>

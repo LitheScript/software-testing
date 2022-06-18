@@ -10,8 +10,7 @@ public class Calendar {
     private int year;
     private int month;
     private int day;
-    private int oYear;
-    private int oMonth;
-    private int oDay;
+    private String expectResult;
+    private String actualResult;
     private int pass;
 }

@@ -18,4 +18,6 @@ public interface CalendarService {
     void saveTestCases(Calendar calendar);
 
     void cleanTestCases();
+
+    String testCalendar(Calendar calendar);
 }

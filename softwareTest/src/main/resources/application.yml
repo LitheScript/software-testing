@@ -13,8 +13,8 @@ spring:
 server:
   IP: localhost
   port: 81
-  file:
-    name: softwareTesting.log
+#  file:
+#    name: softwareTesting.log
 
 
 mybatis:

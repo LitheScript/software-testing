@@ -13,7 +13,7 @@
     </delete>
 
     <insert id="saveTestCases" parameterType="Triangle">
-        insert into softwareTesting.Triangle(a,b,c,expectResult)
-        values(#{a},#{b},#{c},#{expectResult})
+        insert into softwareTesting.Triangle(a,b,c,expectResult,actualResult,pass)
+        values(#{a},#{b},#{c},#{expectResult},#{actualResult},#{pass})
     </insert>
 </mapper>

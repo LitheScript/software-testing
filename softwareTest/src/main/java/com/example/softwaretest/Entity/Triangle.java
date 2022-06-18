@@ -9,6 +9,7 @@ public class Triangle {
     private int b;
     private int c;
     private String expectResult;
+    private String actualResult;
     private int pass;
 
 }

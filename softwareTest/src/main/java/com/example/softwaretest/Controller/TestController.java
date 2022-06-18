@@ -2,13 +2,16 @@ package com.example.softwaretest.Controller;
 
 import com.example.softwaretest.Entity.Calendar;
 import com.example.softwaretest.Entity.Commission;
+import com.example.softwaretest.Entity.Phone;
 import com.example.softwaretest.Entity.Triangle;
 import com.example.softwaretest.Mapper.CalendarMapper;
 import com.example.softwaretest.Mapper.CommissionMapper;
+import com.example.softwaretest.Mapper.PhoneMapper;
 import com.example.softwaretest.Mapper.TriangleMapper;
 import com.example.softwaretest.Result.Response;
 import com.example.softwaretest.Service.CalendarService;
 import com.example.softwaretest.Service.CommissionService;
+import com.example.softwaretest.Service.PhoneService;
 import com.example.softwaretest.Service.TriangleService;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,9 @@ public class TestController {
 
     @Autowired
     private CalendarService calendarService;
+
+    @Autowired
+    private PhoneService phoneService;
 
     /**
      *
@@ -73,17 +79,14 @@ public class TestController {
     /**
      *
      *@author cj
-     *@date 2022/6/18 20:19
-     * @param testCases
-     * @return Response
-     * 测试三角形
+     *@date 2022/6/18 23:22
+     获取电话问题的测试用例
+     * @return List<Phone>
      */
-    @RequestMapping(path ="/testTriangle" ,method =RequestMethod.POST )
-    public Response testTriangle(List<Triangle> testCases){
-        List<Integer> results;
-        results = triangleService.testTriangle(testCases);
-        return Response.success().data((Map<String, Object>) results);
-    }
+    @RequestMapping(path = "/queryPhone" , method = RequestMethod.GET)
+    public List<Phone> queryPhone(){return phoneService.getTestCases();}
+
+
 
     /**
      *
@@ -101,7 +104,7 @@ public class TestController {
         File file = null;
         file = File.createTempFile("tmp", null);
         file.deleteOnExit();
-        if(multipartFile.getOriginalFilename().endsWith(".csv")){
+        if(multipartFile.getOriginalFilename().endsWith(".CSV")){
             System.out.println(multipartFile.getOriginalFilename());
             BufferedReader reader = null;
             String temp = null;
@@ -115,10 +118,15 @@ public class TestController {
                     calendar.setYear(Integer.valueOf(s[0]));
                     calendar.setMonth(Integer.valueOf(s[1]));
                     calendar.setDay(Integer.valueOf(s[2]));
-                    calendar.setYear(Integer.valueOf(s[3]));
-                    calendar.setOYear(Integer.valueOf(s[4]));
-                    calendar.setOMonth(Integer.valueOf(s[5]));
-                    calendar.setODay(Integer.valueOf(s[6]));
+                    calendar.setExpectResult(s[3]);
+
+                    String result = calendarService.testCalendar(calendar);
+                    calendar.setActualResult(result);
+                    if(result.equals(calendar.getExpectResult())){
+                        calendar.setPass(1);
+                    }else{
+                        calendar.setPass(0);
+                    }
 
                     calendarService.saveTestCases(calendar);
                 }
@@ -153,7 +161,7 @@ public class TestController {
         File file = null;
         file = File.createTempFile("tmp", null);
         file.deleteOnExit();
-        if(multipartFile.getOriginalFilename().endsWith(".csv")){
+        if(multipartFile.getOriginalFilename().endsWith(".CSV")){
             System.out.println(multipartFile.getOriginalFilename());
             BufferedReader reader = null;
             String temp = null;
@@ -169,8 +177,8 @@ public class TestController {
                     triangle.setC(Integer.valueOf(s[2]));
                     triangle.setExpectResult(s[3]);
 
-
-                    if(triangleService.testTriangle(triangle).equals(triangle.getExpectResult())){
+                    triangle.setActualResult(triangleService.testTriangle(triangle));
+                    if(triangle.getActualResult().equals(triangle.getExpectResult())){
                         triangle.setPass(1);
                     }else{
                         triangle.setPass(0);
@@ -193,6 +201,14 @@ public class TestController {
         return Response.success().message("上传成功");
     }
 
+    /**
+     *
+     *@author cj
+     *@date 2022/6/18 23:23
+     * @param multipartFile
+     * @return Response
+     * 上传并测试佣金问题
+     */
     @RequestMapping(value = "/uploadCommission",method = RequestMethod.POST)
     public Response  uploadCommission(@RequestParam("file") MultipartFile multipartFile) throws Exception  {
 
@@ -201,7 +217,7 @@ public class TestController {
         File file = null;
         file = File.createTempFile("tmp", null);
         file.deleteOnExit();
-        if(multipartFile.getOriginalFilename().endsWith(".csv")){
+        if(multipartFile.getOriginalFilename().endsWith(".CSV")){
             System.out.println(multipartFile.getOriginalFilename());
             BufferedReader reader = null;
             String temp = null;
@@ -217,7 +233,6 @@ public class TestController {
                     commission.setPeripheral(Integer.valueOf(s[2]));
                     commission.setSales(Integer.valueOf(s[3]));
                     commission.setCommission(Double.valueOf(s[4]));
-
 
 
                     commissionService.saveTestCases(commission);
@@ -237,4 +252,62 @@ public class TestController {
         }
         return Response.success().message("上传成功");
     }
+
+    /**
+     *
+     *@author cj
+     *@date 2022/6/18 23:24
+     * @param multipartFile
+     * @return Response
+     * 上传并测试电话费用问题
+     */
+    @RequestMapping(value = "/uploadPhone",method = RequestMethod.POST)
+    public Response  uploadPhone(@RequestParam("file") MultipartFile multipartFile) throws Exception  {
+
+        //首先清空数据库
+        calendarService.cleanTestCases();
+        File file = null;
+        file = File.createTempFile("tmp", null);
+        file.deleteOnExit();
+        if(multipartFile.getOriginalFilename().endsWith(".CSV")){
+            System.out.println(multipartFile.getOriginalFilename());
+            BufferedReader reader = null;
+            String temp = null;
+            try {
+                multipartFile.transferTo(file); //MultipartFile转File
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "GBK"));//解决服务器上乱码
+                reader.readLine();
+                while ((temp = reader.readLine()) != null) {
+                    Phone phone = new Phone();
+                    String[] s = temp.split(",");
+                    phone.setCallLength(Integer.valueOf(s[0]));
+                    phone.setTimes(Integer.valueOf(s[0]));
+                    phone.setExpectResult(Double.valueOf(s[0]));
+
+
+                    double result = phoneService.testCalendar(phone);
+                    phone.setActualResult(result);
+                    if(result==phone.getExpectResult()){
+                        phone.setPass(1);
+                    }else{
+                        phone.setPass(0);
+                    }
+
+                    phoneService.saveTestCases(phone);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return Response.success().message("上传成功");
+    }
+
 }

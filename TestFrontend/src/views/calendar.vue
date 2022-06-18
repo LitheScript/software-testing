@@ -9,7 +9,7 @@
       <el-upload
           drag
           class="upload-demo"
-          action="http://101.35.194.132:81/uploadCalendar"
+          action="http://localhost:81/uploadTriangle"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
