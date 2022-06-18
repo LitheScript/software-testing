@@ -8,9 +8,15 @@
           <div class="pay-code"></div>
 
           <div class="buttons">
-            <div class="check-out-button" style="background-color: red;margin-right:10px" @click="cancle">取消</div>
-            <div class="check-out-button" style="background-color: rgb(42, 88, 240);margin-right:10px" @click="skip">跳过</div>
-            <div class="check-out-button" style="background-color: rgb(42, 88, 240);" @click="pay">支付</div>
+            <div class="check-out-button"
+            style="background-color: red;margin-right:10px"
+            @click="cancle">取消</div>
+            <div class="check-out-button"
+            style="background-color: rgb(42, 88, 240);margin-right:10px"
+            @click="skip">跳过</div>
+            <div class="check-out-button"
+            style="background-color: rgb(42, 88, 240);"
+            @click="pay">支付</div>
           </div>
         </div>
       </div>
@@ -34,8 +40,10 @@
                 </div>
               </div>
               <div>
-                <div class="section-banner-rating"><i class="far fa-white-star"></i><span>评分</span><b
-                    style="color: red;padding:0 10px;font-size:28px;">{{this.detail.star}}</b><span>({{this.detail.count}}人已评价)</span>
+                <div class="section-banner-rating">
+                  <i class="far fa-white-star"></i><span>评分</span>
+                  <b style="color: red;padding:0 10px;font-size:28px;">{{this.detail.star}}</b>
+                    <span>({{this.detail.count}}人已评价)</span>
                 </div>
                 <div class="section-banner-links">
                   <ul>
@@ -57,7 +65,8 @@
           <div class="uk-width-2-3@m">
             <div data-uk-slideshow="min-height: 300; max-height: 430">
               <div class="uk-position-relative uk-light">
-                <ul class="uk-slideshow-items uk-child-width-1-1" data-uk-lightbox="animation: scale">
+                <ul class="uk-slideshow-items uk-child-width-1-1"
+                data-uk-lightbox="animation: scale">
                   <li class="uk-border-rounded"><img
                       class="uk-width-1-1"
                       :src="this.detail.urls[0]"
@@ -65,28 +74,41 @@
                       data-uk-cover><!--</a>-->
                   </li>
                 </ul>
-                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-previous
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover"
+                  href="#" data-uk-slidenav-previous
                    data-uk-slideshow-item="previous"></a><a
-                  class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-next
+                  class="uk-position-center-right uk-position-small uk-hidden-hover"
+                  href="#" data-uk-slidenav-next
                   data-uk-slideshow-item="next"></a>
               </div>
               <div class="uk-margin-top" data-uk-slider>
-                <ul class="uk-thumbnav uk-slider-items uk-grid uk-grid-small uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l">
-                  <li data-uk-slideshow-item="0"><a href="#"><img class="uk-border-rounded"
-                                                                  src="../assets/img/img-article-intro-1.jpg"
-                                                                  alt="img-gallery"></a></li>
-                  <li data-uk-slideshow-item="1"><a href="#"><img class="uk-border-rounded"
-                                                                  src="../assets/img/img-article-intro-2.jpg"
-                                                                  alt="img-gallery"></a></li>
-                  <li data-uk-slideshow-item="2"><a href="#"><img class="uk-border-rounded"
-                                                                  src="../assets/img/img-article-intro-3.jpg"
-                                                                  alt="img-gallery"></a></li>
-                  <li data-uk-slideshow-item="3"><a href="#"><img class="uk-border-rounded"
-                                                                  src="../assets/img/img-article-intro-4.jpg"
-                                                                  alt="img-gallery"></a></li>
-                  <li data-uk-slideshow-item="4"><a href="#"><img class="uk-border-rounded"
-                                                                  src="../assets/img/img-article-intro-2.jpg"
-                                                                  alt="img-gallery"></a></li>
+                <ul class="uk-thumbnav uk-slider-items uk-grid uk-grid-small uk-child-width-1-2
+                uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l">
+                  <li data-uk-slideshow-item="0"><a href="#">
+                    <img class="uk-border-rounded"
+                         src="../assets/img/img-article-intro-1.jpg"
+                        alt="img-gallery"></a>
+                  </li>
+                  <li data-uk-slideshow-item="1"><a href="#">
+                    <img class="uk-border-rounded"
+                      src="../assets/img/img-article-intro-2.jpg"
+                      alt="img-gallery"></a>
+                  </li>
+                  <li data-uk-slideshow-item="2"><a href="#">
+                    <img class="uk-border-rounded"
+                    src="../assets/img/img-article-intro-3.jpg"
+                    alt="img-gallery"></a>
+                  </li>
+                  <li data-uk-slideshow-item="3"><a href="#">
+                    <img class="uk-border-rounded"
+                         src="../assets/img/img-article-intro-4.jpg"
+                         alt="img-gallery"></a>
+                  </li>
+                  <li data-uk-slideshow-item="4"><a href="#">
+                    <img class="uk-border-rounded"
+                         src="../assets/img/img-article-intro-2.jpg"
+                         alt="img-gallery"></a>
+                  </li>
                 </ul>
                 <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin-top"></ul>
               </div>
@@ -101,7 +123,8 @@
             <div class="uk-comment">
               <div class="uk-comment-header">
                 <div class="uk-grid uk-flex-middle">
-                  <div class="uk-width-auto@l"><img class="uk-comment-avatar" :src="this.detail.avatar"
+                  <div class="uk-width-auto@l">
+                    <img class="uk-comment-avatar" :src="this.detail.avatar"
                                                     width="80"
                                                     height="80" alt="avatar"></div>
                   <div class="uk-width-expand">
@@ -109,13 +132,18 @@
                       <div>
                         <div class="uk-grid">
                           <div>
-                            <h4 class="uk-comment-title uk-margin-small-bottom">{{this.detail.nick_name}}</h4>
+                            <h4 class="uk-comment-title uk-margin-small-bottom">
+                              {{this.detail.nick_name}}
+                            </h4>
                           </div>
-                          <div style="padding-left: 5px"><img src="../assets/img/ico-rating.svg" alt="ico-rating"></div>
+                          <div style="padding-left: 5px">
+                            <img src="../assets/img/ico-rating.svg" alt="ico-rating">
+                          </div>
                         </div>
                         <div class="uk-grid uk-margin-remove">
                           <div class="uk-padding-remove">
-                            <div style="display:flex;flex-direction:row;align-items:center;margin-top:5px;">
+                            <div style="display:flex;flex-direction:row;
+                            align-items:center;margin-top:5px;">
                              信誉度：<div style="color:red">{{this.detail.reputation}}</div>
                             </div>
                           </div>
@@ -129,16 +157,23 @@
             <hr class="uk-margin-medium">
             <div class="uk-flex uk-margin-medium-bottom" data-uk-grid>
               <div class="uk-width-expand">
-                <h3><span class="icon-red-star icon-accent"></span>评价<small>(评分 <b>{{this.detail.star}}</b> 已有 {{this.detail.count}}
+                <h3><span class="icon-red-star icon-accent">
+                    </span>评价<small>(评分 <b>{{this.detail.star}}</b> 已有 {{this.detail.count}}
                   人评价)</small></h3>
               </div>
               <div><a class="uk-button uk-button-danger"  @click="goComment()">发表评价</a></div>
             </div>
-            <div class="uk-comment uk-margin-small-bottom" v-for="item in this.comments" :key="item.content">
+            <div class="uk-comment uk-margin-small-bottom"
+                 v-for="item in this.comments"
+                :key="item.content">
               <div class="uk-comment-header">
                 <div class="uk-grid uk-flex-middle" data-uk-grid>
-                  <div class="uk-width-auto"><img class="uk-comment-avatar" :src="item.avatar" width="60"
-                                                  height="60"  alt="avatar" style="border-radius:30px;"></div>
+                  <div class="uk-width-auto">
+                    <img class="uk-comment-avatar"
+                    :src="item.avatar" width="60"
+                    height="60"  alt="avatar"
+                    style="border-radius:30px;">
+                  </div>
                   <div class="uk-width-expand">
                     <div data-uk-grid>
                       <div>
@@ -173,10 +208,16 @@
                 class="block-rating__numb">{{this.myRate}}.0</span></div>
             <form action="#">
               <div class="uk-grid uk-child-width-1-1" data-uk-grid>
-                <div class="uk-margin-small-bottom"><textarea class="uk-textarea"
-                                                              placeholder="填写你的评价..." v-model="myComment"></textarea></div>
+                <div class="uk-margin-small-bottom">
+                  <textarea class="uk-textarea"
+                            placeholder="填写你的评价..."
+                            v-model="myComment">
+                  </textarea>
+                </div>
                 <div>
-                  <div class="uk-button uk-button-danger uk-button-large"  @click="sendComment()">发表</div>
+                  <div class="uk-button uk-button-danger uk-button-large"@click="sendComment()">
+                    发表
+                  </div>
                 </div>
               </div>
             </form>
@@ -192,7 +233,9 @@
                       <div>
                         <div class="uk-grid" tyle="width:100%" data-uk-grid>
                           <div>
-                            <div class="uk-h5" style="width:300px;margin-bottom:20px;">你所在的校区是?</div>
+                            <div class="uk-h5" style="width:300px;margin-bottom:20px;">
+                              你所在的校区是?
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -232,8 +275,11 @@
                     placeholder="结束日期"
                    >
                   </el-date-picker>
-                  <div class="uk-margin"><input class="uk-button uk-button-danger uk-width-1-1" type="button" @click="rentItem()"
-                                                value="开始租用"></div>
+                  <div class="uk-margin">
+                    <input class="uk-button uk-button-danger uk-width-1-1"
+                          type="button" @click="rentItem()"
+                          value="开始租用">
+                  </div>
                   <div class="uk-margin-top">
                     <div class="uk-text-center">
                       <p class="uk-text-meta">请确认物品在你选择的时间上是否可用
@@ -251,154 +297,150 @@
 </template>
 
 <script>
-import axios from '../axios'
+import axios from '../axios';
+
 export default {
-  mounted () {
-    let uid=this.$store.state.user.userId;
-    let id=this.$route.params.id;
+  mounted() {
+    const uid = this.$store.state.user.userId;
+    const { id } = this.$route.params;
 
     this.getDetail(id)
-    .then(()=>{
-      this.getOrderList(uid);
-    })
-    .then(()=>{
-      this.getComments();
-    })
-    //获取订单的信息
+      .then(() => {
+        this.getOrderList(uid);
+      })
+      .then(() => {
+        this.getComments();
+      });
+    // 获取订单的信息
   },
-  data () {
+  data() {
     return {
-      detail:{},
-      startTime:'',
-      endTime:'',
-      rate:4,
-      myRate:5,
-      colors:[],
-      comments:[],
-      zone:'',
-      checkOut:false,
-      myOrders:[],
-      myComment:'',
-      orderId:-1
-    }
+      detail: {},
+      startTime: '',
+      endTime: '',
+      rate: 4,
+      myRate: 5,
+      colors: [],
+      comments: [],
+      zone: '',
+      checkOut: false,
+      myOrders: [],
+      myComment: '',
+      orderId: -1,
+    };
   },
   methods: {
-    pay(){
+    pay() {
       axios.pay(this.orderId)
-      .then(res=>{
-        console.log(res.data.data);
-        window.open(res.data.data)
-        this.checkOut=false;
-      })
-      return;
+        .then((res) => {
+          console.log(res.data.data);
+          window.open(res.data.data);
+          this.checkOut = false;
+        });
     },
-    async getDetail(id){
-      return new Promise(resolve=>{
+    async getDetail(id) {
+      return new Promise((resolve) => {
         axios.getObjectDetail(id)
-        .then(res=>{
-          console.log('detail',res.data.data);
-          this.detail=res.data.data;
-          resolve();
-        })
-      })
-    },
-    async getOrderList(id){
-      return new Promise(resolve=>{
-        axios.getOrderList(id)
-        .then(res=>{
-            console.log('resssss',res.data)
-            this.myOrders=res.data.data;
-            console.log(this.myOrders);
-            this.myOrders.forEach(item=>{
-            if(item.object_id==this.detail.object_id&&item.status=='待支付'){
-              this.orderId=item.order_id;
-              this.checkOut=true;
-            }
+          .then((res) => {
+            console.log('detail', res.data.data);
+            this.detail = res.data.data;
             resolve();
-          })
-        })
-      })
+          });
+      });
     },
-    getComments(){
+    async getOrderList(id) {
+      return new Promise((resolve) => {
+        axios.getOrderList(id)
+          .then((res) => {
+            console.log('resssss', res.data);
+            this.myOrders = res.data.data;
+            console.log(this.myOrders);
+            this.myOrders.forEach((item) => {
+              if (item.object_id == this.detail.object_id && item.status == '待支付') {
+                this.orderId = item.order_id;
+                this.checkOut = true;
+              }
+              resolve();
+            });
+          });
+      });
+    },
+    getComments() {
       axios.getCommentByItemId(this.detail.object_id)
-      .then(response=>{
-        this.comments=response.data.data.remark_list;
-        console.log(this.comments);
-        this.detail.count=response.data.data.commentNum;
-      })
+        .then((response) => {
+          this.comments = response.data.data.remark_list;
+          console.log(this.comments);
+          this.detail.count = response.data.data.commentNum;
+        });
     },
-    rentItem(){
-      if(!this.$store.state.login){
+    rentItem() {
+      if (!this.$store.state.login) {
         this.$router.push({
           path: '/login',
-          query: { redirect: this.$route.fullPath } //将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
-        })
+          query: { redirect: this.$route.fullPath }, // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
+        });
       }
 
-      let myId=this.$store.state.user.userId;
-      console.log('ididid',myId);
+      const myId = this.$store.state.user.userId;
+      console.log('ididid', myId);
       console.log(this.startTime);
       console.log(this.endTime);
       console.log(this.zone);
-      let data={
-        objectId:this.detail.object_id,
-        userId:myId,
-        time1:this.startTime,
-        time2:this.endTime,
-        zone:this.zone
-      }
-      console.log('data',data);
+      const data = {
+        objectId: this.detail.object_id,
+        userId: myId,
+        time1: this.startTime,
+        time2: this.endTime,
+        zone: this.zone,
+      };
+      console.log('data', data);
       axios.createOrder(data)
-      .then(res=>{
-        this.orderId=res.data.data;
-        this.checkOut=true;
-      })
-
+        .then((res) => {
+          this.orderId = res.data.data;
+          this.checkOut = true;
+        });
     },
-    goComment(){
+    goComment() {
       this.$refs.comment.scrollIntoView();
     },
-    formatTime(time){
-      return time.replace('T',' ');
+    formatTime(time) {
+      return time.replace('T', ' ');
     },
-    cancle(){
+    cancle() {
       axios.cancleOrder(this.orderId)
-      .then(res=>{
-        alert('取消成功');
-      })
-      this.checkOut=false;
+        .then(() => {
+          alert('取消成功');
+        });
+      this.checkOut = false;
     },
-    skip(){
-      this.checkOut=false;
+    skip() {
+      this.checkOut = false;
     },
-    sendComment(){
-      let text=this.myComment;
-      if(text=='')return;
-      else{
-        console.log('orders',this.myOrders);
-        console.log('item',this.detail.object_id);
-        if(this.myOrders.find(item=>{return item.object_id==this.detail.object_id})==undefined){
-          alert('请在使用后再评价！')
-        }
-        else{
-          let data={
-            objectId:this.detail.object_id,
-            userId:this.$store.state.user.userId,
-            content:this.myComment,
-            star:this.myRate
-          }
-          axios.comment(data)
-          .then(res=>{
+    sendComment() {
+      const text = this.myComment;
+      if (text == '') return;
+
+      console.log('orders', this.myOrders);
+      console.log('item', this.detail.object_id);
+      if (this.myOrders.find((item) => item.object_id == this.detail.object_id) == undefined) {
+        alert('请在使用后再评价！');
+      } else {
+        const data = {
+          objectId: this.detail.object_id,
+          userId: this.$store.state.user.userId,
+          content: this.myComment,
+          star: this.myRate,
+        };
+        axios.comment(data)
+          .then((res) => {
             console.log(res);
             alert('评价成功');
-          })
-        }
+          });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
 
 <style lang="scss" scoped>
 .item-detail {
@@ -529,7 +571,6 @@ export default {
                   width: 150px;
                   text-align: center;
 
-
                   .price-item-value {
                     font-size: 30px;
                     font-style: normal;
@@ -596,7 +637,6 @@ export default {
   }
 }
 
-
 .section-banner-grid {
   display: flex;
   flex-wrap: wrap;
@@ -604,7 +644,6 @@ export default {
   padding: 0;
   list-style: none;
 }
-
 
 .section-banner-rating i {
   margin-right: 5px;
@@ -753,7 +792,6 @@ export default {
   padding: 0;
   list-style-type: none;
 }
-
 
 .uk-textarea {
   height: 160px;

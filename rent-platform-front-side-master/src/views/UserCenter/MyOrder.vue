@@ -17,37 +17,37 @@
     </div>
 </template>
 
-
 <script>
-import { WOW } from 'wowjs'
-import orderCard from '../../components/OrderCard.vue'
-import axios from '../../axios'
+import { WOW } from 'wowjs';
+import orderCard from '../../components/OrderCard.vue';
+import axios from '../../axios';
+
 export default {
-  components:{
-    orderCard
+  components: {
+    orderCard,
   },
   mounted() {
     this.$nextTick(() => {
       // 在dom渲染完后,再执行动画
       const wow = new WOW({
-        live: false
-      })
-      wow.init()
-    })
+        live: false,
+      });
+      wow.init();
+    });
 
-    let id=this.$store.state.user.userId;
+    const id = this.$store.state.user.userId;
     axios.getOrderList(id)
-    .then(res=>{
-      console.log('resssss',res.data)
-      this.orderList=res.data.data;
-    })
+      .then((res) => {
+        console.log('resssss', res.data);
+        this.orderList = res.data.data;
+      });
   },
-  data () {
+  data() {
     return {
-      orderList:[]
-    }
-  }
-}
+      orderList: [],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -139,7 +139,7 @@ export default {
           transition: all .3s ease;
           &:hover{
             box-shadow:  25px 25px 50px #b8b8b8,
-             
+
           }
         }
       }

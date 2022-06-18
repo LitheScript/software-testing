@@ -144,11 +144,11 @@
   </div>
 </template>
 
-
 <script>
-import { WOW } from "wowjs";
-import commodityCard from "../components/CommodityCard.vue";
-import axios from "../axios";
+import { WOW } from 'wowjs';
+import commodityCard from '../components/CommodityCard.vue';
+import axios from '../axios';
+
 export default {
   components: {
     commodityCard,
@@ -162,140 +162,140 @@ export default {
       wow.init();
     });
     axios.getRecommendList().then((res) => {
-      console.log("res", res);
+      console.log('res', res);
       this.recommendList = res.data.data;
     });
   },
   computed: {
-    page1: function () {
+    page1() {
       return this.currentPage == 1;
     },
-    page2: function () {
+    page2() {
       return this.currentPage == 2;
     },
-    page3: function () {
+    page3() {
       return this.currentPage == 3;
     },
   },
   data() {
     return {
       currentPage: 1,
-      sliderAnimation: "left-slide",
-      searchInput: "",
+      sliderAnimation: 'left-slide',
+      searchInput: '',
       objectTest: {
         objectId: 1,
-        name: "A-soul装扮套餐",
+        name: 'A-soul装扮套餐',
         userId: 1,
-        description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-        status: "0",
+        description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+        status: '0',
         deposit: 400,
-        tag: "数码产品",
+        tag: '数码产品',
         rentDaliy: 50,
-        newLevel: "七成新",
-        userName: "嘉然小姐的狗",
-        picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+        newLevel: '七成新',
+        userName: '嘉然小姐的狗',
+        picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
       },
       recommendList: [
         {
           objectId: 1,
-          name: "A-soul装扮套餐1",
+          name: 'A-soul装扮套餐1',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
           objectId: 2,
-          name: "A-soul装扮套餐2",
+          name: 'A-soul装扮套餐2',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
           objectId: 3,
-          name: "A-soul装扮套餐3",
+          name: 'A-soul装扮套餐3',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
           objectId: 4,
-          name: "A-soul装扮套餐4",
+          name: 'A-soul装扮套餐4',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
           objectId: 5,
-          name: "A-soul装扮套餐5",
+          name: 'A-soul装扮套餐5',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
           objectId: 6,
-          name: "A-soul装扮套餐6",
+          name: 'A-soul装扮套餐6',
           userId: 1,
-          description: "这里是描述这是一个老师肯定积分啥地方离开加速度来看风景",
-          status: "0",
+          description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
+          status: '0',
           deposit: 400,
-          tag: "数码产品",
+          tag: '数码产品',
           rentDaliy: 50,
-          newLevel: "七成新",
-          userName: "嘉然小姐的狗",
-          picture: "https://m2.im5i.com/2021/12/29/UT2mEq.jpg",
+          newLevel: '七成新',
+          userName: '嘉然小姐的狗',
+          picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
       ],
     };
   },
   methods: {
     toPage1() {
-      this.sliderAnimation = "right-slide";
+      this.sliderAnimation = 'right-slide';
       this.currentPage = 1;
     },
     toPage2() {
-      if (this.currentPage > 2) this.sliderAnimation = "right-slide";
-      else this.sliderAnimation = "left-slide";
+      if (this.currentPage > 2) this.sliderAnimation = 'right-slide';
+      else this.sliderAnimation = 'left-slide';
       this.currentPage = 2;
     },
     toPage3() {
-      this.sliderAnimation = "left-slide";
+      this.sliderAnimation = 'left-slide';
       this.currentPage = 3;
     },
-    //以上三条是动画切换逻辑
+    // 以上三条是动画切换逻辑
     search() {
-      if (this.searchInput == "") return;
+      if (this.searchInput == '') return;
       this.$router.push({
-        path: "/homepage/items",
+        path: '/homepage/items',
         query: {
           mode: 2,
           q: this.searchInput,
@@ -307,7 +307,7 @@ export default {
     },
     goList(data) {
       this.$router.push({
-        path: "/homepage/items",
+        path: '/homepage/items',
         query: {
           mode: 1,
           type: data,

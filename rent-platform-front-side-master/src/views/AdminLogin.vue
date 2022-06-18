@@ -13,9 +13,11 @@
 <!--          </div>-->
             <div class="main-title">登录</div>
             <div class="main-form">
-              <input :class="{'login-input':true, 'login-input-err':this.userNameErr}" placeholder="用户名" @focus="resetErr" v-model="userName">
+              <input :class="{'login-input':true, 'login-input-err':this.userNameErr}"
+              placeholder="用户名" @focus="resetErr" v-model="userName">
               <div class="input-check" v-show="userNameErr">{{this.userNameInfo}}</div>
-              <input :class="{'login-input':true, 'login-input-err':this.pswErr}" placeholder="密码" type="password" @focus="resetErr" v-model="password">
+              <input :class="{'login-input':true, 'login-input-err':this.pswErr}"
+              placeholder="密码" type="password" @focus="resetErr" v-model="password">
               <div class="input-check" v-show="pswErr">{{this.pswInfo}}</div>
             </div>
             <div class="main-lower">
@@ -39,100 +41,100 @@
 </template>
 
 <script>
-import { WOW } from 'wowjs'
-import axios from '../axios'
-var qs = require('qs');
+import { WOW } from 'wowjs';
+import axios from '../axios';
+
+const qs = require('qs');
+
 export default {
   mounted() {
     this.$nextTick(() => {
       // 在dom渲染完后,再执行动画
       const wow = new WOW({
-        live: false
-      })
-      wow.init()
-    })
+        live: false,
+      });
+      wow.init();
+    });
   },
-  data () {
+  data() {
     return {
-      userNameInfo:'',//用户名错误提示
-      pswInfo:'',//密码错误提示
-      userName:'',
-      password:'',
-      role:'',
-    }
+      userNameInfo: '', // 用户名错误提示
+      pswInfo: '', // 密码错误提示
+      userName: '',
+      password: '',
+      role: '',
+    };
   },
   computed: {
-    userNameErr:function(){
-      return this.userNameInfo!='';
+    userNameErr() {
+      return this.userNameInfo != '';
     },
-    pswErr:function(){
-      return this.pswInfo!='';
-    }
+    pswErr() {
+      return this.pswInfo != '';
+    },
   },
   methods: {
-    goBack(){
+    goBack() {
       this.$router.push('/');
     },
-    goRegister(){
+    goRegister() {
       this.$router.push('/register');
     },
-    login(){
-      if(this.userName==''){
-        this.userNameInfo='用户名不能为空';
+    login() {
+      if (this.userName == '') {
+        this.userNameInfo = '用户名不能为空';
         return;
-        }
-      if(this.password==''){
-        this.pswInfo='请输入密码';
-        return;
-        }
-
-      let data={
-        nickName:this.userName,
-        password:this.password,
-        role:1
       }
+      if (this.password == '') {
+        this.pswInfo = '请输入密码';
+        return;
+      }
+
+      const data = {
+        nickName: this.userName,
+        password: this.password,
+        role: 1,
+      };
 
       console.log(data);
 
       axios.userLogin(qs.stringify(data))
-      .then(res=>{
-        console.log(res);
-        if(res.data.code=='-1'){
-          this.pswInfo='用户名或密码错误';
-        }
-        else{
-          let token=res.data.data.token;
-          let data=token;
-          axios.getUserByToken(data)
-          .then(res=>{
-            console.log(res.data.role);
-            let user=res.data;
-            this.$store.commit('LOGIN',token);//mutation LOGIN
-            this.$store.commit('USER',user);
-            this.$store.commit('LOGIN');//mutation LOGIN
-           // if(res.data.role=="1"){
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == '-1') {
+            this.pswInfo = '用户名或密码错误';
+          } else {
+            const { token } = res.data.data;
+            const data = token;
+            axios.getUserByToken(data)
+              .then((res) => {
+                console.log(res.data.role);
+                const user = res.data;
+                this.$store.commit('LOGIN', token);// mutation LOGIN
+                this.$store.commit('USER', user);
+                this.$store.commit('LOGIN');// mutation LOGIN
+                // if(res.data.role=="1"){
                 this.$router.push('/admin');
-                //}
-            // else {
-            //   let redirect = decodeURIComponent(this.$route.query.redirect || '/');
-            //   this.$router.push(redirect);
-            // }
-          })
-        }
-
-      })
-      .catch(err=>{
-        this.pswInfo='用户名或密码错误';
-        console.log(err);
-      })
+                // }
+                // else {
+                //   let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+                //   this.$router.push(redirect);
+                // }
+              });
+          }
+        })
+        .catch((err) => {
+          this.pswInfo = '用户名或密码错误';
+          console.log(err);
+        });
     },
 
-    resetErr(){
-      this.userNameInfo='';
-      this.pswInfo='';
-    }
-  }
-}
+    resetErr() {
+      this.userNameInfo = '';
+      this.pswInfo = '';
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

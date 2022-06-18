@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from '../axios'
+import axios from '../axios';
 
 export default {
   props: {
@@ -46,27 +46,24 @@ export default {
       heartColor: 'black',
       collected: false,
 
-    }
+    };
   },
   methods: {
     goDetail() {
-    console.log("I'm just kidding!")
     },
-    checkProved(){
+    checkProved() {
       axios.checkPass(this.cardInfo.object_id)
-          .then(res=>{
-            console.log(res);
-          })
+        .then(() => {
+        });
     },
-    checkFailed(){
+    checkFailed() {
       axios.removeObj(this.cardInfo.object_id)
-          .then(res=>{
-            console.log(res);
-          })
+        .then(() => {
+        });
     },
 
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

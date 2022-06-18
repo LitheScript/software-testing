@@ -57,25 +57,25 @@
 <script>
 export default {
   computed: {
-    login: function () {
+    login() {
       return !this.$store.state.login;
     },
-    user: function () {
+    user() {
       return this.$store.state.user || this.userDefault;
     },
   },
   data() {
     return {
       option: false,
-      searchInput: "",
+      searchInput: '',
       userDefault: {
         userId: -1,
-        nickName: "",
-        password: "",
-        avatar: "",
-        gender: "",
-        telephone: "",
-        email: "",
+        nickName: '',
+        password: '',
+        avatar: '',
+        gender: '',
+        telephone: '',
+        email: '',
         zone: null,
         registerTime: null,
         role: 0,
@@ -85,8 +85,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit("LOGOUT");
-      this.$router.push("/");
+      this.$store.commit('LOGOUT');
+      this.$router.push('/');
     },
   },
 };

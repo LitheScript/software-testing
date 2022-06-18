@@ -174,24 +174,26 @@
 </template>
 
 <script>
-import axios from "../../axios";
-var qs = require("qs");
+import axios from '../../axios';
+
+// const qs = require('qs');
+
 export default {
   mounted() {
-    let user = this.$store.state.user;
+    const { user } = this.$store.state;
     if (!user) {
-      this.$router.push("/");
+      this.$router.push('/');
     } else {
       this.PersonalData.nick_name = user.nickName;
-      this.nick_name= user.nickName;
+      this.nick_name = user.nickName;
       this.PersonalData.gender = user.gender;
       this.gender = user.gender;
       this.PersonalData.telephone = user.telephone;
-      this.telephone= user.telephone;
+      this.telephone = user.telephone;
       this.PersonalData.email = user.email;
-      this.email=user.email;
+      this.email = user.email;
       this.PersonalData.zone = user.zone;
-      this.zone= user.zone;
+      this.zone = user.zone;
       this.PersonalData.avatar = user.avatar;
       this.PersonalData.userId = user.userId;
       this.PersonalData.password = user.password;
@@ -201,27 +203,27 @@ export default {
     console.log(this.PersonalData);
   },
   data() {
-    var checkOrgin = (rule, value, callback) => {
+    const checkOrgin = (rule, value, callback) => {
       if (value != this.PersonalData.password) {
-        return callback(new Error("原密码输入错误！"));
+        return callback(new Error('原密码输入错误！'));
       }
       callback();
     };
-    var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入一个新密码！"));
+    const validatePass = (rule, value, callback) => {
+      if (value == '') {
+        callback(new Error('请输入一个新密码！'));
       } else {
-        if (this.passForm.checkPass !== "") {
-          this.$refs.passForm.validateField("checkPass");
+        if (this.passForm.checkPass !== '') {
+          this.$refs.passForm.validateField('checkPass');
         }
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码！"));
+    const validatePass2 = (rule, value, callback) => {
+      if (value == '') {
+        callback(new Error('请再次输入密码！'));
       } else if (value !== this.passForm.pass) {
-        callback(new Error("两次输入密码不一致！"));
+        callback(new Error('两次输入密码不一致！'));
       } else {
         callback();
       }
@@ -229,33 +231,33 @@ export default {
     return {
       PersonalData: {
         userId: -1,
-        nick_name: "",
-        password: "",
-        avatar: "",
-        gender: "",
-        telephone: "",
-        email: "",
-        zone: "",
+        nick_name: '',
+        password: '',
+        avatar: '',
+        gender: '',
+        telephone: '',
+        email: '',
+        zone: '',
         role: 0,
         reputation: 0,
       },
-       nick_name: "",
-        gender: "",
-        telephone: "",
-        email: "",
-        zone: "",
+      nick_name: '',
+      gender: '',
+      telephone: '',
+      email: '',
+      zone: '',
       fileList: [],
       editflag: true,
       passwordchange: false,
       passForm: {
-        orgin: "",
-        pass: "",
-        checkpass: "",
+        orgin: '',
+        pass: '',
+        checkpass: '',
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        orgin: [{ validator: checkOrgin, trigger: "blur" }],
+        pass: [{ validator: validatePass, trigger: 'blur' }],
+        checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+        orgin: [{ validator: checkOrgin, trigger: 'blur' }],
       },
     };
   },
@@ -266,61 +268,61 @@ export default {
       axios
         .updateUser(this.PersonalData)
         .then((res) => {
-          console.log("上传成功");
+          console.log('上传成功');
           console.log(res);
-      console.log(this.PersonalData);
+          console.log(this.PersonalData);
         })
         .catch((err) => {
           console.log(err);
         });
       this.editflag = true;
     },
-     HandleCancel(){
-      this.PersonalData.nick_name=this.nick_name,
-            this.PersonalData.gender=this.gender,
-           this.PersonalData.telephone=this.telephone,
-           this.PersonalData.email=this.email,
-            this.PersonalData.zone=this.zone
-              this.editflag=true;
-            },
+    HandleCancel() {
+      this.PersonalData.nick_name = this.nick_name,
+      this.PersonalData.gender = this.gender,
+      this.PersonalData.telephone = this.telephone,
+      this.PersonalData.email = this.email,
+      this.PersonalData.zone = this.zone;
+      this.editflag = true;
+    },
     submitForm(formName) {
       console.log(this.PersonalData);
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.PersonalData.password=this.passForm.pass;
+          this.PersonalData.password = this.passForm.pass;
           console.log(this.PersonalData);
           axios
             .updateUser(this.PersonalData)
-            .then((res) => {
-              console.log("上传成功");
-                this.$message({
-                message: "修改成功",
-                type: "success",
+            .then(() => {
+              console.log('上传成功');
+              this.$message({
+                message: '修改成功',
+                type: 'success',
                 duration: 1000,
-                offset:100
+                offset: 100,
               });
-             this.passwordchange = false;
-      console.log(this.PersonalData);
+              this.passwordchange = false;
+              console.log(this.PersonalData);
             })
             .catch((err) => {
               console.log(err);
             });
         } else {
-          console.log("error submit!!");
+          console.log('error submit!!');
           return false;
         }
       });
     },
-        CancelChange(){
+    CancelChange() {
       this.$refs.passForm.resetFields();
-       this.passwordchange = false
-        },
+      this.passwordchange = false;
+    },
     // el-upload相关方法
 
     uploadSuccess(res) {
       // 图片上传成功后即调用的函数
-      console.log("图片上传成功" + JSON.stringify(res));
-      if (res.code == 0) {
+      console.log(`图片上传成功${JSON.stringify(res)}`);
+      if (res.code === 0) {
         // sysUser为form表单对象，当上传成功后，后端会动将图片存储在数据库，数据库会自动为该图片生成一个名字，
         // 提交form表单时需要向后台发送服务器生成的图片名的字段
         // this.sysUser.logoImg = res.data.uploadUrl
@@ -329,10 +331,10 @@ export default {
         // 图片上传成功之后可以拿到服务器生成的图片名，赋值给表单对象，提交时再传递给后台
         // console.log('上传到服务器照片名' + this.sysUser.logoImg)
         this.$message({
-          message: "上传成功",
-          type: "success",
+          message: '上传成功',
+          type: 'success',
           duration: 1000,
-          offset:100
+          offset: 100,
         });
         // 上传成功后为当前页面中的img赋值src，即照片回显（回显的地址是后台传递给前端的）
         // this.imgShow = true
@@ -340,9 +342,9 @@ export default {
       } else {
         this.$message({
           message: res.msg,
-          type: "error",
+          type: 'error',
           duration: 1000,
-          offset:100
+          offset: 100,
         });
         // this.$message.error(res.msg)
       }
@@ -357,15 +359,15 @@ export default {
         message: `当前限制选择1个文件，本次选择了 ${
           files.length
         }个文件，共选择了${files.length + fileList.length}个文件`,
-        type: "warning",
+        type: 'warning',
         duration: 1000,
-        offset:100
+        offset: 100,
       });
     },
 
     uploading() {
       // 文件上传时的钩子
-      console.log("正在上传...");
+      console.log('正在上传...');
       this.confirmLoadig = true;
     },
     beforeAvatarUpload(file) {

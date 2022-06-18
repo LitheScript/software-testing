@@ -20,15 +20,15 @@
 
 <script>
 export default {
-  props:{
-    cardInfo:new Object,
-    required:true,
+  props: {
+    cardInfo: Object(),
+    required: true,
   },
-  data () {
+  data() {
     return {
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +44,6 @@ export default {
           &:hover{
             box-shadow:  25px 25px 50px #b8b8b8;
           }
-
 
           .section-featured-card-main{
             padding:32px;

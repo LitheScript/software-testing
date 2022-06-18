@@ -13,41 +13,43 @@
                   <div class="postID">需求ID&nbsp;&nbsp;
                     <div class="postID-content">{{cardInfo.post.postId}}</div>
                   </div>
-                    <el-button size="medium" type="danger" icon="el-icon-delete" @click="DeletePost">删除</el-button>
+                    <el-button size="medium" type="danger" icon="el-icon-delete"
+                    @click="DeletePost">删除</el-button>
                 </div>
               </div>
   </div>
 </template>
 
 <script>
-import axios from '../axios'
+import axios from '../axios';
+
 export default {
-  props:{
-    cardInfo:new Object,
-    required:true,
+  props: {
+    cardInfo: Object(),
+    required: true,
   },
-  data () {
+  data() {
     return {
-    }
+    };
   },
   methods:
   {
-    DeletePost(){
+    DeletePost() {
       axios.deletePost(this.cardInfo.post.postId)
-      .then(()=>{
-            this.$message({
-          message: "删除成功",
-          type: "success",
-          offset:100
+        .then(() => {
+          this.$message({
+            message: '删除成功',
+            type: 'success',
+            offset: 100,
+          });
+          axios.getMyPost(this.$store.state.user.userId)
+            .then((res) => {
+              this.$parent.MyPost = res.data.data;
+            });
         });
-        axios.getMyPost(this.$store.state.user.userId)
-      .then((res)=>{
-        this.$parent.MyPost=res.data.data
-      })
-      })
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +65,6 @@ export default {
           &:hover{
             box-shadow:  25px 25px 50px #b8b8b8;
           }
-
 
           .section-featured-card-main{
             padding:32px;

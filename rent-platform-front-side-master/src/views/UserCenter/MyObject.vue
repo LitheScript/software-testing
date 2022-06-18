@@ -7,25 +7,26 @@
           </div>
 </template>
 <script>
-import objectCard from '../../components/ObjectCard.vue'
-import axios from '../../axios'
+import objectCard from '../../components/ObjectCard.vue';
+import axios from '../../axios';
+
 export default {
-    components:{
-    objectCard
+  components: {
+    objectCard,
   },
-  data(){
-      return{
-          myObject:[]
-      }
+  data() {
+    return {
+      myObject: [],
+    };
   },
-    mounted(){
-        axios.getMyObject(this.$store.state.user.userId)
-        .then(res=>{
-            this.myObject=res.data.data
-            console.log(res.data.data)
-        })
-    }
-}
+  mounted() {
+    axios.getMyObject(this.$store.state.user.userId)
+      .then((res) => {
+        this.myObject = res.data.data;
+        console.log(res.data.data);
+      });
+  },
+};
 </script>
 <style>
 .myobject{

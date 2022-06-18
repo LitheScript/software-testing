@@ -14,7 +14,7 @@
           <div class="main-lower">
             <div class="login-btn" @click="Register()">注册</div>
             <div class="go-login" @click="goLogin()">登录</div>
-            
+
           </div>
         </div>
         <div class="bottom">
@@ -30,48 +30,50 @@
 </template>
 
 <script>
-import { WOW } from 'wowjs'
-import axios from '../axios'
-var qs = require('qs');//格式化数据用的，很重要
+import { WOW } from 'wowjs';
+import axios from '../axios';
+
+const qs = require('qs');
+// 格式化数据用的，很重要
 export default {
   mounted() {
     this.$nextTick(() => {
       // 在dom渲染完后,再执行动画
       const wow = new WOW({
-        live: false
-      })
-      wow.init()
-    })
+        live: false,
+      });
+      wow.init();
+    });
   },
-  data () {
+  data() {
     return {
-      name:'',
-      psw:''
-    }
+      name: '',
+      psw: '',
+    };
   },
   methods: {
-    goBack(){
+    goBack() {
       this.$router.push('/');
     },
-    goLogin(){
+    goLogin() {
       this.$router.push('/login');
     },
-    Register(){
-      //....逻辑代码
+    Register() {
+      // ....逻辑代码
 
-      let data={
-        nickName:this.name,
-        password:this.psw
-      }
-      console.log('data',data);
+      const data = {
+        nickName: this.name,
+        password: this.psw,
+      };
+      console.log('data', data);
       axios.register(qs.stringify(data))
-      .then(res=>{
-        alert(res);
-      })
-      //this.$router.push('/');
-    }
-  }
-}
+        .then((res) => {
+          alert(res);
+        });
+      // this.$router.push('/');
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

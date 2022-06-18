@@ -15,7 +15,10 @@
                     <img class="owner-icon" :src="cardInfo.avatar"/>
                     <div class="owner-name">{{cardInfo.nick_name}}</div>
                   </div>
-                  <div @click.stop="collect()" :class="{'collect':!this.collected,'collect-active':this.collected}" @mouseover="changeToWhite()" @mouseleave="changeBack()">
+                  <div @click.stop="collect()"
+                  :class="{'collect':!this.collected,'collect-active':this.collected}"
+                  @mouseover="changeToWhite()"
+                  @mouseleave="changeBack()">
                     <svg class="heart" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="none" :stroke="this.heartColor" stroke-width="1.03" d="M10,4 C10,4 8.1,2 5.74,2 C3.38,2 1,3.55 1,6.73 C1,8.84 2.67,10.44 2.67,10.44 L10,18 L17.33,10.44 C17.33,10.44 19,8.84 19,6.73 C19,3.55 16.62,2 14.26,2 C11.9,2 10,4 10,4 L10,4 Z"></path></svg>
                   </div>
                 </div>
@@ -24,49 +27,51 @@
 </template>
 
 <script>
-import axios from '../axios'
+import axios from '../axios';
+
 export default {
-  props:{
-    cardInfo:new Object,
-    required:true,
+  props: {
+    cardInfo: Object,
+    required: true,
   },
-  data () {
+  data() {
     return {
-      heartColor:'black',
-      collected:false,
-    }
+      heartColor: 'black',
+      collected: false,
+    };
   },
   methods: {
-    goDetail(){
+    goDetail() {
       this.$router.push({
-        path:'/homepage/ItemDetail/'+this.cardInfo.object_id,
-      })
-      
+        path: `/homepage/ItemDetail/${this.cardInfo.object_id}`,
+      });
     },
-    changeToWhite(){
-      this.heartColor='white'
+    changeToWhite() {
+      this.heartColor = 'white';
     },
-    changeBack(){
-      if(this.collected)return;
-      this.heartColor='black'
+    changeBack() {
+      if (this.collected) return;
+      this.heartColor = 'black';
     },
-    collect(){
-      if(!this.collected){
+    collect() {
+      if (!this.collected) {
         axios.collect(this.cardInfo.object_id)
-        .then(res=>{
-          console.log(res);
-          alert('收藏成功');
-        })
-        this.collected=true;
+          .then(() => {
+            this.$message({
+              message: '收藏成功',
+              type: 'success',
+              offset: 100,
+            });
+          });
+        this.collected = true;
         this.changeToWhite();
-      }
-      else{
-        this.collected=false;
+      } else {
+        this.collected = false;
         this.changeBack();
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -84,7 +89,7 @@ export default {
             .picture{
               filter: brightness(100%);
             }
-            
+
           }
 
           .picture{

@@ -11,31 +11,31 @@
     </div>
 </template>
 <script>
-import PostCard from '../../components/PostCard.vue'
-import axios from '../../axios'
+import PostCard from '../../components/PostCard.vue';
+import axios from '../../axios';
+
 export default {
-    data(){
-        return{
-            Posts:[{
-                postID:0,
-                userId:0,
-                title:"还没有人发布过需求",
-                content:null,
-                time:null,
-                expectedPrice:0
-                },]
-        }
-    },
-    components:{
-        PostCard
+  data() {
+    return {
+      Posts: [{
+        postID: 0,
+        userId: 0,
+        title: '还没有人发布过需求',
+        content: null,
+        time: null,
+        expectedPrice: 0,
+      }],
+    };
   },
-  mounted()
-  {
-      axios.getPosts()
-      .then((res)=>{
-          console.log("post",res.data.data.records)
-        this.Posts=res.data.data.records
-      })
-  }
-}
+  components: {
+    PostCard,
+  },
+  mounted() {
+    axios.getPosts()
+      .then((res) => {
+        console.log('post', res.data.data.records);
+        this.Posts = res.data.data.records;
+      });
+  },
+};
 </script>
