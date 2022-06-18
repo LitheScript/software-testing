@@ -1,19 +1,23 @@
 <template>
   <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 100%;">
-    <div style="width: 250px;">
-      <h1>Question4: 万年历问题</h1>
+    <div style="width: 68%;">
+      <div style="display: flex;justify-content: space-between">
+        <h1>Question4: 万年历问题</h1>
+        <el-button size="small" type="primary" @click="viewAll">查看所有</el-button>
+      </div>
+
       <el-upload
+          drag
           class="upload-demo"
-          action="http://localhost:5000/question4"
+          action="http://101.35.194.132:81/uploadCalendar"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
           multiple
-          :limit="100"
           :on-exceed="handleExceed"
           :on-success="Success"
           :file-list="fileList">
-        <el-button size="small" type="primary">上传测试用例</el-button>
+        <div class="el-upload__text" style="margin-top: 68px">将文件拖到此处，或<em>点击上传</em></div>
         <div class="el-upload__tip">只能上传csv文件，且不超过500kb</div>
       </el-upload>
     </div>
@@ -58,7 +62,7 @@
 
 <script>
 export default {
-  name: "computerSell",
+  name: "calender",
   data() {
     return {
       tableData: [],
@@ -82,6 +86,21 @@ export default {
     // eslint-disable-next-line no-unused-vars
     Success(response, file, fileList) {
       this.tableData = response;
+      if (file != null) {
+        if (response.code != 0) {
+          console.log(response.code + response + file)
+          // 响应码不为0时，标识后台上传文件出错啦
+          file.status = 'error'
+          let fileName = file.name
+          file.name = file.name + '---上传失败'
+          this.$message({
+            type: 'error', message: fileName + '上传失败'
+          })
+        } else {
+          file.name = file.name + '---上传成功'
+          console.log(file.name)
+        }
+      }
     }
   }
 }
