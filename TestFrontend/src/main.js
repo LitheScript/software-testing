@@ -8,6 +8,8 @@ import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import router from '@/router'
 
+
+
 //createApp(App).mount('#app')
 const app = createApp(App)
 app.use(ElementPlus, {
