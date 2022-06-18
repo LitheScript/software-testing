@@ -20,9 +20,9 @@
             </div>
             <div class="main-lower">
               <div class="login-btn" @click="login()">登录</div>
-              <div class="register" @click="goRegister()">注册</div>
-              <router-link to="/adminlogin">
-                <div class="admin-login">管理员登录</div>
+              <div class="register" @click="goRegister()">管理员注册</div>
+               <router-link to="/login">
+                <div class="user-login">用户登录</div>
               </router-link>
             </div>
         </div>
@@ -89,7 +89,7 @@ export default {
       let data={
         nickName:this.userName,
         password:this.password,
-        role:0
+        role:1
       }
 
       console.log(data);
@@ -110,10 +110,12 @@ export default {
             this.$store.commit('LOGIN',token);//mutation LOGIN
             this.$store.commit('USER',user);
             this.$store.commit('LOGIN');//mutation LOGIN
-            // if(res.data.role=="1"){this.$router.push('/admin');}
+           // if(res.data.role=="1"){
+                this.$router.push('/admin');
+                //}
             // else {
-              let redirect = decodeURIComponent(this.$route.query.redirect || '/');
-              this.$router.push(redirect);
+            //   let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+            //   this.$router.push(redirect);
             // }
           })
         }
@@ -275,10 +277,10 @@ export default {
               color: #276ac2;
             }
           }
-          .admin-login{
+          .user-login{
             user-select: none;
             font-size: 13px;
-           padding-left:50px ;
+           padding-left:25px ;
             color:gray;
             transition: all .3s ease;
 
