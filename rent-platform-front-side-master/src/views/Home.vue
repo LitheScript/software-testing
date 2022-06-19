@@ -183,7 +183,7 @@ export default {
       sliderAnimation: 'left-slide',
       searchInput: '',
       objectTest: {
-        objectId: 1,
+        object_id: 1,
         name: 'A-soul装扮套餐',
         userId: 1,
         description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -197,7 +197,7 @@ export default {
       },
       recommendList: [
         {
-          objectId: 1,
+          object_id: 1,
           name: 'A-soul装扮套餐1',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -210,7 +210,7 @@ export default {
           picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
-          objectId: 2,
+          object_id: 2,
           name: 'A-soul装扮套餐2',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -223,7 +223,7 @@ export default {
           picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
-          objectId: 3,
+          object_id: 3,
           name: 'A-soul装扮套餐3',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -236,7 +236,7 @@ export default {
           picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
-          objectId: 4,
+          object_id: 4,
           name: 'A-soul装扮套餐4',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -249,7 +249,7 @@ export default {
           picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
-          objectId: 5,
+          object_id: 5,
           name: 'A-soul装扮套餐5',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',
@@ -262,7 +262,7 @@ export default {
           picture: 'https://m2.im5i.com/2021/12/29/UT2mEq.jpg',
         },
         {
-          objectId: 6,
+          object_id: 6,
           name: 'A-soul装扮套餐6',
           userId: 1,
           description: '这里是描述这是一个老师肯定积分啥地方离开加速度来看风景',

@@ -16,11 +16,13 @@ module.exports = {
   plugins: [
     'vue',
   ],
-  rules: {
+  rules: { // 屏蔽Airbnb的部分规则
     'vue/require-prop-type-constructor': 1,
     'vue/multi-word-component-names': 1,
     eqeqeq: 1,
     'no-param-reassign': 1,
     'linebreak-style': [0, 'error', 'window'],
+    'import/no-extraneous-dependencies': 1,
+    'consistent-return': 1,
   },
 };

@@ -1,7 +1,7 @@
 <template>
           <div class="myobject">
             <object-card
-            v-for="item in this.myObject" :key="item.object.objectId"
+            v-for="item in this.myObject" :key="item.object.object_id"
             :cardInfo="item"
             ></object-card>
           </div>

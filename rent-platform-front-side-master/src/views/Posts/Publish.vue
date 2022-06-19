@@ -17,9 +17,9 @@
         :rows="8"
           placeholder="请描述所需物品的种类、名称、可交易的时间、地点等等"></el-input>
         </el-form-item>
-        <el-form-item label="预期租金价格" prop="expected_price">
+        <el-form-item label="预期租金价格" prop="expectedPrice">
           <el-input-number
-            v-model="postForm.expected_price"
+            v-model="postForm.expectedPrice"
             controls-position="right"
             :min="0"
             :step="1"
@@ -44,10 +44,10 @@ export default {
   data() {
     return {
       postForm: {
-        user_id: this.$store.state.user.userId,
+        userId: this.$store.state.user.userId,
         title: '',
         content: '',
-        expected_price: '',
+        expectedPrice: '',
       },
 
       rules: {
@@ -60,7 +60,7 @@ export default {
             trigger: 'blur',
           },
         ],
-        expected_price: [
+        expectedPrice: [
           {
             required: true,
             message: '请输入预期价格',
@@ -83,6 +83,7 @@ export default {
         if (valid) {
           axios.publishPost(this.postForm)
             .then(() => {
+              console.log(this.postForm);
               this.$message({
                 message: '发布成功',
                 type: 'success',
@@ -90,7 +91,7 @@ export default {
               });
               this.$router.push('/homepage/posts/mypost');
             });
-          return true;
+        //  return true;
         }
         return false;
       });

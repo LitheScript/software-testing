@@ -34,7 +34,7 @@
           </el-form-item>
           <el-form-item label="昵称：">
             <el-input
-              v-model="PersonalData.nick_name"
+              v-model="PersonalData.nickName"
               :disabled="editflag"
               class="input"
             >
@@ -89,7 +89,7 @@
             >
               保存
             </el-button>
-            <el-button round v-show="!editflag" @click="HandleCancel"
+            <el-button round v-show="!editflag" @click="HandleCancel()"
               >取消
             </el-button>
           </el-form-item>
@@ -119,7 +119,7 @@
             </el-button>
           </el-form-item>
           <!-- <el-form-item label="注册时间："
-            >{{ PersonalData.register_time }}
+            >{{ PersonalData.registerTime }}
           </el-form-item> -->
           <el-form-item label="用户权限：">
             <span v-if="PersonalData.role == 0">一般用户 </span>
@@ -184,8 +184,8 @@ export default {
     if (!user) {
       this.$router.push('/');
     } else {
-      this.PersonalData.nick_name = user.nickName;
-      this.nick_name = user.nickName;
+      this.PersonalData.nickName = user.nickName;
+      this.nickName = user.nickName;
       this.PersonalData.gender = user.gender;
       this.gender = user.gender;
       this.PersonalData.telephone = user.telephone;
@@ -207,7 +207,7 @@ export default {
       if (value != this.PersonalData.password) {
         return callback(new Error('原密码输入错误！'));
       }
-      callback();
+      return callback();
     };
     const validatePass = (rule, value, callback) => {
       if (value == '') {
@@ -231,7 +231,7 @@ export default {
     return {
       PersonalData: {
         userId: -1,
-        nick_name: '',
+        nickName: '',
         password: '',
         avatar: '',
         gender: '',
@@ -241,7 +241,7 @@ export default {
         role: 0,
         reputation: 0,
       },
-      nick_name: '',
+      nickName: '',
       gender: '',
       telephone: '',
       email: '',
@@ -264,7 +264,6 @@ export default {
   methods: {
     editUser() {
       console.log(this.PersonalData);
-      console.log('222');
       axios
         .updateUser(this.PersonalData)
         .then((res) => {
@@ -278,10 +277,10 @@ export default {
       this.editflag = true;
     },
     HandleCancel() {
-      this.PersonalData.nick_name = this.nick_name,
-      this.PersonalData.gender = this.gender,
-      this.PersonalData.telephone = this.telephone,
-      this.PersonalData.email = this.email,
+      this.PersonalData.nickName = this.nickName;
+      this.PersonalData.gender = this.gender;
+      this.PersonalData.telephone = this.telephone;
+      this.PersonalData.email = this.email;
       this.PersonalData.zone = this.zone;
       this.editflag = true;
     },
@@ -307,10 +306,10 @@ export default {
             .catch((err) => {
               console.log(err);
             });
-        } else {
-          console.log('error submit!!');
-          return false;
+          // return true;
         }
+        console.log('error submit!!');
+        return false;
       });
     },
     CancelChange() {

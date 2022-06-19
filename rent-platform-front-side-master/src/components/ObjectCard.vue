@@ -6,7 +6,7 @@
                 <div class="card-description">{{cardInfo.object.description}}</div>
                 <div class="price">
                   <div class="price-title">租金</div>
-                  <div class="price-content">￥{{cardInfo.object.rentDaliy}}/天</div>
+                  <div class="price-content">￥{{cardInfo.object.rent_daliy}}/天</div>
                 </div>
                 <div class="line"></div>
                 <div class="bottom-part">
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     delobject() {
-      axios.deleteObject(this.cardInfo.object.objectId)
+      axios.deleteObject(this.cardInfo.object.object_id)
         .then(() => {
           this.$message({
             message: '删除成功',

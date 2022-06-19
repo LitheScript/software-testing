@@ -182,7 +182,7 @@ export default {
         axios.searchListByName(data).then((res) => {
           const list = res.data.data.records;
           this.objectList.push(...list);
-          this.currentPage++;
+          this.currentPage += 1;
         });
       }
       if (this.mode == 1) {
@@ -194,7 +194,7 @@ export default {
         axios.getListByType(data).then((res) => {
           const list = res.data.data.records;
           this.objectList.push(...list);
-          this.currentPage++;
+          this.currentPage += 1;
         });
       } else if (this.mode == 2) {
         if (this.currentPage == this.totalPages) return; // 健壮性保护
@@ -206,7 +206,7 @@ export default {
         axios.searchListByName(data).then((res) => {
           const list = res.data.data.records;
           this.objectList.push(...list);
-          this.currentPage++;
+          this.currentPage += 1;
         });
       }
     },

@@ -1,12 +1,12 @@
 <template>
 <!--商品信息卡片 -->
   <div class="order-card" @click="goDetail">
-            <img class="picture" :src="cardInfo.picture_url"/>
+            <img class="picture" :src="cardInfo.pictureUrl"/>
               <div class="section-featured-card-main">
                 <div class="card-row">订单 ID：{{this.cardInfo.order_id}}</div>
-                <div class="card-row">创建时间：{{formatTime(this.cardInfo.created_time)}}</div>
-                <div class="card-row">借用时间：{{formatTime(this.cardInfo.lentout_time)}}</div>
-                <div class="card-row">归还时间：{{formatTime(this.cardInfo.return_time)}}</div>
+                <div class="card-row">创建时间：{{formatTime(this.cardInfo.createdTime)}}</div>
+                <div class="card-row">借用时间：{{formatTime(this.cardInfo.lentoutTime)}}</div>
+                <div class="card-row">归还时间：{{formatTime(this.cardInfo.returnTime)}}</div>
                 <div class="card-row">订单状态：{{this.cardInfo.status}}</div>
               </div>
   </div>

@@ -41,12 +41,12 @@ export default {
         const total = [];
         raw.forEach((item) => {
           const data = {
-            picture_url: item.urls[0],
+            pictureUrl: item.urls[0],
             name: item.name,
             description: item.description,
-            rent_daily: item.rent_daily,
+            rentDaily: item.rentDaily,
             avatar: item.avatar,
-            nick_name: item.nick_name,
+            nickName: item.nickName,
             object_id: item.object_id,
           };
           total.push(data);

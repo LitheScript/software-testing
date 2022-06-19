@@ -4,7 +4,7 @@
       <div class="check-out-box">
         <div class="check-out-head">确认订单</div>
         <div class="check-out-main">
-          <div class="pay-row">订单ID: {{this.orderId}}</div>
+          <div class="pay-row">订单ID: {{this.order_id}}</div>
           <div class="pay-code"></div>
 
           <div class="buttons">
@@ -215,7 +215,7 @@
                   </textarea>
                 </div>
                 <div>
-                  <div class="uk-button uk-button-danger uk-button-large"@click="sendComment()">
+                  <div class="uk-button uk-button-danger uk-button-large" @click="sendComment()">
                     发表
                   </div>
                 </div>
@@ -326,12 +326,12 @@ export default {
       checkOut: false,
       myOrders: [],
       myComment: '',
-      orderId: -1,
+      order_id: -1,
     };
   },
   methods: {
     pay() {
-      axios.pay(this.orderId)
+      axios.pay(this.order_id)
         .then((res) => {
           console.log(res.data.data);
           window.open(res.data.data);
@@ -357,7 +357,7 @@ export default {
             console.log(this.myOrders);
             this.myOrders.forEach((item) => {
               if (item.object_id == this.detail.object_id && item.status == '待支付') {
-                this.orderId = item.order_id;
+                this.order_id = item.order_id;
                 this.checkOut = true;
               }
               resolve();
@@ -368,7 +368,7 @@ export default {
     getComments() {
       axios.getCommentByItemId(this.detail.object_id)
         .then((response) => {
-          this.comments = response.data.data.remark_list;
+          this.comments = response.data.data.remarkList;
           console.log(this.comments);
           this.detail.count = response.data.data.commentNum;
         });
@@ -396,7 +396,7 @@ export default {
       console.log('data', data);
       axios.createOrder(data)
         .then((res) => {
-          this.orderId = res.data.data;
+          this.order_id = res.data.data;
           this.checkOut = true;
         });
     },
@@ -407,9 +407,14 @@ export default {
       return time.replace('T', ' ');
     },
     cancle() {
-      axios.cancleOrder(this.orderId)
+      axios.cancleOrder(this.order_id)
         .then(() => {
-          alert('取消成功');
+          this.$message({
+            message: '取消成功',
+            type: 'info',
+            duration: 1000,
+            offset: 100,
+          });
         });
       this.checkOut = false;
     },
@@ -434,7 +439,12 @@ export default {
         axios.comment(data)
           .then((res) => {
             console.log(res);
-            alert('评价成功');
+            this.$message({
+              message: '评价成功',
+              type: 'success',
+              duration: 1000,
+              offset: 100,
+            });
           });
       }
     },

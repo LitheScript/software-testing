@@ -105,11 +105,11 @@ export default {
             this.pswInfo = '用户名或密码错误';
           } else {
             const { token } = res.data.data;
-            const data = token;
-            axios.getUserByToken(data)
-              .then((res) => {
-                console.log(res.data.role);
-                const user = res.data;
+            const tokenData = token;
+            axios.getUserByToken(tokenData)
+              .then((Response) => {
+                console.log(Response.data.role);
+                const user = Response.data;
                 this.$store.commit('LOGIN', token);// mutation LOGIN
                 this.$store.commit('USER', user);
                 this.$store.commit('LOGIN');// mutation LOGIN

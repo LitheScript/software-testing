@@ -55,9 +55,9 @@
             <el-radio label="生活好物" border>生活好物</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="每日租金" prop="rent_daily">
+        <el-form-item label="每日租金" prop="rentDaily">
           <el-input-number
-            v-model="itemForm.rent_daily"
+            v-model="itemForm.renDdaily"
             controls-position="right"
             :min="0"
             :step="1"
@@ -78,8 +78,8 @@
           >
           </el-input-number>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元
         </el-form-item>
-        <el-form-item label="物品新旧程度" prop="new_level">
-          <el-input v-model="itemForm.new_level"></el-input>
+        <el-form-item label="物品新旧程度" prop="newLevel">
+          <el-input v-model="itemForm.newLevel"></el-input>
         </el-form-item>
         <el-form-item label="物品详细描述" prop="description">
           <el-input type="textarea" v-model="itemForm.description"></el-input>
@@ -109,13 +109,13 @@ export default {
   data() {
     return {
       itemForm: {
-        user_id: this.$store.state.user.userId,
+        userId: this.$store.state.user.userId,
         name: '',
-        rent_daily: Number(),
+        rentDaily: Number(),
         deposit: '',
         tag: '',
         description: '',
-        new_level: '',
+        newLevel: '',
         url: null,
       },
       fileList: [],
@@ -136,7 +136,7 @@ export default {
             trigger: 'change',
           },
         ],
-        rent_daily: [
+        rentDaily: [
           {
             required: true,
             message: '请输入每日租金',
@@ -157,7 +157,7 @@ export default {
             trigger: 'blur',
           },
         ],
-        new_level: [
+        newLevel: [
           {
             required: true,
             message: '请输入物品新旧程度',
@@ -184,7 +184,7 @@ export default {
               });
 
               console.log('上传成功', res.data.data);
-              // var item_id=res.data.data
+              // var itemId=res.data.data
               this.$router.push({
                 path: '/homepage',
               });

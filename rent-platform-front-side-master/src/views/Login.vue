@@ -100,16 +100,17 @@ export default {
 
       axios.userLogin(qs.stringify(data))
         .then((res) => {
-          console.log(res);
+          console.log(11, res);
           if (res.data.code == '-1') {
             this.pswInfo = '用户名或密码错误';
           } else {
             const { token } = res.data.data;
-            const data = token;
-            axios.getUserByToken(data)
-              .then(() => {
-                console.log(res.data.role);
-                const user = res.data;
+            const tokenData = token;
+            axios.getUserByToken(tokenData)
+              .then((Response) => {
+                console.log(Response.data.role);
+                const user = Response.data;
+                console.log(22, Response);
                 this.$store.commit('LOGIN', token);// mutation LOGIN
                 this.$store.commit('USER', user);
                 this.$store.commit('LOGIN');// mutation LOGIN
