@@ -1,9 +1,9 @@
 <template>
-  <p1>Canary金丝雀软件测试平台</p1>
+  <p1>Doremi软件测试平台</p1>
 </template>
 
 <style>
- 
+
 
 </style>
 

@@ -25,54 +25,40 @@
       </div>
       <div style="width: 28%;height: 300px;" id="pieReport">
       </div>
-      <el-upload
-          drag
-          class="upload-demo"
-          action="http://localhost:81/uploadPhone"
-          
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-          multiple
-          :on-exceed="handleExceed"
-          :on-success="Success"
-          :file-list="fileList">
-        <div class="el-upload__text" style="margin-top: 68px">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip">只能上传csv文件，且不超过500kb</div>
-      </el-upload>
     </div>
 
     <div>
       <el-table
           :data="tableData"
           stripe
-          style="width: 100%">
+          height="500"
+          style="width: 95%">
         <el-table-column
-            prop=0
+            prop=id
             label="序号">
         </el-table-column>
         <el-table-column
-            prop=1
+            prop=year
             label="年">
         </el-table-column>
         <el-table-column
-            prop=2
+            prop=month
             label="月">
         </el-table-column>
         <el-table-column
-            prop=3
+            prop=day
             label="日">
         </el-table-column>
         <el-table-column
-            prop=4
+            prop=expectResult
             label="预期输出">
         </el-table-column>
         <el-table-column
-            prop=5
+            prop=actualResult
             label="实际输出">
         </el-table-column>
         <el-table-column
-            prop=6
+            prop=pass
             label="是否通过">
         </el-table-column>
 
@@ -188,7 +174,8 @@ export default {
             type: 'error', message: fileName + '上传失败'
           })
         } else {
-          this.partData = response;
+          this.partData = response.data;
+          console.log(response.data)
           file.name = file.name + '---上传成功'
           console.log(file.name)
         }

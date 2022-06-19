@@ -41,7 +41,7 @@ public class CalendarServiceImpl implements CalendarService {
         if (!(month > 0 && month < 13)) return errorMonth();
         if (!(day > 0 && day < 32)) return errorDay();
         if (month == 2) {
-            if (year % 400 == 0 && (year % 4 == 0 && year % 100 != 0)) {
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
                 if (day > 0 && day <= 28) return plusDay(year, month, day);
                 else if (day == 29) return plusMonth(year, month, day);
                 else return errorDay();
@@ -92,12 +92,12 @@ public class CalendarServiceImpl implements CalendarService {
 
     public String plusMonth(int year, int month, int day) {
         month++;
-        return format(year, month, day);
+        return format(year, month, 1);
     }
 
     public String plusYear(int year, int month, int day) {
         year++;
-        return format(year, month, day);
+        return format(year, 1, 1);
     }
 
     String format(int year, int month, int day) {
