@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PostController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.demo.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: PostController (com.example.demo.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PostController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.2%
+  </span>
+  <span class="absValue">
+    (1/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.example.demo.controller;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;//import cn.hutool.core.util.StrUtil;
+<i class="no-highlight">5</i>&nbsp;import cn.hutool.json.JSONObject;
+<i class="no-highlight">6</i>&nbsp;import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+<i class="no-highlight">7</i>&nbsp;import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+<i class="no-highlight">8</i>&nbsp;import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+<i class="no-highlight">9</i>&nbsp;import com.example.demo.common.Result;
+<i class="no-highlight">10</i>&nbsp;//import com.example.demo.entity.Object;
+<i class="no-highlight">11</i>&nbsp;import com.example.demo.entity.Post;
+<i class="no-highlight">12</i>&nbsp;import com.example.demo.mapper.PostMapper;
+<i class="no-highlight">13</i>&nbsp;//import com.example.demo.service.PostService;
+<i class="no-highlight">14</i>&nbsp;import com.example.demo.service.impl.PostServiceImpl;
+<i class="no-highlight">15</i>&nbsp;//import io.swagger.models.auth.In;
+<i class="no-highlight">16</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;import org.springframework.stereotype.Controller;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;import javax.annotation.Resource;
+<i class="no-highlight">21</i>&nbsp;import java.util.List;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;/**
+<i class="no-highlight">24</i>&nbsp; * &lt;p&gt;
+<i class="no-highlight">25</i>&nbsp; * 发帖的表 前端控制器
+<i class="no-highlight">26</i>&nbsp; * &lt;/p&gt;
+<i class="no-highlight">27</i>&nbsp; *
+<i class="no-highlight">28</i>&nbsp; * @author cj
+<i class="no-highlight">29</i>&nbsp; * @since 2021-12-17
+<i class="no-highlight">30</i>&nbsp; */
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;@Controller
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;@RestController
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;@RequestMapping(&quot;/post&quot;)
+<b class="fc"><i class="no-highlight">37</i>&nbsp;public class PostController {</b>
+<i class="no-highlight">38</i>&nbsp;    @Resource
+<i class="no-highlight">39</i>&nbsp;    private PostServiceImpl postService;
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    @Resource
+<i class="no-highlight">42</i>&nbsp;    private PostMapper postMapper;
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    @PostMapping(&quot;publishPost&quot;)
+<i class="no-highlight">45</i>&nbsp;    public Integer publishPost(Integer userId, String title, String content, Integer expectedPrice) {
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        Integer postId = postService.publishPost(userId, title, content, expectedPrice);</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        if (postId &lt;= 0) {</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;            return -1;</b>
+<i class="no-highlight">49</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        return postId;</b>
+<i class="no-highlight">51</i>&nbsp;    }
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    @GetMapping(&quot;viewMyPosts&quot;)
+<i class="no-highlight">54</i>&nbsp;    public Result&lt;?&gt; vieMyPosts(Integer userId) {
+<b class="nc"><i class="no-highlight">55</i>&nbsp;        List&lt;JSONObject&gt; jsonObjects = postService.viewMyPosts(userId);</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;        if (jsonObjects.isEmpty()) {</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;            return Result.error(&quot;-1&quot;, &quot;当前用户没有发布过帖子&quot;);</b>
+<i class="no-highlight">58</i>&nbsp;        } else {
+<b class="nc"><i class="no-highlight">59</i>&nbsp;            return Result.success(jsonObjects);</b>
+<i class="no-highlight">60</i>&nbsp;        }
+<i class="no-highlight">61</i>&nbsp;    }
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;    @GetMapping(&quot;viewAllPosts&quot;)
+<i class="no-highlight">64</i>&nbsp;    public Result&lt;?&gt; viewAllPosts(@RequestParam(defaultValue = &quot;1&quot;) Integer pageNum,
+<i class="no-highlight">65</i>&nbsp;                                  @RequestParam(defaultValue = &quot;10&quot;) Integer pageSize) {
+<b class="nc"><i class="no-highlight">66</i>&nbsp;        LambdaQueryWrapper&lt;Post&gt; wrapper = Wrappers.&lt;Post&gt;lambdaQuery();</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;        Page&lt;Post&gt; postPage = postMapper.selectPage(new Page&lt;&gt;(pageNum, pageSize), wrapper);</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;        return Result.success(postPage);</b>
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    @PostMapping(&quot;deleteMypost&quot;)
+<i class="no-highlight">72</i>&nbsp;    public Result&lt;?&gt; deleteaMyPost(Integer postId) {
+<b class="nc"><i class="no-highlight">73</i>&nbsp;        Integer count = postService.deleteMyPost(postId);</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;        if (count &lt;= 0) {</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;            return Result.error(&quot;-1&quot;, &quot;删除帖子失败&quot;);</b>
+<i class="no-highlight">76</i>&nbsp;        } else {
+<b class="nc"><i class="no-highlight">77</i>&nbsp;            return Result.success();</b>
+<i class="no-highlight">78</i>&nbsp;        }
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;}
+<i class="no-highlight">81</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-06-19 21:46</div>
+</div>
+</body>
+</html>

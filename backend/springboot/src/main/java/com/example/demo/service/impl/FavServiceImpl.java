@@ -72,4 +72,10 @@ public class FavServiceImpl extends ServiceImpl<FavMapper, Fav> implements IServ
 
 
     }
+
+    public int isExist(Integer favId, Integer objectId) {
+        int fav_id = favId;
+        Integer object_id = objectId;
+        return favMapper.isExist(fav_id,object_id);
+    }
 }

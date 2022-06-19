@@ -64,16 +64,18 @@ public class UserController {
     //登录
     @PassToken
     @PostMapping("/login")
-    public Result<?> login(User user) {
+    public Result<?> login(@RequestParam(value = "nickName", required = true) String nickName,
+                           @RequestParam(value = "password", required = true) String password,
+                           @RequestParam(value = "role", required = true) String role) {
         JSONObject jsonObject = new JSONObject();
-        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, user.getNickName()));
+        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, nickName));
 
         if (res == null
-                || !res.getPassword().equals(user.getPassword())
-                || !res.getRole().equals(user.getRole())) {
+                || !res.getPassword().equals(password)
+                || !res.getRole().equals(role)) {
             return Result.error("-1", "用户名或密码输入错误");
         } else {
-            String token = JwtUtil.getToken(user.getNickName(), user.getPassword());
+            String token = JwtUtil.getToken(nickName, password);
             jsonObject.put("token", token);
             return Result.success(jsonObject);
         }
@@ -88,14 +90,19 @@ public class UserController {
     //注册
     @PassToken
     @PostMapping("/register")
-    public Result<?> register(@RequestBody User user) {
+    public Result<?> register(@RequestParam(value = "nickName", required = true) String nickName, @RequestParam(value = "password", required = true) String password) {
         //判断用户名是否唯一
-        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, user.getNickName()));
+        if (nickName.equals("")) {
+            return Result.error("-1", "用户名不能为空");
+        } else if (password.equals("")) {
+            return Result.error("-1", "密码不能为空");
+        }
+        User user = new User();
+        user.setNickName(nickName);
+        user.setPassword(password);
+        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, nickName));
         if (res != null) {
             return Result.error("-1", "用户名重复");
-        }
-        if (user.getPassword() == null) {
-            user.setPassword("123456");
         }
         userMapper.insert(user);
         return Result.success();

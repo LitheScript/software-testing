@@ -64,7 +64,7 @@ public class ObjectController {
 
 
     @GetMapping("getObjectDetail")
-    public Result<?> getObjectDetail(int objectId) {
+    public Result<?> getObjectDetail(@RequestParam(value = "objectId", required = true) int objectId) {
         JSONObject jsonObject;
         jsonObject = objectService.getObjectDetail(objectId);
         if (jsonObject == null) {
@@ -94,7 +94,11 @@ public class ObjectController {
     }
 
     @GetMapping("searchObject")
-    public Result<?> searchObject(String name, Integer page) {
+    public Result<?> searchObject(@RequestParam(value = "name", required = true) String name, @RequestParam("page") Integer page) {
+
+        if (name.equals("")) {
+            return Result.error("-1", "名字不能为空");
+        }
         Page<JSONObject> iPage = new Page<JSONObject>(page, 6);
         if (name == null) {
             name = "%";

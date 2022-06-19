@@ -15,4 +15,6 @@ public interface FavMapper extends BaseMapper<Fav> {
 
     Integer queryObjectInFav(Integer objectId, Integer userId);
 
+    Integer isExist(Integer fav_id, Integer object_id) ;
+
 }

@@ -5,11 +5,18 @@
     <select id="queryObjectInFav" resultType="Integer">
         select fav.fav_id
         from favourite_cart
-            join `user` on favourite_cart.user_id=`user`.user_id
-            join fav on favourite_cart.fav_id=fav.fav_id
-        where  `user`.user_id=#{user_id} and fav.object_id=#{object_id}
+                 join `user` on favourite_cart.user_id = `user`.user_id
+                 join fav on favourite_cart.fav_id = fav.fav_id
+        where `user`.user_id = #{user_id}
+          and fav.object_id = #{object_id}
     </select>
 
+    <select id="isExist" resultType="Integer">
+        select count(*)
+        from fav
+        where fav_id = #{fav_id}
+          and object_id = #{object_id}
+    </select>
 
 
 </mapper>
