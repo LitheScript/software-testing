@@ -6,11 +6,11 @@
         <el-container style="height:88%">
             <el-aside width="200px">
                 <el-menu :default-openeds="['1','2']"
-                         text-color="#fff"
-                         active-text-color="#ffd04b"
+                         text-color="black"
+                         active-text-color="#12a182;"
                          router=true>
                     <el-submenu index="1">
-                        <template #title><i class="el-icon-message"></i><span style="color:gold">平时题目</span></template>
+                        <template #title><i class="el-icon-message"></i><span style="color:#c27c88">平时题目</span></template>
 
                         <el-menu-item index="/triangle">三角形问题</el-menu-item>
                         <el-menu-item index="/telecom">电信收费问题</el-menu-item>
@@ -19,7 +19,7 @@
 
                     </el-submenu>
                     <el-submenu index="2">
-                        <template #title><i class="el-icon-menu"></i><span style="color:gold">期末项目</span></template>
+                        <template #title><i class="el-icon-menu"></i><span style="color:#c27c88">期末项目</span></template>
                         <el-menu-item index="/unitTest">单元测试</el-menu-item>
                         <el-menu-item index="2.2">集成测试</el-menu-item>
                         <el-menu-item index="2.3">系统测试</el-menu-item>
@@ -45,7 +45,7 @@
 
 <style>
     .el-header {
-        background-color: #034069;
+        background-color: #12a182;
         color: rgb(244, 252, 245);
         line-height: 60px;
         text-align: right;
@@ -61,33 +61,33 @@
 
     .el-aside {
         border: 0;
-        background-color: black;
+        background-color: #12a182;
         color: white;
     }
 
     .el-aside .el-menu {
-        background-color: black;
+        background-color:#12a182;
         color: white;
     }
 
     .el-aside .el-menu .el-submenu {
-        background-color: rgb(39, 105, 160);
+        background-color:#e2e1e4;
         color: white;
     }
 
     .el-aside .el-menu .el-submenu #title {
-        background-color: black;
-        color: gold
+        background-color: #e2e1e4;
+        color: #c27c88;
     }
 
     .el-aside .el-menu .el-submenu .el-menu-item {
-        background-color: black;
+        background-color: #e2e1e4;
         color: white;
 
     }
 
     .el-aside .el-menu .el-submenu .el-menu-item:hover {
-        background-color: rgb(44, 43, 43);
+        background-color: whitesmoke;
     }
 
     .el-aside .el-menu .el-submenu .el-menu-item:active {

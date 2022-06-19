@@ -9,8 +9,8 @@ var instance = axios.create({
 });
 
 
-var url = 'http://101.35.194.132:81/';  //服务器连接
-// var url = 'http://localhost:9090/';  //服务器连接
+// var url = 'http://101.35.194.132:81/';  //服务器连接
+var url = 'http://localhost:81/';  //本地连接
 
 export default {
   //这里export的是axios
@@ -18,10 +18,25 @@ export default {
   getCalendars(){
     return instance.get(url+'queryCalendar');
   },
+  getCalendarPass(){
+    return instance.get(url+'queryCalendarPass');
+  },
   getTriangles(){
     return instance.get(url+'queryTriangle');
   },
+  getTrianglePass(){
+    return instance.get(url+'queryTrianglePass');
+  },
   getCommissions(){
     return instance.get(url+'queryCommission');
+  },
+  getCommissionPass(){
+    return instance.get(url+'queryCommissionPass');
+  },
+  getPhones(){
+    return instance.get(url+'queryPhone');
+  },
+  getPhonePass(){
+    return instance.get(url+'queryPhonePass');
   },
 }

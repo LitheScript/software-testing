@@ -4,7 +4,8 @@
    <el-container>
     <h1 style="font-size:18px" class="header">Question1:判断三角形类型</h1>
     <el-footer style="margin-left: 30px">
-       <el-tabs type="border-card" style="width: 70%; height: 350px">
+      <div style="display: flex;justify-content: space-between">
+       <el-tabs type="border-card" style="width: 50%; height: 350px">
         <el-tab-pane label="单个测试" name="first">
           <h4>单个测试</h4>
           <el-form ref="form" :model="form" label-width="80px" class="input-form">
@@ -26,7 +27,7 @@
           <h4>批量测试</h4>
           <el-upload
             class="upload-demo"
-            action="http://localhost:5000/question1"
+            action="http://localhost:81/uploadTriangle"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :before-remove="beforeRemove"
@@ -40,42 +41,44 @@
           </el-upload>
         </el-tab-pane>
       </el-tabs>
-
+        <div style="width: 50%;height: 300px;" id="pieReport"></div>
+      </div>
       <div>
         <el-table
           :data="tableData"
           stripe
+          height="500"
           style="width: 100%">
           <el-table-column
-              prop=0
+              prop=id
               label="序号"
               width="180">
           </el-table-column>
           <el-table-column
-              prop=1
+              prop=a
               label="输入第一条边"
               width="180">
           </el-table-column>
           <el-table-column
-              prop=2
+              prop=b
               label="输入第二条边"
               width="180">
           </el-table-column>
           <el-table-column
-              prop=3
+              prop=c
               label="输入第三条边"
               width="180">
           </el-table-column>
           <el-table-column
-              prop=4
+              prop=expectResult
               label="预期输出">
           </el-table-column>
           <el-table-column
-              prop=5
+              prop=actualResult
               label="实际输出">
           </el-table-column>
           <el-table-column
-              prop=6
+              prop=pass
               label="是否通过">
           </el-table-column>
 
@@ -88,6 +91,8 @@
 
 </template>
 <script>
+import axios from "../axios";
+
 export default {
   name: "triangle",
   data() {
@@ -100,9 +105,52 @@ export default {
         edge2: '',
         edge3: '',
       },
+      passRate:0,
+      charts: "",
+      opinion: ["通过用例", "未通过用例"],
+      opinionData: [
+        { value: 20, name: "通过用例", itemStyle: "#1ab394" },
+        { value: 18, name: "未通过用例", itemStyle: "#79d2c0" }
+      ],
     }
   },
   methods: {
+    drawPie(id) {
+      this.charts = echarts.init(document.getElementById(id));
+      this.charts.setOption({
+        tooltip: {
+          trigger: "item",
+          formatter: "{a}<br/>{b}:{c} ({d}%)"
+        },
+        legend: {
+          bottom: 10,
+          left: "center",
+          data: this.opinion
+        },
+        series: [
+          {
+            name: "状态",
+            type: "pie",
+            radius: "65%",
+            center: ["50%", "50%"],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              },
+              color: function(params) {
+                //自定义颜色
+                var colorList = ["#12a182", "#c27c88"];
+                return colorList[params.dataIndex];
+              }
+            },
+            data: this.opinionData
+          }
+        ]
+      });
+    },
     onClick() {
       var a = parseFloat(this.form.edge1)
       var b = parseFloat(this.form.edge2)
@@ -147,7 +195,38 @@ export default {
 
     // eslint-disable-next-line no-unused-vars
     Success(response, file, fileList) {
-      this.tableData = response;
+      if (file != null) {
+        if (response.code != 0) {
+          console.log(response.code + response + file)
+          // 响应码不为0时，标识后台上传文件出错啦
+          file.status = 'error'
+          let fileName = file.name
+          file.name = file.name + '---上传失败'
+          this.$message({
+            type: 'error', message: fileName + '上传失败'
+          })
+        } else {
+          file.name = file.name + '---上传成功'
+          axios.getTriangles()
+              .then(res=>{
+                console.log(res.data);
+                this.tableData=res.data;
+                let _this = this;
+                axios.getTrianglePass()
+                    .then(res=>{
+                      console.log(res.data);
+                      _this.passRate=res.data;
+                      let len=_this.tableData.length;
+                      console.log(_this.opinionData[0]);
+                      _this.opinionData[0].value=len*_this.passRate;
+                      _this.opinionData[1].value=len*(1-_this.passRate);
+                      this.$nextTick(function() {
+                        this.drawPie("pieReport");
+                      });
+                    });
+              });
+        }
+      }
     }
   }
 }

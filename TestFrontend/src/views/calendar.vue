@@ -1,16 +1,12 @@
 <template>
-  <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 100%;">
+  <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 90%;">
     <div style="display: flex;justify-content: space-between">
-      <div style="width: 28%;">
-        <div style="display: flex;justify-content: space-between">
+      <div style="width: 58%;">
           <h1>Question4: 万年历问题</h1>
-          <el-button v-if="isAll" size="small" type="primary" @click="viewAll" style="margin: 10px 0px">所有结果</el-button>
-          <el-button v-if="isPart" size="small" type="primary" @click="viewPart" style="margin: 10px 0px">本次结果</el-button>
-        </div>
         <el-upload
             drag
             class="upload-demo"
-            action="http://101.35.194.132:81/uploadCalendar"
+            action="http://localhost:81/uploadCalendar"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :before-remove="beforeRemove"
@@ -23,10 +19,8 @@
           <div class="el-upload__tip">只能上传csv文件，且不超过500kb</div>
         </el-upload>
       </div>
-      <div style="width: 28%;height: 300px;" id="pieReport">
-      </div>
+      <div style="width: 60%;height: 300px;" id="pieReport"></div>
     </div>
-
     <div>
       <el-table
           :data="tableData"
@@ -67,9 +61,9 @@
   </div>
 </template>
 
+
 <script>
 import axios from '../axios'
-import echarts from 'echarts'
 
 export default {
   name: "calender",
@@ -77,31 +71,18 @@ export default {
     return {
       tableData: [],
       fileList: [],
-      isAll:true,
-      isPart:false,
-      allData:[],
-      partData:[],
+      passRate:0,
       charts: "",
-      opinion: ["及格人数", "未及格人数"],
+      opinion: ["通过用例", "未通过用例"],
       opinionData: [
-        { value: 12, name: "及格人数", itemStyle: "#1ab394" },
-        { value: 18, name: "未及格人数", itemStyle: "#79d2c0" }
+        { value: 20, name: "通过用例", itemStyle: "#1ab394" },
+        { value: 18, name: "未通过用例", itemStyle: "#79d2c0" }
       ],
     };
   },
-  mounted() {
-    axios.getCalendars()
-        .then(res=>{
-          console.log(res.data);
-          this.allData=res.data;
-        });
-    this.$nextTick(function() {
-      this.drawPie("pieReport");
-    });
-  },
   methods: {
     drawPie(id) {
-      this.charts = this.$echarts.init(document.getElementById(id));
+      this.charts = echarts.init(document.getElementById(id));
       this.charts.setOption({
         tooltip: {
           trigger: "item",
@@ -127,7 +108,7 @@ export default {
               },
               color: function(params) {
                 //自定义颜色
-                var colorList = ["#1ab394", "#79d2c0"];
+                var colorList = ["#12a182", "#c27c88"];
                 return colorList[params.dataIndex];
               }
             },
@@ -135,18 +116,6 @@ export default {
           }
         ]
       });
-    },
-    viewAll(){
-      this.isAll=false;
-      this.isPart=true;
-      this.tableData=this.allData;
-      console.log(this.tableData[0])
-      console.log(this.allData)
-    },
-    viewPart(){
-      this.isAll=true;
-      this.isPart=false;
-      this.tableData=this.partData;
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -174,10 +143,25 @@ export default {
             type: 'error', message: fileName + '上传失败'
           })
         } else {
-          this.partData = response.data;
-          console.log(response.data)
           file.name = file.name + '---上传成功'
-          console.log(file.name)
+          axios.getCalendars()
+              .then(res=>{
+                console.log(res.data);
+                this.tableData=res.data;
+                let _this = this;
+                axios.getCalendarPass()
+                    .then(res=>{
+                      console.log(res.data);
+                      _this.passRate=res.data;
+                      let len=_this.tableData.length;
+                      console.log(_this.opinionData[0]);
+                      _this.opinionData[0].value=len*_this.passRate;
+                      _this.opinionData[1].value=len*(1-_this.passRate);
+                      this.$nextTick(function() {
+                        this.drawPie("pieReport");
+                      });
+                    });
+              });
         }
       }
     }
