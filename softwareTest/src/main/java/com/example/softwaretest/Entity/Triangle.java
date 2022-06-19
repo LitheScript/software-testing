@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class Triangle {
+    private int id;
     private int a;
     private int b;
     private int c;

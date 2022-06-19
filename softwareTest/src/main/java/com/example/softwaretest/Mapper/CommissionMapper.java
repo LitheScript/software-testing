@@ -22,4 +22,8 @@ public interface CommissionMapper {
     void cleanTestCases();
 
     void saveTestCases(Commission commission);
+
+    double queryPass();
+
+    double total();
 }

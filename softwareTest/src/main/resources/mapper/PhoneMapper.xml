@@ -3,7 +3,7 @@
 <mapper namespace="com.example.softwaretest.Mapper.PhoneMapper">
 
     <select id="getTestCases" resultType="Phone">
-        select id, callLength,times,expectResult,actualResult,pass
+        select id, length,times,expectOff,expectResult,actualOff,actualResult,pass
         from softwareTesting.Phone;
     </select>
 
@@ -12,7 +12,18 @@
     </delete>
 
     <insert id="saveTestCases" parameterType="Phone">
-        insert into softwareTesting.Triangle(callLength,times,expectResult,actualResult,pass)
-        values(#{callLength},#{times},#{expectResult},#{actualResult},#{pass})
+        insert into softwareTesting.Phone(length,times,expectOff,expectResult,actualOff,actualResult,pass)
+        values(#{length},#{times},#{expectOff},#{expectResult},#{actualOff},#{actualResult},#{pass})
     </insert>
+
+    <select id="queryPass" resultType="Double">
+        select count(pass)
+        from softwareTesting.Phone
+        where pass = 1
+    </select>
+
+    <select id="total" resultType="Double">
+        select count(pass)
+        from softwareTesting.Phone
+    </select>
 </mapper>

@@ -20,4 +20,8 @@ public interface PhoneService {
     void saveTestCases(Phone phone);
 
     double testCalendar(Phone phone);
+
+    double queryPass();
+
+    double total();
 }

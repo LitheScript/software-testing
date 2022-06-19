@@ -25,6 +25,21 @@
       </div>
       <div style="width: 28%;height: 300px;" id="pieReport">
       </div>
+      <el-upload
+          drag
+          class="upload-demo"
+          action="http://localhost:81/uploadPhone"
+          
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          multiple
+          :on-exceed="handleExceed"
+          :on-success="Success"
+          :file-list="fileList">
+        <div class="el-upload__text" style="margin-top: 68px">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip">只能上传csv文件，且不超过500kb</div>
+      </el-upload>
     </div>
 
     <div>

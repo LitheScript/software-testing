@@ -23,4 +23,8 @@ public interface CalendarMapper {
     void saveTestCases(Calendar calendar);
 
     void cleanTestCases();
+
+    double queryPass();
+
+    double total();
 }

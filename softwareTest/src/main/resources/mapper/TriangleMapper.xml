@@ -16,4 +16,15 @@
         insert into softwareTesting.Triangle(a,b,c,expectResult,actualResult,pass)
         values(#{a},#{b},#{c},#{expectResult},#{actualResult},#{pass})
     </insert>
+
+    <select id="queryPass" resultType="Double">
+        select count(pass)
+        from softwareTesting.Triangle
+        where pass = 1
+    </select>
+
+    <select id="total" resultType="Double">
+    select count(pass)
+    from softwareTesting.Triangle
+    </select>
 </mapper>

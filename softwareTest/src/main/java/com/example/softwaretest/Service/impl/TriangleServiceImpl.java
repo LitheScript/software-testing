@@ -59,5 +59,15 @@ public class TriangleServiceImpl implements TriangleService {
             }
         }
 
+    @Override
+    public double queryPass() {
+        return triangleMapper.queryPass();
+    }
+
+    @Override
+    public double total() {
+        return triangleMapper.total();
+    }
+
 
 }

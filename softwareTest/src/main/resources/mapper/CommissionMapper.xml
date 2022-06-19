@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.softwaretest.Mapper.CommissionMapper">
     <select id="getTestCases" resultType="Commission">
-        select id,host,display,peripheral,sales,commission,pass
+        select id,host,display,after,peripheral,sales,commission,actualCommission,pass
         from softwareTesting.Commission
     </select>
 
@@ -11,8 +11,18 @@
     </delete>
 
     <insert id="saveTestCases" parameterType="Commission">
-        insert into softwareTesting.Commission(host,display,peripheral,sales,commission)
-        values(#{host},#{display},#{peripheral},#{sales},#{commission})
+        insert into softwareTesting.Commission(host,display,peripheral,after,sales,commission,actualCommission,pass)
+        values(#{host},#{display},#{peripheral},#{after},#{sales},#{commission},#{actualCommission},#{pass})
     </insert>
 
+    <select id="queryPass" resultType="Double">
+        select count(pass)
+        from softwareTesting.Commission
+        where pass = 1
+    </select>
+
+    <select id="total" resultType="Double">
+        select count(pass)
+        from softwareTesting.Commission
+    </select>
 </mapper>

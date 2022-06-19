@@ -28,6 +28,10 @@ public interface TriangleService {
     void saveTestCases(Triangle triangle);
 
     String testTriangle(Triangle triangle);
+
+    double queryPass();
+
+    double total();
 }
 
 
