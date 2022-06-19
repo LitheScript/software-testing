@@ -9,7 +9,8 @@
       <el-upload
           drag
           class="upload-demo"
-          action="http://localhost:81/uploadTriangle"
+          action="http://localhost:81/uploadPhone"
+          
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"

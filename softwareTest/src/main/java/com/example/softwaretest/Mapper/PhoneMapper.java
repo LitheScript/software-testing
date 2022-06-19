@@ -22,4 +22,8 @@ public interface PhoneMapper {
     void cleanTestCases();
 
     void saveTestCases(Phone phone);
+
+    double queryPass();
+
+    double total();
 }

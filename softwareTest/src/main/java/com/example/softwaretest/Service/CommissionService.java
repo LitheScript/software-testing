@@ -18,4 +18,10 @@ public interface CommissionService {
     void cleanTestCases();
 
     void saveTestCases(Commission commission);
+
+    double testCommission(Commission commission);
+
+    double queryPass();
+
+    double total();
 }

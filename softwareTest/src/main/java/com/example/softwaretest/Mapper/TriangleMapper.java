@@ -20,4 +20,8 @@ public interface TriangleMapper {
     void cleanTestCases();
 
     void saveTestCases(Triangle triangle);
+
+    double queryPass();
+
+    double total();
 }

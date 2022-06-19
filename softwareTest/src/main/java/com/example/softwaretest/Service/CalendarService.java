@@ -20,4 +20,8 @@ public interface CalendarService {
     void cleanTestCases();
 
     String testCalendar(Calendar calendar);
+
+    double queryPass();
+
+    double total();
 }

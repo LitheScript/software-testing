@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 public class CommissionServiceImpl implements CommissionService {
@@ -29,53 +28,49 @@ public class CommissionServiceImpl implements CommissionService {
         commissionMapper.saveTestCases(commission);
     }
 
-//    public double test(Commission commission) {
-//
-//        int MAXHOST = 70;
-//        int MAXDISPLAYS = 80;
-//        int MAXPERIPHERAL = 90;
-//
-//        int host = commission.getHost();
-//        int display = commission.getDisplay();
-//        int peripheral = commission.getPeripheral();
-//
-//        if (host == 0 || display == 0 || peripheral == 0) {
-//            return -1;
-//        }
-//
-//        int totalSales = 0;
-//        if (totalSales <= 1000) {
-//            return totalSales * 0.1;
-//        } else if (totalSales > 1000 && totalSales <= 1800) {
-//            return totalSales * 0.15;
-//        } else if (totalSales > 1800) {
-//            return totalSales * 0.2;
-//        }
-//
-//
-//        if (in.hasNextInt()) {
-//            salesOfDisplays = in.nextInt();
-//            if (salesOfDisplays < 1) {
-//                System.out.println("error!请输入大于1的数");
-//            } else if (salesOfDisplays > MAXDISPLAYS) {
-//                System.out.println("error!超过显示屏最大销售量");
-//            }
-//            displays.setSales(salesOfDisplays);
-//        } else {
-//            System.out.println("error!请输入整数");
-//        }
-//        if (in.hasNextInt()) {
-//            salesOfPeripheral = in.nextInt();
-//            if (salesOfPeripheral < 1) {
-//                System.out.println("error!请输入大于1的数");
-//            } else if (salesOfPeripheral > MAXPERIPHERAL) {
-//                System.out.println("error!超过外设最大销售量");
-//            }
-//            peripheral.setSales(salesOfPeripheral);
-//        } else {
-//            System.out.println("error!请输入整数");
-//        }
-//
-//    }
-//    }
+    @Override
+    public double testCommission(Commission commission) {
+
+        if(commission.getAfter()!=-1){
+            return -5;
+        }
+
+        int host = commission.getHost();
+        int display = commission.getDisplay();
+        int peripheral = commission.getPeripheral();
+
+        if(host==-1){
+            return -4;
+        }
+        if (host == 0 || display == 0 || peripheral == 0) {
+            return -1;
+        }
+        if(host<0||display<0||peripheral<0){
+            return -2;
+        }
+        if(host >=70 ||display >=80 ||peripheral>=90){
+            return -3;
+        }
+
+        int totalSales = host*25+display*30+peripheral*45;
+        if (totalSales <= 1000) {
+            return totalSales * 0.1;
+        } else if (totalSales > 1000 && totalSales <= 1800) {
+            return totalSales * 0.15;
+        } else{
+            return totalSales * 0.2;
+        }
+    }
+
+    @Override
+    public double queryPass() {
+        return commissionMapper.queryPass();
+    }
+
+    @Override
+    public double total() {
+        return commissionMapper.total();
+    }
+
+
 }

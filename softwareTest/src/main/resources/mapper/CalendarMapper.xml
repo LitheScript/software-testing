@@ -3,7 +3,7 @@
 <mapper namespace="com.example.softwaretest.Mapper.CalendarMapper">
 
     <select id="getTestCases" resultType="Calendar">
-        select id, year, month, day, oYear, oMonth, oDay, pass
+        select id, year, month, day, expectResult,actualResult,pass
         from softwareTesting.Calendar
     </select>
 
@@ -12,7 +12,18 @@
     </delete>
 
     <insert id="saveTestCases" parameterType="Calendar">
-        insert into softwareTesting.Calendar (year, month, day, oYear, oMonth, oDay)
-        values (#{year},#{month},#{day},#{oYear},#{oMonth},#{oDay})
+        insert into softwareTesting.Calendar (year, month, day,expectResult,actualResult,pass)
+        values (#{year},#{month},#{day},#{expectResult},#{actualResult},#{pass})
     </insert>
+
+    <select id="queryPass" resultType="Double">
+        select count(pass)
+        from softwareTesting.Calendar
+        where pass = 1
+    </select>
+
+    <select id="total" resultType="Double">
+        select count(pass)
+        from softwareTesting.Calendar
+    </select>
 </mapper>
