@@ -139,6 +139,8 @@ export default {
       this.isAll=false;
       this.isPart=true;
       this.tableData=this.allData;
+      console.log(this.tableData[0])
+      console.log(this.allData)
     },
     viewPart(){
       this.isAll=true;
