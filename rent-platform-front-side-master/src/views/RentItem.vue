@@ -95,13 +95,14 @@
   </div>
 </template>
 
-
 <script>
-import axios from "../axios";
-var qs = require("qs");
+import axios from '../axios';
+
+// const qs = require('qs');
+
 export default {
   computed: {
-    user: function () {
+    user() {
       return this.$store.state.user;
     },
   },
@@ -109,58 +110,58 @@ export default {
     return {
       itemForm: {
         user_id: this.$store.state.user.userId,
-        name: "",
-        rent_daily: new Number(),
-        deposit: "",
-        tag: "",
-        description: "",
-        new_level: "",
-        url:null,
+        name: '',
+        rent_daily: Number(),
+        deposit: '',
+        tag: '',
+        description: '',
+        new_level: '',
+        url: null,
       },
       fileList: [],
       rules: {
         name: [
-          { required: true, message: "请输入物品名称", trigger: "blur" },
+          { required: true, message: '请输入物品名称', trigger: 'blur' },
           {
             min: 1,
             max: 20,
-            message: "物品名称长度在1至20字符内",
-            trigger: "blur",
+            message: '物品名称长度在1至20字符内',
+            trigger: 'blur',
           },
         ],
         tag: [
           {
             required: true,
-            message: "请选择一个种类",
-            trigger: "change",
+            message: '请选择一个种类',
+            trigger: 'change',
           },
         ],
         rent_daily: [
           {
             required: true,
-            message: "请输入每日租金",
-            trigger: "change",
+            message: '请输入每日租金',
+            trigger: 'change',
           },
         ],
         deposit: [
           {
             required: true,
-            message: "请输入押金",
-            trigger: "change",
+            message: '请输入押金',
+            trigger: 'change',
           },
         ],
         description: [
           {
             required: true,
-            message: "请输入物品详细描述",
-            trigger: "blur",
+            message: '请输入物品详细描述',
+            trigger: 'blur',
           },
         ],
         new_level: [
           {
             required: true,
-            message: "请输入物品新旧程度",
-            trigger: "blur",
+            message: '请输入物品新旧程度',
+            trigger: 'blur',
           },
         ],
       },
@@ -171,55 +172,55 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(this.itemForm);
-          //this.$refs.upload.submit();
+          // this.$refs.upload.submit();
           axios
             .uploadObject(this.itemForm)
             .then((res) => {
               this.$message({
-              type:"success",
-              message: '上传成功！',
-              offset:100,
-              duration: 3000
-            });
+                type: 'success',
+                message: '上传成功！',
+                offset: 100,
+                duration: 3000,
+              });
 
-              console.log("上传成功",res.data.data);
-              //var item_id=res.data.data
-            this.$router.push({
-              path:'/homepage',
-             })
+              console.log('上传成功', res.data.data);
+              // var item_id=res.data.data
+              this.$router.push({
+                path: '/homepage',
+              });
             })
             .catch((err) => {
               console.log(err);
             });
         } else {
-          console.log("error submit!!");
+          console.log('error submit!!');
           return false;
         }
       });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-       // this.$refs.avatar.clearFiles();
+      // this.$refs.avatar.clearFiles();
     },
     // el-upload相关方法
- 
-uploadSuccess(res) { // 图片上传成功后即调用的函数
-      console.log('图片上传成功' + JSON.stringify(res))
+
+    uploadSuccess(res) { // 图片上传成功后即调用的函数
+      console.log(`图片上传成功${JSON.stringify(res)}`);
       if (res.code == 0) {
         // sysUser为form表单对象，当上传成功后，后端会动将图片存储在数据库，数据库会自动为该图片生成一个名字，
         // 提交form表单时需要向后台发送服务器生成的图片名的字段
         // this.sysUser.logoImg = res.data.uploadUrl
-        this.itemForm.url = res.data
-        console.log(res.data)
-        console.log(this.itemForm.url)
+        this.itemForm.url = res.data;
+        console.log(res.data);
+        console.log(this.itemForm.url);
         // 图片上传成功之后可以拿到服务器生成的图片名，赋值给表单对象，提交时再传递给后台
         // console.log('上传到服务器照片名' + this.sysUser.logoImg)
         this.$message({
           message: '上传成功',
           type: 'success',
           duration: 1000,
-          offset:100
-        })
+          offset: 100,
+        });
         // 上传成功后为当前页面中的img赋值src，即照片回显（回显的地址是后台传递给前端的）
         // this.imgShow = true
         // console.log(this.imgSrc)
@@ -228,31 +229,31 @@ uploadSuccess(res) { // 图片上传成功后即调用的函数
           message: res.msg,
           type: 'error',
           duration: 1000,
-          offset:100
-        })
+          offset: 100,
+        });
         // this.$message.error(res.msg)
       }
-      this.confirmLoading = false
+      this.confirmLoading = false;
     },
 
-  handleExceed(files, fileList) { // 文件超出个数限制的钩子
-      console.log(files)
-      console.log(fileList)
+    handleExceed(files, fileList) { // 文件超出个数限制的钩子
+      console.log(files);
+      console.log(fileList);
       this.$message({
         message: `当前限制选择1个文件，本次选择了 ${files.length}个文件，共选择了${files.length + fileList.length}个文件`,
         type: 'warning',
         duration: 1000,
-        offset:100
-      })
+        offset: 100,
+      });
     },
-    
-uploading() { // 文件上传时的钩子
-     console.log('正在上传...')
-     this.confirmLoadig = true
-},
-beforeAvatarUpload(file) {
-        console.log(file);
-      }
+
+    uploading() { // 文件上传时的钩子
+      console.log('正在上传...');
+      this.confirmLoadig = true;
+    },
+    beforeAvatarUpload(file) {
+      console.log(file);
+    },
   },
 };
 </script>

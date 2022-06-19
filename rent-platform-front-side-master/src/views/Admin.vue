@@ -35,17 +35,17 @@
   </div>
 </template>
 
-
 <script>
-import { WOW } from "wowjs";
-import commodityReviewCard from "../components/CommodityReviewCard.vue";
-import axios from "../axios";
+import { WOW } from 'wowjs';
+import commodityReviewCard from '../components/CommodityReviewCard.vue';
+import axios from '../axios';
+
 export default {
   components: {
     commodityReviewCard,
   },
   computed: {
-    user: function () {
+    user() {
       return this.$store.state.user;
     },
   },
@@ -65,8 +65,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit("LOGOUT");
-      this.$router.push("/");
+      this.$store.commit('LOGOUT');
+      this.$router.push('/');
     },
     showOption() {
       this.option = true;

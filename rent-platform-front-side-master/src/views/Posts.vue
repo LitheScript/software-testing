@@ -35,8 +35,8 @@
 </template>
 <script>
 export default {
-    
-}
+
+};
 </script>
 <style>
 .post-page{

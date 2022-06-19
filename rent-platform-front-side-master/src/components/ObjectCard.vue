@@ -23,36 +23,35 @@
 </template>
 
 <script>
-import axios from '../axios'
-import router from '../router'
+import axios from '../axios';
+
 export default {
-  props:{
-    cardInfo:new Object,
-    required:true,
+  props: {
+    cardInfo: Object(),
+    required: true,
   },
-  data () {
+  data() {
     return {
-    }
+    };
   },
   methods: {
-      delobject(){
-          axios.deleteObject(this.cardInfo.object.objectId)
-          .then(()=>
-          {
-            this.$message({
-          message: "删除成功",
-          type: "success",
-          offset:100
+    delobject() {
+      axios.deleteObject(this.cardInfo.object.objectId)
+        .then(() => {
+          this.$message({
+            message: '删除成功',
+            type: 'success',
+            offset: 100,
+          });
+          axios.getMyObject(this.$store.state.user.userId)
+            .then((res) => {
+              this.$parent.myObject = res.data.data;
+              console.log(res.data.data);
+            });
         });
-         axios.getMyObject(this.$store.state.user.userId)
-        .then(res=>{
-            this.$parent.myObject=res.data.data
-            console.log(res.data.data)
-        })
-          })
-      }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -70,7 +69,7 @@ export default {
             .picture{
               filter: brightness(100%);
             }
-            
+
           }
 
           .picture{

@@ -22,11 +22,11 @@
 <script>
 export default {
   computed: {
-    user:function(){
+    user() {
       return this.$store.state.user;
-    }
+    },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .user-page{
