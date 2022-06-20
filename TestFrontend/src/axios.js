@@ -18,11 +18,17 @@ export default {
   getCalendars(){
     return instance.get(url+'queryCalendar');
   },
+  getOneCalendar(data){
+    return instance.post(url+'testOneCalendar',data);
+  },
   getCalendarPass(){
     return instance.get(url+'queryCalendarPass');
   },
   getTriangles(){
     return instance.get(url+'queryTriangle');
+  },
+  getOneTriangle(data){
+    return instance.post(url+'testOneTriangle',data);
   },
   getTrianglePass(){
     return instance.get(url+'queryTrianglePass');
@@ -30,11 +36,17 @@ export default {
   getCommissions(){
     return instance.get(url+'queryCommission');
   },
+  getOneCommission(data){
+    return instance.post(url+'testOneCommission',data);
+  },
   getCommissionPass(){
     return instance.get(url+'queryCommissionPass');
   },
   getPhones(){
     return instance.get(url+'queryPhone');
+  },
+  getOnePhone(data){
+    return instance.post(url+'testOnePhone',data);
   },
   getPhonePass(){
     return instance.get(url+'queryPhonePass');

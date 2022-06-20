@@ -2,7 +2,7 @@
   <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 90%;">
     <div style="display: flex;justify-content: space-between">
       <div style="width: 58%;">
-        <h1><h1>Question2: 电信收费问题</h1></h1>
+        <h1>Question2: 电信收费问题</h1>
         <el-upload
             drag
             class="upload-demo"

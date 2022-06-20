@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 100%;">
+  <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 90%;">
     <div style="display: flex;justify-content: space-between">
       <div style="width: 58%;">
         <h1>Question3: 电脑销售系统</h1>

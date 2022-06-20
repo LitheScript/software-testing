@@ -1,5 +1,4 @@
 <template>
-
  <div class='container'>
    <el-container>
     <h1 style="font-size:18px" class="header">Question1:判断三角形类型</h1>
