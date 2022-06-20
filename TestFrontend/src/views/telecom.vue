@@ -1,62 +1,88 @@
 <template>
-  <div style="margin-left: 50px;margin-right:50px;text-align: left;width: 90%;">
-    <div style="display: flex;justify-content: space-between">
-      <div style="width: 58%;">
-        <h1>Question2: 电信收费问题</h1>
-        <el-upload
-            drag
-            class="upload-demo"
-            action="http://localhost:81/uploadPhone"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="100"
-            :on-exceed="handleExceed"
-            :on-success="Success"
-            :file-list="fileList">
-          <div class="el-upload__text" style="margin-top: 68px">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip">只能上传csv文件，且不超过500kb</div>
-        </el-upload>
-      </div>
-      <div style="width: 60%;height: 300px;" id="pieReport"></div>
-    </div>
-    <div>
-      <el-table
-          :data="tableData"
-          stripe
-          height="500"
-          style="width: 100%">
-        <el-table-column
-            prop=id
-            label="序号"
-            width="180">
-        </el-table-column>
-        <el-table-column
-            prop=length
-            label="本月通话的分钟数"
-            width="180">
-        </el-table-column>
-        <el-table-column
-            prop=times
-            label="通话时间段的最大容许不按时缴费次数"
-            width="380">
-        </el-table-column>
-        <el-table-column
-            prop=expectResult
-            label="预期输出">
-        </el-table-column>
-        <el-table-column
-            prop=actualResult
-            label="实际输出">
-        </el-table-column>
-        <el-table-column
-            prop=pass
-            label="是否通过">
-        </el-table-column>
+  <div class='container'>
+    <el-container>
+      <h1 style="font-size:18px" class="header">Question2: 电信收费问题</h1>
+      <el-footer style="margin-left: 30px">
+        <div style="display: flex;justify-content: space-between">
+          <el-tabs type="border-card" style="width: 50%; height: 400px">
+            <el-tab-pane label="单个测试" name="one">
+              <h4>单个测试</h4>
+              <el-form ref="form" :inline="true" :model="form" label-width="110px" class="input-form">
+                <el-form-item label="通话时间" class="input-text">
+                  <el-input v-model="form.length"></el-input>
+                </el-form-item>
+                <el-form-item label="不按时缴费次数" class="input-text">
+                  <el-input v-model="form.times"></el-input>
+                </el-form-item>
+                <el-form-item label="不按时缴费次数" class="input-text">
+                  <el-input v-model="form.expectOff"></el-input>
+                </el-form-item>
+                <el-form-item label="预期结果" class="input-text">
+                  <el-input v-model="form.expectResult"></el-input>
+                </el-form-item>
+                <el-form-item class="button">
+                  <el-button type="primary" @click="onClick">测试</el-button>
+                </el-form-item>
+              </el-form>
+            </el-tab-pane>
+            <el-tab-pane label="批量测试" name="second">
+              <h4>批量测试</h4>
+              <el-upload
+                  class="upload-demo"
+                  action="http://localhost:81/uploadPhone"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  multiple
+                  :limit="100"
+                  :on-exceed="handleExceed"
+                  :on-success="Success"
+                  :file-list="fileList">
+                <el-button size="small" type="primary">上传测试用例</el-button>
+                <div class="el-upload__tip">只能csv文件，且不超过500kb</div>
+              </el-upload>
+            </el-tab-pane>
+          </el-tabs>
+          <div style="width: 50%;height: 300px;" id="pieReport"></div>
+        </div>
+        <div>
+          <el-table
+              :data="tableData"
+              stripe
+              height="500"
+              style="width: 100%">
+            <el-table-column
+                prop=id
+                label="序号"
+                width="180">
+            </el-table-column>
+            <el-table-column
+                prop=length
+                label="本月通话的分钟数"
+                width="180">
+            </el-table-column>
+            <el-table-column
+                prop=times
+                label="通话时间段的最大容许不按时缴费次数"
+                width="380">
+            </el-table-column>
+            <el-table-column
+                prop=expectResult
+                label="预期输出">
+            </el-table-column>
+            <el-table-column
+                prop=actualResult
+                label="实际输出">
+            </el-table-column>
+            <el-table-column
+                prop=pass
+                label="是否通过">
+            </el-table-column>
 
-      </el-table>
-    </div>
+          </el-table>
+        </div>
+      </el-footer>
+    </el-container>
   </div>
 </template>
 
@@ -69,6 +95,12 @@ export default {
     return {
       tableData: [],
       fileList: [],
+      form: {
+        length: '',
+        times: '',
+        expectOff: '',
+        expectResult: '',
+      },
       passRate:0,
       charts: "",
       opinion: ["通过用例", "未通过用例"],
@@ -114,6 +146,30 @@ export default {
           }
         ]
       });
+    },
+    onClick() {
+      let data={
+        length:parseInt(this.form.length),
+        times:parseInt(this.form.times),
+        expectOff:parseInt(this.form.expectOff),
+        expectResult: this.form.expectResult
+      }
+      console.log(data);
+      axios.getOnePhone(data).then(res=>{
+        console.log(res.data.data.Phone);
+        this.tableData=[];
+        this.tableData.push(res.data.data.Phone);
+        console.log(this.tableData[0]);
+        if(res.data.data.Phone.pass==1) {
+          this.$message({
+            message: '测试通过',
+            type: 'success'
+          });
+        }
+        else {
+          this.$message.error('测试未通过');
+        }
+      })
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -168,5 +224,15 @@ export default {
 </script>
 
 <style scoped>
-
+.header{
+  margin-left: 50px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+.upload-demo {
+  margin-top: 50px;
+}
+.input-form{
+  padding-right: 10px;
+}
 </style>

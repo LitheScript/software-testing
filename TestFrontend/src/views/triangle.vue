@@ -4,21 +4,24 @@
     <h1 style="font-size:18px" class="header">Question1:判断三角形类型</h1>
     <el-footer style="margin-left: 30px">
       <div style="display: flex;justify-content: space-between">
-       <el-tabs type="border-card" style="width: 50%; height: 350px">
-        <el-tab-pane label="单个测试" name="first">
+       <el-tabs type="border-card" style="width: 50%; height: 400px">
+        <el-tab-pane label="单个测试" name="one">
           <h4>单个测试</h4>
-          <el-form ref="form" :model="form" label-width="80px" class="input-form">
-            <el-form-item label="edge1" class="input-text">
-              <el-input v-model="form.edge1"></el-input>
+          <el-form ref="form" :inline="true" :model="form" label-width="110px" class="input-form">
+            <el-form-item label="a" class="input-text">
+              <el-input v-model="form.a"></el-input>
             </el-form-item>
-            <el-form-item label="edge2" class="input-text">
-              <el-input v-model="form.edge2"></el-input>
+            <el-form-item label="b" class="input-text">
+              <el-input v-model="form.b"></el-input>
             </el-form-item>
-            <el-form-item label="edge3" class="input-text">
-              <el-input v-model="form.edge3"></el-input>
+            <el-form-item label="c" class="input-text">
+              <el-input v-model="form.c"></el-input>
+            </el-form-item>
+            <el-form-item label="预期结果" class="input-text">
+              <el-input v-model="form.expectResult"></el-input>
             </el-form-item>
             <el-form-item class="button">
-              <el-button type="primary" @click="onClick">提交</el-button>
+              <el-button type="primary" @click="onClick">测试</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -85,7 +88,6 @@
     </div>
     </el-footer>
    </el-container>
-
  </div>
 
 </template>
@@ -100,9 +102,10 @@ export default {
       tableData: [],
       fileList: [],
       form: {
-        edge1: '',
-        edge2: '',
-        edge3: '',
+        a: '',
+        b: '',
+        c: '',
+        expectResult: '',
       },
       passRate:0,
       charts: "",
@@ -151,32 +154,28 @@ export default {
       });
     },
     onClick() {
-      var a = parseFloat(this.form.edge1)
-      var b = parseFloat(this.form.edge2)
-      var c = parseFloat(this.form.edge3)
-      if (a < 0)
-          this.$message.warning ("a不能为0")
-      if (b < 0)
-          this.$message.warning ("b不能为0")
-      if (c < 0)
-          this.$message.warning ("c不能为0")
-      if (a >= 800)
-          this.$message.warning ("a不在取值范围内")
-      if (b >= 800)
-          this.$message.warning ("b不在取值范围内")
-      if (c >= 800)
-          this.$message.warning ("c不在取值范围内")
-      if (a + c > b && a + b > c && b + c > a)
-      {
-          if (a == b && b == c)
-              this.$message.warning ("等边三角形")
-          else if( a == b || b == c || a == c)
-              this.$message.warning ("等腰三角形")
-          else
-              this.$message.warning ("普通三角形")
+      let data={
+        a:parseInt(this.form.a),
+        b:parseInt(this.form.b),
+        c:parseInt(this.form.c),
+        expectResult: this.form.expectResult
       }
-      else
-          this.$message.warning ("不是三角形")
+      console.log(data);
+      axios.getOneTriangle(data).then(res=>{
+        console.log(res.data.data.Triangle);
+        this.tableData=[];
+        this.tableData.push(res.data.data.Triangle);
+        console.log(this.tableData[0]);
+        if(res.data.data.Triangle.pass==1) {
+          this.$message({
+            message: '测试通过',
+            type: 'success'
+          });
+        }
+        else {
+          this.$message.error('测试未通过');
+        }
+      })
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -241,7 +240,7 @@ export default {
   margin-top: 50px;
 }
 .input-form{
-  padding-right: 20px;
+  padding-right: 10px;
 }
 
 </style>

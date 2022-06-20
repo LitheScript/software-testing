@@ -5,7 +5,7 @@ import axios from 'axios'
 //创建axios实例
 var instance = axios.create({
     timeout: 5000, //请求超过5秒即超时返回错误
-    headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
 });
 
 

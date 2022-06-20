@@ -10,7 +10,7 @@
                          active-text-color="#12a182;"
                          router=true>
                     <el-submenu index="1">
-                        <template #title><i class="el-icon-message"></i><span style="color:#c27c88">平时题目</span></template>
+                        <template #title><i class="el-icon-s-order"></i><span style="color:#c27c88">平时题目</span></template>
 
                         <el-menu-item index="/triangle">三角形问题</el-menu-item>
                         <el-menu-item index="/telecom">电信收费问题</el-menu-item>
