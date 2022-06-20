@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class Triangle {
     private int id;
-    private int a;
-    private int b;
-    private int c;
+    private double a;
+    private double b;
+    private double c;
     private String expectResult;
     private String actualResult;
     private int pass;

@@ -48,7 +48,7 @@ public class CommissionServiceImpl implements CommissionService {
         if(host<0||display<0||peripheral<0){
             return -2;
         }
-        if(host >=70 ||display >=80 ||peripheral>=90){
+        if(host >70 ||display >80 ||peripheral>90){
             return -3;
         }
 

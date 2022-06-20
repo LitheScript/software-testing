@@ -36,15 +36,15 @@ public class TriangleServiceImpl implements TriangleService {
 
     @Override
     public String testTriangle(Triangle triangle){
-            int a = triangle.getA();
-            int b = triangle.getB();
-            int c = triangle.getC();
+            double a = triangle.getA();
+            double b = triangle.getB();
+            double c = triangle.getC();
             if(a<1||a>200){
-                return "error!a要为[1,200]的数";
+                return "error!a要为1到200";
             }else if(b<1||b>200) {
-                return "error!b要为[1,200]的数";
+                return "error!b要为1到200";
             }else if(c<1||c>200){
-                return "error!c要为[1,200]的数";
+                return "error!c要为1到200";
             }
             if (a+b>c&&a+c>b&&b+c>a) {
                 if (a==b&&b==c) {

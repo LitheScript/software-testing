@@ -30,7 +30,7 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public double testCalendar(Phone phone) {
+    public double testPhone(Phone phone) {
         int callLength = phone.getLength();
         int times = phone.getTimes();
 

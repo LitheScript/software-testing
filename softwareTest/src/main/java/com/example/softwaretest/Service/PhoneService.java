@@ -1,6 +1,5 @@
 package com.example.softwaretest.Service;
 
-import com.example.softwaretest.Entity.Commission;
 import com.example.softwaretest.Entity.Phone;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public interface PhoneService {
 
     void saveTestCases(Phone phone);
 
-    double testCalendar(Phone phone);
+    double testPhone(Phone phone);
 
     double queryPass();
 

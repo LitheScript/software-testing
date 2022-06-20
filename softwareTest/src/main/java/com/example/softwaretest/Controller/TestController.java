@@ -4,25 +4,17 @@ import com.example.softwaretest.Entity.Calendar;
 import com.example.softwaretest.Entity.Commission;
 import com.example.softwaretest.Entity.Phone;
 import com.example.softwaretest.Entity.Triangle;
-import com.example.softwaretest.Mapper.CalendarMapper;
-import com.example.softwaretest.Mapper.CommissionMapper;
-import com.example.softwaretest.Mapper.PhoneMapper;
-import com.example.softwaretest.Mapper.TriangleMapper;
 import com.example.softwaretest.Result.Response;
 import com.example.softwaretest.Service.CalendarService;
 import com.example.softwaretest.Service.CommissionService;
 import com.example.softwaretest.Service.PhoneService;
 import com.example.softwaretest.Service.TriangleService;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.*;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -237,9 +229,9 @@ public class TestController {
                 while ((temp = reader.readLine()) != null) {
                     Triangle triangle = new Triangle();
                     String[] s = temp.split(",");
-                    triangle.setA(Integer.valueOf(s[0]));
-                    triangle.setB(Integer.valueOf(s[1]));
-                    triangle.setC(Integer.valueOf(s[2]));
+                    triangle.setA(Double.valueOf(s[0]));
+                    triangle.setB(Double.valueOf(s[1]));
+                    triangle.setC(Double.valueOf(s[2]));
                     triangle.setExpectResult(s[3]);
 
                     triangle.setActualResult(triangleService.testTriangle(triangle));
@@ -358,7 +350,7 @@ public class TestController {
                     phone.setExpectResult(Double.valueOf(s[3]));
 
 
-                    double result = phoneService.testCalendar(phone);
+                    double result = phoneService.testPhone(phone);
                     phone.setActualOff(result);
                     if (result != -1) {
                         phone.setActualResult(25 + 0.15 * phone.getLength() * (1 - result));
@@ -384,5 +376,92 @@ public class TestController {
         }
         return Response.success().message("上传成功");
     }
+
+
+    /**
+     *单独测试日历接口
+     *@author cj
+     *@date 2022/6/20 12:13
+     * @param calendar
+     * @return Response
+     */
+    @RequestMapping(value = "/testOneCalendar", method = RequestMethod.POST)
+    public Response testOneCalendar(@RequestBody Calendar calendar){
+
+         String result =calendarService.testCalendar(calendar);
+         if(result.equals(calendar.getExpectResult())){
+             calendar.setPass(1);
+             calendar.setActualResult(result);
+         }else{
+             calendar.setPass(0);
+             calendar.setActualResult(result);
+         }
+         return Response.success().message("测试成功").data("Calendar",calendar);
+    }
+
+    /**
+     *单独测试佣金
+     *@author cj
+     *@date 2022/6/20 12:17
+     * @param commission
+     * @return Response
+     */
+    @RequestMapping(value = "/testOneCommission", method = RequestMethod.POST)
+    public Response testCommission(@RequestBody Commission commission){
+
+        Double result =commissionService.testCommission(commission);
+        if(result.equals(commission.getCommission())){
+            commission.setPass(1);
+            commission.setActualCommission(result);
+        }else{
+            commission.setPass(0);
+            commission.setActualCommission(result);
+        }
+        return Response.success().message("测试成功").data("Commission",commission);
+    }
+
+    /**
+     *单独测试电话
+     *@author cj
+     *@date 2022/6/20 12:17
+     * @param phone
+     * @return Response
+     */
+    @RequestMapping(value = "/testOnePhone", method = RequestMethod.POST)
+    public Response testOnePhone(@RequestBody Phone phone){
+
+        Double result =phoneService.testPhone(phone);
+        if(result.equals(phone.getExpectResult())){
+            phone.setPass(1);
+            phone.setActualResult(result);
+        }else{
+            phone.setPass(1);
+            phone.setActualResult(result);
+        }
+        return Response.success().message("测试成功").data("Phone",phone);
+    }
+
+    /**
+     *单独测试三角形
+     *@author cj
+     *@date 2022/6/20 12:19
+     * @param triangle
+     * @return Response
+     */
+    @RequestMapping(value = "/testOneTriangle", method = RequestMethod.POST)
+    public Response testOneTriangle(@RequestBody Triangle triangle){
+
+        String result =triangleService.testTriangle(triangle);
+        if(result.equals(triangle.getExpectResult())){
+            triangle.setPass(1);
+            triangle.setActualResult(result);
+        }else{
+            triangle.setPass(1);
+            triangle.setActualResult(result);
+        }
+        return Response.success().message("测试成功").data("Triangle",triangle);
+    }
+
+
 
 }
