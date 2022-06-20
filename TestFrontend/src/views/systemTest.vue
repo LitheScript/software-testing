@@ -14,7 +14,7 @@ export default {
   name:"unitTest",
   data(){
     return {
-      ifeData:require('../../static/ObjectControllerTest.html'),
+      ifeData:require('../../public/static/ObjectControllerTest.html'),
     };
   },
   created() {
