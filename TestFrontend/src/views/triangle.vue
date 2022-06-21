@@ -155,9 +155,9 @@ export default {
     },
     onClick() {
       let data={
-        a:parseInt(this.form.a),
-        b:parseInt(this.form.b),
-        c:parseInt(this.form.c),
+        a: parseFloat(this.form.a),
+        b: parseFloat(this.form.b),
+        c: parseFloat(this.form.c),
         expectResult: this.form.expectResult
       }
       console.log(data);
