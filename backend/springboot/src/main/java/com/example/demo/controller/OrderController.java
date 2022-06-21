@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 //import com.baomidou.mybatisplus.extension.api.R;
 import com.example.demo.common.Result;
 //import com.example.demo.entity.Order;
+import com.example.demo.entity.Object;
 import com.example.demo.service.impl.ObjectServiceImpl;
 import com.example.demo.service.impl.OrderServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -109,6 +110,9 @@ public class OrderController {
         } else if (count == -2) {
             return Result.error("-2", "操作失败");
         } else {
+            Object object = objectService.getById(orderService.getById(orderId).getObjectId());
+            object.setStatus("已租出");
+            objectService.updateById(object);
             return Result.success(payUrl);
         }
     }
