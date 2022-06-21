@@ -46,7 +46,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IS
     public List<JSONObject> viewMyPosts(Integer userId) {
         List<JSONObject> jsonObjects = new ArrayList<>();
         QueryWrapper<Post> wrapper = new QueryWrapper<>();
-        wrapper.eq("userId", userId);
+        wrapper.eq("user_id", userId);
         List<Post> postList = postMapper.selectList(wrapper);
         if (postList.isEmpty()) {
             return null;
