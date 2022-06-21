@@ -51,7 +51,7 @@ export default {
           };
           total.push(data);
         });
-        console.log(total);
+        console.log('mycollect', total);
         this.myCollects = total;
       });
   },

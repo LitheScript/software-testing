@@ -5,6 +5,7 @@
         <el-form
           ref="PersonalData"
           :model="PersonalData"
+          :rules="dataRules"
           label-width="20%"
           style="margin-top: 4%"
         >
@@ -48,7 +49,7 @@
             >
             </el-input>
           </el-form-item>
-          <el-form-item label="电话：">
+          <el-form-item label="电话：" prop="telephone">
             <el-input
               v-model="PersonalData.telephone"
               :disabled="editflag"
@@ -56,7 +57,7 @@
             >
             </el-input>
           </el-form-item>
-          <el-form-item label="E-mail：">
+          <el-form-item label="E-mail：" prop="email">
             <el-input
               v-model="PersonalData.email"
               :disabled="editflag"
@@ -85,7 +86,7 @@
               type="success"
               round
               v-show="!editflag"
-              @click="editUser"
+              @click="editUser('PersonalData')"
             >
               保存
             </el-button>
@@ -228,6 +229,26 @@ export default {
         callback();
       }
     };
+    const checkTelephone = (rule, value, callback) => {
+      const phonereg = 11 && /^((13|14|15|16|17|18|19)[0-9]{1}\d{8})$/;
+      if (value == '') {
+        callback(new Error('手机号不能为空！'));
+      } else if (!phonereg.test(value)) {
+        callback(new Error('请输入有效的手机号码！'));
+      } else {
+        callback();
+      }
+    };
+    const checkEmail = (rule, value, callback) => {
+      const emailreg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (value == '') {
+        callback(new Error('邮箱不能为空！'));
+      } else if (!emailreg.test(value)) {
+        callback(new Error('请输入有效的邮箱！'));
+      } else {
+        callback();
+      }
+    };
     return {
       PersonalData: {
         userId: -1,
@@ -240,6 +261,10 @@ export default {
         zone: '',
         role: 0,
         reputation: 0,
+      },
+      dataRules: {
+        telephone: [{ validator: checkTelephone, trigger: 'blur' }],
+        email: [{ validator: checkEmail, trigger: 'blur' }],
       },
       nickName: '',
       gender: '',
@@ -262,19 +287,26 @@ export default {
     };
   },
   methods: {
-    editUser() {
+    editUser(formName) {
       console.log(this.PersonalData);
-      axios
-        .updateUser(this.PersonalData)
-        .then((res) => {
-          console.log('上传成功');
-          console.log(res);
-          console.log(this.PersonalData);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.editflag = true;
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log('哪里不正确', this.PersonalData);
+          axios
+            .updateUser(this.PersonalData)
+            .then((res) => {
+              console.log('上传成功');
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          this.editflag = true;
+          return true;
+        }
+        console.log('输入有误');
+        return false;
+      });
     },
     HandleCancel() {
       this.PersonalData.nickName = this.nickName;
@@ -306,7 +338,7 @@ export default {
             .catch((err) => {
               console.log(err);
             });
-          // return true;
+          return true;
         }
         console.log('error submit!!');
         return false;

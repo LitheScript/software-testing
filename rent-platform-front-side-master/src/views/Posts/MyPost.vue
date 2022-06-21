@@ -1,11 +1,6 @@
 <template>
-    <div style="margin:4%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;">
-        <div v-if="this.MyPost.length!=0">
+    <div class="post-card">
+        <div v-if="this.MyPost.length!=0" class="post-card">
         <my-publish
          v-for="item in this.MyPost" :key="item.postID"
             :cardInfo="item"/>
@@ -47,3 +42,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.post-card{
+  margin:4%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+</style>

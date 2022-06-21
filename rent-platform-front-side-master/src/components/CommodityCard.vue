@@ -54,7 +54,8 @@ export default {
       this.heartColor = 'black';
     },
     collect() {
-      if (!this.collected) {
+      if (this.$store.state.user == null) this.$router.push('/login');
+      else if (!this.collected) {
         axios.collect(this.cardInfo.object_id)
           .then(() => {
             this.$message({
