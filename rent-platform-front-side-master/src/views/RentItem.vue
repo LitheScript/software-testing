@@ -30,10 +30,10 @@
     <el-card
       style="
         width: 60%;
-        height: 70%;
+        height: 75%;
         position: absolute;
         top: 20%;
-        left: 10%;
+        left: 5%;
         border-radius: 35px;
         padding: 50px;
       "
@@ -43,7 +43,7 @@
         :rules="rules"
         ref="itemForm"
         label-width="150px"
-        style="width: 70%"
+        style="width: 80%"
       >
         <el-form-item label="物品名称" prop="name">
           <el-input v-model="itemForm.name"></el-input>

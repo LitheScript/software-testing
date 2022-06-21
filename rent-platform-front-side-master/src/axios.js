@@ -83,7 +83,7 @@ export default {
     return instance.get(`${url}post/viewMyPosts?userId=${id}`);
   },
   publishPost(data) {
-    return instance.post(`${url}post/publishPost?userId=${data.userId}&title=${data.title}&content=${data.content}&time=${data.time}`);
+    return instance.post(`${url}post/publishPost?userId=${data.userId}&title=${data.title}&content=${data.content}&expectedPrice=${data.expectedPrice}`);
   },
   deletePost(id) {
     return instance.post(`${url}post/deleteMypost?postId=${id}`);

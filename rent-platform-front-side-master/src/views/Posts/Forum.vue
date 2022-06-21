@@ -5,9 +5,15 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;">
+        <div v-if="Posts.length!=0">
         <post-card
          v-for="item in this.Posts" :key="item.postID"
             :cardInfo="item"/>
+        </div>
+        <div  v-else>
+          <img src="@/assets/empty.png">
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;暂无需求！</p>
+        </div>
     </div>
 </template>
 <script>
@@ -18,12 +24,12 @@ export default {
   data() {
     return {
       Posts: [{
-        postID: 0,
-        userId: 0,
-        title: '还没有人发布过需求',
-        content: null,
-        time: null,
-        expectedPrice: 0,
+        // postID: 0,
+        // userId: 0,
+        // title: '还没有人发布过需求',
+        // content: null,
+        // time: null,
+        // expectedPrice: 0,
       }],
     };
   },
