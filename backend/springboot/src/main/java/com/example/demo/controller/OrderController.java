@@ -56,6 +56,10 @@ public class OrderController {
 
     @PostMapping("generateOrder")
     public Result<?> generateOrder(int objectId, int borrowerId, String lentoutTime, String returnTime, String campus) {
+
+        if (objectService.getById(objectId).getUserId() == borrowerId) {
+            return Result.error("-3", "用户不能租用自己的物品!!");
+        }
         LocalDateTime parseLentOutTime = LocalDateTime.parse(lentoutTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime parseReturnTime = LocalDateTime.parse(returnTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         int orderId = orderService.generateOrder(objectId, borrowerId, parseLentOutTime, parseReturnTime, campus);

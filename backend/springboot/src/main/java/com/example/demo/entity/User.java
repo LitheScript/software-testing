@@ -35,7 +35,7 @@ public class User implements Serializable {
 
     private String gender;
 
-    private Integer telephone;
+    private String telephone;
 
     private String email;
 

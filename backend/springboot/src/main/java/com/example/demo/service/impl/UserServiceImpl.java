@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IS
     }
 
 
-    public int modifyUserInfo(Integer userId, String nickName, String password, String avatar, String gender, Integer telephone, String email, String zone) {
+    public int modifyUserInfo(Integer userId, String nickName, String password, String avatar, String gender, String telephone, String email, String zone) {
         User user = new User();
         user.setUserId(userId);
         if (nickName != null) {

@@ -44,7 +44,7 @@ public class RemarksServiceImpl extends ServiceImpl<RemarksMapper, Remarks> impl
 
     public Integer giveRemark(Integer objectId, Integer userId, String content, Integer grade, Integer type) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
-        wrapper.eq("objectId", objectId);
+        wrapper.eq("object_id", objectId);
         wrapper.eq("borrower_id", userId);
         Order order = orderMapper.selectOne(wrapper);
         if (order == null) {

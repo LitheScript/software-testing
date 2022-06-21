@@ -147,7 +147,7 @@ public class UserController {
                                     @RequestParam(required = false) String password,
                                     @RequestParam(required = false) String avatar,
                                     @RequestParam(required = false) String gender,
-                                    @RequestParam(required = false) Integer telephone,
+                                    @RequestParam(required = false) String telephone,
                                     @RequestParam(required = false) String email,
                                     @RequestParam(required = false) String zone) {
         int count = userService.modifyUserInfo(userId, nickName, password, avatar, gender, telephone, email, zone);
