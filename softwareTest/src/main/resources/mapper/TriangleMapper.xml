@@ -4,7 +4,7 @@
 
 
     <select id="getTestCases" resultType="Triangle">
-        select id, a, b, c, expectResult, pass
+        select id, a, b, c, expectResult,actualResult, pass
         from softwareTesting.Triangle;
     </select>
 

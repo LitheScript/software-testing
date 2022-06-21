@@ -435,7 +435,7 @@ public class TestController {
             phone.setPass(1);
             phone.setActualResult(result);
         }else{
-            phone.setPass(1);
+            phone.setPass(0);
             phone.setActualResult(result);
         }
         return Response.success().message("测试成功").data("Phone",phone);
@@ -456,7 +456,7 @@ public class TestController {
             triangle.setPass(1);
             triangle.setActualResult(result);
         }else{
-            triangle.setPass(1);
+            triangle.setPass(0);
             triangle.setActualResult(result);
         }
         return Response.success().message("测试成功").data("Triangle",triangle);
