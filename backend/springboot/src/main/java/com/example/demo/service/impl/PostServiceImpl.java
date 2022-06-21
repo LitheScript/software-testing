@@ -65,7 +65,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements IS
 
     public Integer deleteMyPost(Integer postId) {
         QueryWrapper<Post> wrapper = new QueryWrapper<>();
-        wrapper.eq("postId", postId);
+        wrapper.eq("post_id", postId);
         return postMapper.delete(wrapper);
     }
 
