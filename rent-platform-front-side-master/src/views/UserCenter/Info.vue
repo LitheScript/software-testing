@@ -42,12 +42,15 @@
             </el-input>
           </el-form-item>
           <el-form-item label="性别：">
-            <el-input
-              v-model="PersonalData.gender"
-              :disabled="editflag"
-              class="input"
-            >
-            </el-input>
+            <el-select v-model="PersonalData.gender"
+            placeholder="请选择性别" :disabled="editflag" class="input">
+              <el-option
+                v-for="item in sex"
+                :key="item.value"
+                :label="item.value"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="电话：" prop="telephone">
             <el-input
@@ -284,6 +287,15 @@ export default {
         checkPass: [{ validator: validatePass2, trigger: 'blur' }],
         orgin: [{ validator: checkOrgin, trigger: 'blur' }],
       },
+      sex: [{
+        value: '男',
+      },
+      {
+        value: '女',
+      },
+      {
+        value: '保密',
+      }],
     };
   },
   methods: {
@@ -291,7 +303,6 @@ export default {
       console.log(this.PersonalData);
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log('哪里不正确', this.PersonalData);
           axios
             .updateUser(this.PersonalData)
             .then((res) => {

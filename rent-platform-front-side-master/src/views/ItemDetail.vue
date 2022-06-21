@@ -255,7 +255,7 @@
               <div class="rent-box__form">
                 <div class="uk-h5">你需要它的时间?</div>
                 <form action="#">
-                  <el-date-picker
+                  <!-- <el-date-picker
                     v-model="startTime"
                     style="width:100%;margin-bottom:15px;"
                     format="yyyy-MM-dd"
@@ -274,6 +274,16 @@
                     value-format="yyyy-MM-dd HH:mm:ss"
                     placeholder="结束日期"
                    >
+                  </el-date-picker> -->
+                   <el-date-picker
+                    v-model="rentTime"
+                    style="width:100%"
+                    type="daterange"
+                    value-format="yyyy-MM-dd HH:mm:ss"
+                    range-separator="-"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    :picker-options="pickerOptions">
                   </el-date-picker>
                   <div class="uk-margin">
                     <input class="uk-button uk-button-danger uk-width-1-1"
@@ -316,8 +326,9 @@ export default {
   data() {
     return {
       detail: {},
-      startTime: '',
-      endTime: '',
+      // startTime: '',
+      // endTime: '',
+      rentTime: '',
       rate: 4,
       myRate: 5,
       colors: [],
@@ -327,6 +338,11 @@ export default {
       myOrders: [],
       myComment: '',
       order_id: -1,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7; // 只能选择今天及今天之后的日期
+        },
+      },
     };
   },
   methods: {
@@ -380,17 +396,14 @@ export default {
           query: { redirect: this.$route.fullPath }, // 将刚刚要去的路由path作为参数，方便登录成功后直接跳转到该路由
         });
       }
-
       const myId = this.$store.state.user.userId;
       console.log('ididid', myId);
-      console.log(this.startTime);
-      console.log(this.endTime);
       console.log(this.zone);
       const data = {
         objectId: this.detail.object_id,
         userId: myId,
-        time1: this.startTime,
-        time2: this.endTime,
+        time1: this.rentTime[0],
+        time2: this.rentTime[1],
         zone: this.zone,
       };
       console.log('data', data);
