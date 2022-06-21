@@ -22,7 +22,7 @@
             </div>
             <div class="main-lower">
               <div class="login-btn" @click="login()">登录</div>
-              <div class="register" @click="goRegister()">管理员注册</div>
+              <!-- <div class="register" @click="goRegister()">管理员注册</div> -->
                <router-link to="/login">
                 <div class="user-login">用户登录</div>
               </router-link>

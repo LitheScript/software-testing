@@ -8,8 +8,13 @@
         <div class="main">
           <div class="main-title">注册</div>
           <div class="main-form">
-            <input class="login-input" placeholder="用户名" v-model="name">
-            <input class="login-input" placeholder="密码" type="password" v-model="psw">
+            <el-input placeholder="用户名" v-model="name"/>
+            <el-input placeholder="密码"
+            type="password" v-model="psw"
+            maxlength="15" show-password/>
+            <el-input placeholder="密码"
+            type="password" v-model="checkpsw"
+            maxlength="15" show-password/>
           </div>
           <div class="main-lower">
             <div class="login-btn" @click="Register()">注册</div>
@@ -49,6 +54,7 @@ export default {
     return {
       name: '',
       psw: '',
+      checkpsw: '',
     };
   },
   methods: {
@@ -60,17 +66,20 @@ export default {
     },
     Register() {
       // ....逻辑代码
-
-      const data = {
-        nickName: this.name,
-        password: this.psw,
-      };
-      console.log('data', data);
-      axios.register(qs.stringify(data))
-        .then((res) => {
-          alert(res);
-        });
+      if (this.psw !== this.checkpsw)
+        alert('两次输入密码不一致');
+      else {
+        const data = {
+          nickName: this.name,
+          password: this.psw,
+        };
+        console.log('data', qs.stringify(data));
+        axios.register(qs.stringify(data))
+          .then((res) => {
+            alert(res);
+          });
       // this.$router.push('/');
+      }
     },
   },
 };
@@ -144,23 +153,6 @@ export default {
           flex-direction: column;
           align-items: center;
           width:100%;
-          .login-input{
-            width:100%;
-            height:44px;
-            border-radius: 22px;
-            outline: none;
-            border: 1px solid #e5e5e5;
-            margin-top: 20px;
-            transition: .2s ease-in-out;
-            font-size: 15px;
-            color:#222222;
-            padding-left: 20px;
-            padding-right: 10px;
-
-            &:focus{
-              border:#2f80eb 1px solid;
-            }
-          }
         }
 
         .main-lower{
@@ -250,4 +242,22 @@ export default {
     }
   }
 }
+ ::v-deep .el-input__inner {
+         width:100%;
+            height:44px;
+            border-radius: 22px;
+            outline: none;
+            border: 1px solid #e5e5e5;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            transition: .2s ease-in-out;
+            font-size: 15px;
+            color:#222222;
+            padding-left: 20px;
+            padding-right: 10px;
+
+            &:focus{
+              border:#2f80eb 1px solid;
+            }
+      }
 </style>
