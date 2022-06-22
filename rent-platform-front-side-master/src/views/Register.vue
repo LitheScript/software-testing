@@ -12,7 +12,7 @@
             <el-input placeholder="密码"
             type="password" v-model="psw"
             maxlength="15" show-password/>
-            <el-input placeholder="密码"
+            <el-input placeholder="再次输入密码"
             type="password" v-model="checkpsw"
             maxlength="15" show-password/>
           </div>
@@ -76,9 +76,13 @@ export default {
         console.log('data', qs.stringify(data));
         axios.register(qs.stringify(data))
           .then((res) => {
-            alert(res);
+            console.log(res.data)
+            if(res.data.code==-1)  alert(res.data.msg)
+            else {
+              alert("注册成功")
+              this.$router.push('/login');
+            }
           });
-      // this.$router.push('/');
       }
     },
   },

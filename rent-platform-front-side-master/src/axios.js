@@ -89,7 +89,7 @@ export default {
     return instance.post(`${url}post/deleteMypost?postId=${id}`);
   },
   register(data) {
-    return instance.post(`${url}user/insert?${data}`);
+    return instance.post(`${url}user/register?${data}`);
   },
   getCommentByItemId(id) {
     return instance.get(`${url}remarks/getRemarkList?objectId=${id}`);
