@@ -126,10 +126,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         // DateTimeFormatter.ofPattern方法根据指定的格式输出时间
         String formatDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern(format));
         StringBuilder todayTime=new StringBuilder(formatDateTime);
+        System.out.println(todayTime);
         todayTime.delete(11,19);
+        System.out.println(todayTime);
         todayTime.append("00:00:00");
+        System.out.println(todayTime);
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime returnTime = LocalDateTime.parse(todayTime,df);
+//        return orderMapper.getOrderList(1);
         return orderMapper.getTodayReturnList(returnTime);
     }
 }
