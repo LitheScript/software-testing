@@ -137,5 +137,11 @@ public class OrderController {
         return Result.success("归还成功");
     }
 
+    @PostMapping("getTodayReturnList")
+    public Result<?> getTodayReturnList(@RequestParam(defaultValue = "1") Integer pageNum,
+                                        @RequestParam(defaultValue = "10") Integer pageSize) {
+        Page<Order> userPage = orderService.getTodayReturnList(pageNum,pageSize);
+        return Result.success(userPage);
+    }
 }
 

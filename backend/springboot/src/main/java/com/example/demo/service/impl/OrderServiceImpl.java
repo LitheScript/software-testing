@@ -117,4 +117,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
 
+    public Page<Order> getTodayReturnList(Integer pageNum,Integer pageSize){
+        LambdaQueryWrapper<Order> wrapper = Wrappers.<Order>lambdaQuery();
+        String format = "YYYY-MM-dd hh:mm:ss";
+        // DateTimeFormatter.ofPattern方法根据指定的格式输出时间
+        String formatDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern(format));
+        StringBuilder todayTime=new StringBuilder(formatDateTime);
+        System.out.println(todayTime);
+        todayTime.delete(11,19);
+        System.out.println(todayTime);
+        todayTime.append("00:00:00");
+        wrapper.like(Order::getReturnTime, todayTime);
+        Page<Order> userPage = orderMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        System.out.println(todayTime);
+        return userPage;
+    }
 }
