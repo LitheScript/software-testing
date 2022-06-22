@@ -59,7 +59,7 @@
           <el-input-number
             v-model="itemForm.renDdaily"
             controls-position="right"
-            :min="0"
+            :min="1"
             :step="1"
             :precision='0'
             style="width: 50%"
