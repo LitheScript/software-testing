@@ -6,6 +6,7 @@ import cn.hutool.json.JSONObject;
 import com.example.demo.common.Result;
 //import com.example.demo.entity.Order;
 import com.example.demo.entity.Object;
+import com.example.demo.entity.Order;
 import com.example.demo.service.impl.ObjectServiceImpl;
 import com.example.demo.service.impl.OrderServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -103,18 +104,34 @@ public class OrderController {
         String payUrl = "http://101.35.194.132:9090/alipay/pay?subject="
                 + objectService.getById((orderService.getById(orderId).getObjectId())).getName()
                 + "&traceNo=" + orderId + "&totalAmount=" + orderService.getById(orderId).getRentTotal();
-        Integer userId = orderService.getById(orderId).getBorrowerId();
-        userService.getById(userId).setReputation(userService.getById(userId).getReputation() + 5);
         if (count == -1) {
             return Result.error("-1", "订单不存在");
         } else if (count == -2) {
             return Result.error("-2", "操作失败");
         } else {
+            //修改用户信誉度
+            Integer userId = orderService.getById(orderId).getBorrowerId();
+            userService.getById(userId).setReputation(userService.getById(userId).getReputation() + 5);
+            //修改物品状态
             Object object = objectService.getById(orderService.getById(orderId).getObjectId());
             object.setStatus("已租出");
             objectService.updateById(object);
+            //修改订单状态
+            Order order = orderService.getById(orderId);
+            order.setStatus("待归还");
+            orderService.updateById(order);
+
+
             return Result.success(payUrl);
         }
+    }
+
+    @PostMapping("returnObject")
+    public Result<?> returnObject(Integer orderId) {
+        Order order = orderService.getById(orderId);
+        order.setStatus("待评价");
+        orderService.updateById(order);
+        return Result.success("归还成功");
     }
 
 }
