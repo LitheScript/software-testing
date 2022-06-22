@@ -145,11 +145,11 @@ class UserControllerTest {
     @Test
     void UT_TC_001_002_001_2() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
-                        .param("nickName", "lwy")
+                        .param("nickName", "lwy1")
                         .param("password", "")
                         .param("role", "0"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("code").value(-1))
+                .andExpect(MockMvcResultMatchers.jsonPath("code").value(0))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }

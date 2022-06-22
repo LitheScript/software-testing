@@ -130,6 +130,9 @@ public class OrderController {
     public Result<?> returnObject(Integer orderId) {
         Order order = orderService.getById(orderId);
         order.setStatus("待评价");
+        Object object = objectService.getById(order.getObjectId());
+        object.setStatus("审核通过");
+        objectService.updateById(object);
         orderService.updateById(order);
         return Result.success("归还成功");
     }
