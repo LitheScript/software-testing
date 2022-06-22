@@ -62,6 +62,34 @@ export default {
       myCollects: [],
     };
   },
+  watch:{
+    myCollects:{
+      handler (newName, oldName) {
+        console.log(newName)
+        axios.getCollect()
+            .then((res) => {
+              console.log(res.data.data);
+              const raw = res.data.data;
+              const total = [];
+              raw.forEach((item) => {
+                const data = {
+                  picture_url: item.urls[0],
+                  name: item.name,
+                  description: item.description,
+                  rent_daily: item.rent_daily,
+                  avatar: item.avatar,
+                  nick_name: item.nick_name,
+                  object_id: item.object_id,
+                };
+                total.push(data);
+              });
+              console.log('mycollect', total);
+              this.myCollects = total;
+            });
+      },
+      immediate: true
+    }
+  }
 };
 </script>
 
