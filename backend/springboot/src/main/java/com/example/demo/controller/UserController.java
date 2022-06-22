@@ -90,17 +90,21 @@ public class UserController {
     //注册
     @PassToken
     @PostMapping("/register")
-    public Result<?> register(String nickName, String password) {
+    public Result<?> register(@RequestParam(value = "nickName", required = true) String nickName,
+                              @RequestParam(value = "password", required = true) String password,
+                              @RequestParam(value = "role", required = true) String role) {
         //判断用户名是否唯一
+        role="0";
         if (nickName.equals("")) {
             return Result.error("-1", "用户名不能为空");
         } else if (password.equals("")) {
-            return Result.error("-1", "密码不能为空");
+            password = "123456";
         }
         User user = new User();
         user.setNickName(nickName);
         user.setPassword(password);
-        User res = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, nickName));
+        user.setRole(role);
+        User res = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getNickName, nickName));
         if (res != null) {
             return Result.error("-1", "用户名重复");
         }

@@ -8,13 +8,16 @@
         <div class="main">
           <div class="main-title">注册</div>
           <div class="main-form">
-            <el-input placeholder="用户名" v-model="name"/>
-            <el-input placeholder="密码"
-            type="password" v-model="psw"
-            maxlength="15" show-password/>
-            <el-input placeholder="再次输入密码"
-            type="password" v-model="checkpsw"
-            maxlength="15" show-password/>
+            <!-- <el-input placeholder="用户名" v-model="name"/> -->
+            <input :class="{'register-input':true, 'register-input-err':this.userNameErr}"
+              placeholder="用户名" @focus="resetErr" v-model="userName">
+            <div class="input-check" v-show="userNameErr">{{this.userNameInfo}}</div>
+            <input :class="{'register-input':true, 'register-input-err':this.pswErr}"
+              placeholder="密码" type="password" @focus="resetErr" v-model="password" maxlength="15">
+              <div class="input-check" v-show="pswErr">{{this.pswInfo}}</div>
+            <input :class="{'register-input':true, 'register-input-err':this.pswErr}"
+              placeholder="密码确认" type="password" @focus="resetErr" v-model="passwordConfirm" maxlength="15">
+              <div class="input-check" v-show="pswErr">{{this.pswInfo}}</div>
           </div>
           <div class="main-lower">
             <div class="login-btn" @click="Register()">注册</div>
@@ -52,10 +55,21 @@ export default {
   },
   data() {
     return {
-      name: '',
-      psw: '',
-      checkpsw: '',
+      userNameInfo: '', // 用户名错误提示
+      pswInfo: '', // 密码错误提示
+      userName: '',
+      password: '',
+      passwordConfirm: '',
+      role: '',
     };
+  },
+  computed: {
+    userNameErr() {
+      return this.userNameInfo != '';
+    },
+    pswErr() {
+      return this.pswInfo != '';
+    },
   },
   methods: {
     goBack() {
@@ -66,25 +80,65 @@ export default {
     },
     Register() {
       // ....逻辑代码
-      if (this.psw !== this.checkpsw)
-        alert('两次输入密码不一致');
+      if (this.userName == '') {
+        this.userNameInfo = '用户名不能为空';
+        return;
+      }
+      if (this.password !== this.passwordConfirm){
+        this.pswInfo = '两次输入密码不一致';
+        return;
+      }
       else {
         const data = {
-          nickName: this.name,
-          password: this.psw,
+          nickName: this.userName,
+          password: this.password,
+          role: 0,
         };
         console.log('data', qs.stringify(data));
         axios.register(qs.stringify(data))
           .then((res) => {
-            console.log(res.data)
-            if(res.data.code==-1)  alert(res.data.msg)
-            else if(res.data.code==0){
-              alert("注册成功")
+            console.log(res);
+            if(res.data.code=='0'){
+              if(this.password!=''){
+                this.$message({
+                  message: '注册成功',
+                  type: 'success',
+                  offset: 100,
+                })
+              }
+              else{
+                this.$message({
+                  message: '注册成功，默认密码为123456',
+                  type: 'success',
+                  offset: 100,
+                })
+              }
               this.$router.push('/login');
             }
-             else alert("注册失败，原因未知。")
+            else
+            {
+              this.userNameInfo = res.data.msg;
+            }
+          })
+          .catch((err) => {
+            this.$alert(err.data.msg, 'ERROR', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.$message({
+                  type: 'info',
+                  message: `action: ${ action }`
+                });
+              }
+            });
+            console.log(err);
           });
+          
+      // this.$router.push('/');
       }
+    },
+    resetErr() {
+      this.userNameInfo = '';
+      this.pswInfo = '';
     },
   },
 };
@@ -158,6 +212,36 @@ export default {
           flex-direction: column;
           align-items: center;
           width:100%;
+          .register-input{
+            width:100%;
+            height:44px;
+            border-radius: 22px;
+            outline: none;
+            border: 1px solid #e5e5e5;
+            margin-top: 20px;
+            transition: .2s ease-in-out;
+            font-size: 15px;
+            color:#222222;
+            padding-left: 20px;
+            padding-right: 10px;
+            transition: all .3s ease;
+            &:focus{
+              border:#2f80eb 1px solid;
+            }
+          }
+
+          .register-input-err{
+            border:#eb3c2f 1px solid;
+          }
+
+          .input-check{
+            user-select: none;
+            width:100%;
+            padding-left: 20px;
+            margin-top: 3px;
+            font-size: .3rem;
+            color:rgb(248, 52, 52);
+          }
         }
 
         .main-lower{

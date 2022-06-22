@@ -17,8 +17,8 @@ instance.interceptors.request.use(
     return config;
   },
 );
-const url = 'http://101.35.194.132:9090/'; // 服务器连接
-// var url = 'http://localhost:9090/';  //本地连接
+// const url = 'http://101.35.194.132:9090/'; // 服务器连接
+var url = 'http://localhost:9090/';  //本地连接
 
 export default {
   // 这里export的是axios
@@ -89,7 +89,7 @@ export default {
     return instance.post(`${url}post/deleteMypost?postId=${id}`);
   },
   register(data) {
-    return instance.post(`${url}user/register?${data}`);
+    return instance.post(`${url}user/register`,data);
   },
   getCommentByItemId(id) {
     return instance.get(`${url}remarks/getRemarkList?objectId=${id}`);
@@ -108,9 +108,6 @@ export default {
   },
   collect(id) {
     return instance.post(`${url}fav/collect?favId=1&objectId=${id}`);
-  },
-  deleteCollect(id){
-    return instance.get(`${url}fav/deleteCollection?favId=1&objectId=${id}`);
   },
   getCollect() {
     return instance.get(`${url}fav/viewFavouriteCart?favId=1`);
