@@ -135,15 +135,11 @@ public class OrderController {
         return Result.success("归还成功");
     }
 
-    @GetMapping("getTodayReturnList")
-    public Result<?> getTodayReturnList() {
-        List<JSONObject> orderList;
-        orderList = orderService.getTodayReturnList();
-        if (orderList.isEmpty()) {
-            return Result.error("-1", "今天没有要归还订单");
-        } else {
-            return Result.success(orderList);
-        }
+    @PostMapping("getTodayReturnList")
+    public Result<?> getTodayReturnList(@RequestParam(defaultValue = "1") Integer pageNum,
+                                        @RequestParam(defaultValue = "10") Integer pageSize) {
+        Page<Order> userPage = orderService.getTodayReturnList(pageNum,pageSize);
+        return Result.success(userPage);
     }
 }
 
