@@ -9,8 +9,8 @@ var instance = axios.create({
 });
 
 
-// var url = 'http://101.35.194.132:81/';  //服务器连接
-var url = 'http://localhost:81/';  //本地连接
+var url = 'http://101.35.194.132:81/';  //服务器连接
+// var url = 'http://localhost:81/';  //本地连接
 
 export default {
   //这里export的是axios

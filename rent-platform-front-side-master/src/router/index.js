@@ -129,6 +129,7 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+    //以下子路径其实没有发挥作用，该bug以后再说吧。
     children: [
       {
         path: 'pendingObj',

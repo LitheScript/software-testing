@@ -1,16 +1,16 @@
 <template>
 <!--商品信息卡片 -->
-  <div class="order-card" @click="goDetail">
-            <img class="picture" :src="cardInfo.picture_url"/>
-              <div class="section-featured-card-main">
-                <div class="card-row">订单 ID：{{this.cardInfo.orderId}}</div>
-                <div class="card-row">创建时间：{{formatTime(this.cardInfo.createdTime)}}</div>
-                <div class="card-row">借用时间：{{formatTime(this.cardInfo.lentoutTime)}}</div>
-                <div class="card-row">归还时间：{{formatTime(this.cardInfo.returnTime)}}</div>
-                <div class="card-row">订单状态：{{cardInfo.status}}</div>
-              </div>
+  <div class="order-card">
+    <img class="picture"  @click="goDetail" :src="cardInfo.picture_url"/>
+    <div class="section-featured-card-main">
+      <div class="card-row">订单 ID：{{this.cardInfo.order_id}}</div>
+      <div class="card-row">创建时间：{{formatTime(this.cardInfo.created_time)}}</div>
+      <div class="card-row">借用时间：{{formatTime(this.cardInfo.lentout_time)}}</div>
+      <div class="card-row">归还时间：{{formatTime(this.cardInfo.return_time)}}</div>
+      <div class="card-row">订单状态：{{this.cardInfo.status}}</div>
+    </div>
     <div class="line"></div>
-<a class="uk-button uk-button-normal" @click="checkReturned()" style="margin-left: 135px">确认归还</a>
+<a class="uk-button" @click="checkReturned()" :style="{backgroundColor:this.buttonColor}">确认归还</a>
   </div>
 </template>
 
@@ -24,20 +24,27 @@ export default {
   },
   data() {
     return {
+    buttonColor: '#2B5AE1',
     };
+  },
+  created() {
+    if(this.cardInfo.status=="待评价") {
+      this.buttonColor="gray"
+    }
   },
   methods: {
     goDetail() {
       this.$router.push({
-        path: `/homepage/ItemDetail/${this.cardInfo.objectId}`,
+        path: `/homepage/ItemDetail/${this.cardInfo.object_id}`,
       });
     },
     formatTime(time) {
       return time.replace('T', ' ');
     },
     checkReturned() {
-      axios.returnObject(this.cardInfo.objectId)
+      axios.returnObject(this.cardInfo.order_id)
           .then((res) => {
+            console.log(res)
             this.$message({
               message: res.data.msg,
               type: 'success',
@@ -56,7 +63,7 @@ export default {
         margin-left: 30px;
         margin-bottom: 30px;
         width:360px;
-        height:520px;
+        height:500px;
         background-color: whitesmoke;
         border-radius: 20px;
         transition: all .3s ease;
@@ -97,18 +104,17 @@ export default {
             width:100%;
             height:0;
             border-bottom: #e0e0e0 1px solid;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            margin-top: 0px;
+            margin-bottom: 10px;
         }
     }
 }
-    .uk-button-normal {
-      background-color: #2B5AE1;
-      color: white;
-    }
 
 
     .uk-button {
+      //background-color: #2B5AE1;
+      margin-left: 135px;
+      color: white;
       -webkit-transition: 0.5s;
       -o-transition: 0.5s;
       height: 50px;

@@ -21,8 +21,9 @@
                     <el-submenu index="2">
                         <template #title><i class="el-icon-menu"></i><span style="color:#c27c88">期末项目</span></template>
                         <el-menu-item index="/unitTest">单元测试结果</el-menu-item>
-                      <el-menu-item index="/integrationTest">集成测试结果</el-menu-item>
-                      <el-menu-item index="/systemTest">系统测试结果</el-menu-item>
+<!--                      暂不演示集成测试、系统测试-->
+<!--                      <el-menu-item index="/integrationTest">集成测试结果</el-menu-item>-->
+<!--                      <el-menu-item index="/systemTest">系统测试结果</el-menu-item>-->
                     </el-submenu>
                 </el-menu>
             </el-aside>

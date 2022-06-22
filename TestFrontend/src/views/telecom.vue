@@ -29,7 +29,7 @@
               <h4>批量测试</h4>
               <el-upload
                   class="upload-demo"
-                  action="http://localhost:81/uploadPhone"
+                  action="http://101.35.194.132:81/uploadPhone"
                   :on-preview="handlePreview"
                   :on-remove="handleRemove"
                   :before-remove="beforeRemove"

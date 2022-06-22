@@ -76,15 +76,15 @@ export default {
       myCollects: [],
       orderList: [
         {
-          orderId:52,
-          objectId:2,
-          borrowerId:1,
+          picture_url:"",
+          order_id:52,
+          object_id:2,
+          borrower_id:1,
           status:"待评价",
-          rentTotal:120,
-          lentoutTime:"2022-06-21T00:00:00",
-          returnTime:"2022-06-22T00:00:00",
-          createdTime:"2022-06-21T23:24:57",
-          finishedTime:null,
+          rent_total:120,
+          lentout_time:"2022-06-21T00:00:00",
+          return_time:"2022-06-22T00:00:00",
+          created_time:"2022-06-21T23:24:57",
           campus:""
         }
       ],
@@ -102,15 +102,11 @@ export default {
       this.myCollects = res.data.data.records;
     });
 
-    // let data = {
-    //   pageSize:10,
-    //   pageNum:1
-    // }
-    // axios.getTodayReturnList(data)
-    //     .then((res) => {
-    //       console.log('return order:', res.data);
-    //       this.orderList = res.data.data.records;
-    //     });
+    axios.getTodayReturnList()
+        .then((res) => {
+          console.log('return order:', res.data);
+          this.orderList = res.data.data;
+        });
   },
   methods: {
     logout() {
@@ -134,6 +130,8 @@ export default {
   },
 };
 </script>
+
+
 <style lang="scss" scoped>
 .admin {
   width: 100%;
