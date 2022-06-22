@@ -42,7 +42,14 @@ export default {
   },
   created() {
     if (this.$store.state.user != null) {
-
+      axios.queryObjectInFav(this.cardInfo.object_id, this.$store.state.user.userId)
+          .then((res) => {
+            console.log(res.data)
+             if(res.data.code!=-1) {
+               this.collected = true;
+               this.changeToWhite();
+             }
+          });
     }
   },
   methods: {
@@ -62,15 +69,25 @@ export default {
       if (this.$store.state.user == null) this.$router.push('/login');
       else if (!this.collected) {
         axios.collect(this.cardInfo.object_id)
-          .then(() => {
-            this.$message({
-              message: '收藏成功',
-              type: 'success',
-              offset: 100,
-            });
+          .then((res) => {
+            if(res.data.code==-1) {
+              this.$message({
+                message: res.data.msg,
+                type: 'warning',
+                offset: 100,
+              });
+            }
+            else {
+              this.$message({
+                message: '收藏成功',
+                type: 'success',
+                offset: 100,
+              });
+              this.collected = true;
+              this.changeToWhite();
+            }
           });
-        this.collected = true;
-        this.changeToWhite();
+
       } else {
         axios.deleteCollect(this.cardInfo.object_id)
             .then((res) => {
@@ -87,11 +104,10 @@ export default {
                   type: 'success',
                   offset: 100,
                 });
+                this.collected = false;
+                this.changeBack();
               }
-
             });
-        this.collected = false;
-        this.changeBack();
       }
     },
   },
