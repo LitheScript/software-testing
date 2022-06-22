@@ -78,10 +78,11 @@ export default {
           .then((res) => {
             console.log(res.data)
             if(res.data.code==-1)  alert(res.data.msg)
-            else {
+            else if(res.data.code==0){
               alert("注册成功")
               this.$router.push('/login');
             }
+             else alert("注册失败，原因未知。")
           });
       }
     },
