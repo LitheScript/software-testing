@@ -33,18 +33,18 @@ export default {
   props: {
     cardInfo: Object,
     required: true,
-    collected:false,
   },
   data() {
     return {
       heartColor: 'black',
+      collected:false,
     };
   },
   created() {
+    console.log(this.$store.state.user)
     if (this.$store.state.user != null) {
       axios.queryObjectInFav(this.cardInfo.object_id, this.$store.state.user.userId)
           .then((res) => {
-            console.log(res.data)
              if(res.data.code!=-1) {
                this.collected = true;
                this.changeToWhite();

@@ -47,6 +47,10 @@
             Guess You Like | Guess You Like | What others like, you might like.
             <p>Even in our darkest moments, there's light.</p>
           </div>
+          <div v-if="noData" class="wow fadeInLeft" style="color:  #c43323;">
+            暂无出租品信息，静候上架。
+            <p> 您或许可以移步需求中心，发布您的需求。</p>
+          </div>
         </div>
         <div class="section-featured-main">
           <commodityCard
@@ -89,13 +93,9 @@ export default {
       this.objectList = [];
       this.currentPage = 1;
       this.totalPages = 1;
-      const data = {
-        name: '',
-        page: 1,
-      };
-      axios.searchListByName(data).then((res) => {
-        console.log(res);
-        this.objectList = res.data.data.records;
+      axios.getRecommendList().then((res) => {
+        console.log('res', res);
+        this.objectList = res.data.data;
         this.totalPages = res.data.data.pages;
       });
     }
@@ -125,8 +125,14 @@ export default {
       console.log(data);
       axios.searchListByName(data).then((res) => {
         console.log(res);
-        this.objectList = res.data.data.records;
-        this.totalPages = res.data.data.pages;
+        if(res.data.code==-1) {
+          this.$message(res.data.msg);
+          this.noData=true;
+        }
+        else {
+          this.objectList = res.data.data.records;
+          this.totalPages = res.data.data.pages;
+        }
       });
     }
 
@@ -141,6 +147,7 @@ export default {
       objectList: [],
       totalPages: 1,
       currentPage: 1,
+      noData:false,
     };
   },
   computed: {
