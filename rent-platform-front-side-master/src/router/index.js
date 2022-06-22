@@ -122,6 +122,33 @@ const routes = [
     ],
   },
   {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/AdminCenter.vue'),
+    redirect: '/admin/pendingObj',
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: 'pendingObj',
+        name: 'PendingObj',
+        component: () => import('../views/AdminCenter/PendingObject.vue'), // lazy-load
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'returnOrder',
+        name: 'ReturnOrder',
+        component: () => import('../views/AdminCenter/ReturnOrder.vue'), // lazy-load
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
@@ -135,11 +162,6 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/Register.vue'),
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('../views/Admin.vue'),
   },
 ];
 const router = new VueRouter({

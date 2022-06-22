@@ -130,5 +130,10 @@ export default {
   removeObj(id) {
     return instance.get(`${url}object/removeObject?objectId=${id}`);
   },
-
+  getTodayReturnList(data) {
+    return instance.post(`${url}order/getTodayReturnList`,data);
+  },
+  returnObject(id){
+    return instance.post(`${url}object/returnObject?objectId=${id}`);
+  },
 };
