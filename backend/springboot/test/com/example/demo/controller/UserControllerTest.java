@@ -133,7 +133,9 @@ class UserControllerTest {
     void UT_TC_001_002_001_1() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                         .param("nickName", "")
-                        .param("password", "12345"))
+                        .param("password", "12345")
+                        .param("role", "0"))
+
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(-1))
                 .andDo(MockMvcResultHandlers.print())
@@ -144,7 +146,8 @@ class UserControllerTest {
     void UT_TC_001_002_001_2() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                         .param("nickName", "lwy")
-                        .param("password", ""))
+                        .param("password", "")
+                        .param("role", "0"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(-1))
                 .andDo(MockMvcResultHandlers.print())
@@ -155,7 +158,8 @@ class UserControllerTest {
     void UT_TC_001_002() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                         .param("nickName", "mjy")
-                        .param("password", "12345"))
+                        .param("password", "12345")
+                        .param("role", "0"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(-1))
                 .andDo(MockMvcResultHandlers.print())
@@ -166,7 +170,8 @@ class UserControllerTest {
     void UT_TC_001_002_003() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/user/register")
                         .param("nickName", "lwy")
-                        .param("password", "12345"))
+                        .param("password", "12345")
+                        .param("role", "0"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value(0))
                 .andDo(MockMvcResultHandlers.print())
