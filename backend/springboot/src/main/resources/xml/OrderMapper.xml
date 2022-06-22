@@ -8,6 +8,11 @@
             where `order`.borrower_id=#{user_id}
     </select>
 
+    <select id="getTodayReturnList" resultType="cn.hutool.json.JSONObject">
+        select order_id,`order`.object_id,borrower_id,status,rent_total,lentout_time,return_time,created_time,finished_time,campus,picture_url
+        from `order` left outer join picture on `order`.object_id=picture.object_id
+        where `order`.return_time=#{return_time}
+    </select>
 
     <select id="getObjectName" resultType="cn.hutool.json.JSONObject">
         select object.name
