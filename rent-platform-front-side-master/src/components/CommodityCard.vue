@@ -33,12 +33,17 @@ export default {
   props: {
     cardInfo: Object,
     required: true,
+    collected:false,
   },
   data() {
     return {
       heartColor: 'black',
-      collected: false,
     };
+  },
+  created() {
+    if (this.$store.state.user != null) {
+
+    }
   },
   methods: {
     goDetail() {
@@ -67,6 +72,24 @@ export default {
         this.collected = true;
         this.changeToWhite();
       } else {
+        axios.deleteCollect(this.cardInfo.object_id)
+            .then((res) => {
+              if(res.data.code==-1) {
+                this.$message({
+                  message: res.data.msg,
+                  type: 'warning',
+                  offset: 100,
+                });
+              }
+              else {
+                this.$message({
+                  message: "取消收藏成功",
+                  type: 'success',
+                  offset: 100,
+                });
+              }
+
+            });
         this.collected = false;
         this.changeBack();
       }

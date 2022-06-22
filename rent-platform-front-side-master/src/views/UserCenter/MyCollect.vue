@@ -7,6 +7,7 @@
             v-for="item in this.myCollects"
             :key=item.object_id
             :cardInfo="item"
+            :collected="true"
             />
           </div>
 

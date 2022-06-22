@@ -109,6 +109,9 @@ export default {
   collect(id) {
     return instance.post(`${url}fav/collect?favId=1&objectId=${id}`);
   },
+  deleteCollect(id){
+    return instance.get(`${url}fav/deleteCollection?favId=1&objectId=${id}`);
+  },
   getCollect() {
     return instance.get(`${url}fav/viewFavouriteCart?favId=1`);
   },
